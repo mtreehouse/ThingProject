@@ -1,0 +1,80 @@
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+select:focus,
+select:active,
+.btn:active,
+.btn.active
+{
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
+}
+input:focus::-webkit-input-placeholder { color:transparent; }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* chrome autofill design */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+  -webkit-box-shadow: 0 0 0 30px rgb(255, 228, 228) inset !important;
+}
+
+.component {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.component.first-component {
+  background-color: #ffddd8;
+  background-image: url("../img/firstcomp_back.jpg");
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.component.second-component {
+  background-image: url("../img/secondcomp_back.jpg");
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.hide{
+  display: none !important;
+}
+
+.readonly{
+  background-color: #d0baba !important;
+  color: #717171 !important;
+}
+
