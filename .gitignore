@@ -25,5 +25,3 @@ yarn-error.log*
 
 # firebase
 # /src/pages/*.json
-src/js/
-src/pages/firebase.json
