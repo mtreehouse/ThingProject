@@ -24,4 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # firebase
-/src/pages/*.json
+# /src/pages/*.json
