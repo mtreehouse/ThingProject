@@ -8,10 +8,11 @@
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^8.0.6",
+    "mysql2": "^2.1.0",
     "nodemon": "^2.0.2"
   },
   "scripts": {
-    "start": "node src",
-    "start:dev": "nodemon --watch src/ src/index.js"
+    "start:dev": "node src",
+    "nm": "nodemon --watch src/ src/index.js"
   }
 }

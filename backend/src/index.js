@@ -16,6 +16,23 @@ const api = require('./api');
 const app = new Koa();
 const router = new Router();
 
+// dbtest
+const mysqlDB = require('../mysql-db')
+router.get('/db', async (ctx) => {
+    let d = "";
+    mysqlDB.query('select * from posts', (err, rows, fields) => {
+        rows.map(row => {
+            d = JSON.stringify(row);
+            return d;
+        })
+    })
+    setTimeout(() => {
+        console.log("_________________" + d);
+        ctx.body = d.title;
+
+    }, 1000)
+});
+
 // 라우터 설정
 router.use('/api', api.routes());
 
