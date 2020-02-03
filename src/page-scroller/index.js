@@ -232,7 +232,7 @@ const ReactPageScroller = ({
         return () => {
             isMounted = false;
         };
-    }, []);
+    }, [checkRenderOnMount]);
 
     useEffect(() => {
         isScrolling = false;
@@ -288,7 +288,7 @@ const ReactPageScroller = ({
                 }
             }
         }
-    }, [customPageNumber]);
+    }, [customPageNumber, animationTimer, children, componentIndex, componentsToRenderLength]);
 
     // useEffect(() => {
     //     if (isTransitionAfterComponentsToRenderChanged) {

@@ -2,9 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/main.js",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^8.0.6",
@@ -12,7 +14,7 @@
     "nodemon": "^2.0.2"
   },
   "scripts": {
-    "start:dev": "node src",
-    "nm": "nodemon --watch src/ src/index.js"
+    "start:dev": "node -r src",
+    "nm": "nodemon --watch src/ -r esm src/main.js"
   }
 }
