@@ -14,7 +14,7 @@ import '../css/firstComponent.css';
 import * as firebase from "firebase/app";
 import 'firebase/auth';
 import SlideToggle from "react-slide-toggle";
-
+import BootPay from "bootpay-js"
 
 export default function FirstComponent(props) {
     // TODO: 데이터베이스연결
@@ -24,6 +24,8 @@ export default function FirstComponent(props) {
     const [toggleEvent2, setToggleEvent2] = useState(0);
     const [phoneNumber, setPhoneNumber] = useState('');
     const [loveNumber, setLoveNumber] = useState('');
+
+    let reqId = "";
 
     const onToggle = () => {
         setToggleEvent(Date.now());
@@ -107,6 +109,65 @@ export default function FirstComponent(props) {
 
     function btn_sendLove() {
         console.log("_______loverNumber__________" + loveNumber);
+        BootPay.request({
+            price: '1000', //실제 결제되는 가격
+            application_id: "5e38c26a02f57e00245c7593",
+            name: '메세지 전송 결제', //결제창에서 보여질 이름
+            show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
+            items: [
+                {
+                    item_name: '나는 아이템',
+                    qty: 1, //수량
+                    unique: '123',
+                    price: 1000,
+                    cat1: 'TOP',
+                    cat2: '티셔츠',
+                    cat3: '라운드 티',
+                }
+            ],
+            user_info: {
+                username: '사용자 이름',
+                email: '사용자 이메일',
+                addr: '사용자 주소',
+                phone: '010-1234-4567'
+            },
+            order_id: 'order_id_1234', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
+            params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
+        }).error(function (data) {
+            //결제 진행시 에러가 발생하면 수행됩니다.
+            console.log(data);
+        }).cancel(function (data) {
+            //결제가 취소되면 수행됩니다.
+            console.log(data);
+        }).ready(function (data) {
+            // 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
+            console.log(data);
+        }).confirm(function (data) {
+            //결제가 실행되기 전에 수행되며, 주로 재고를 확인하는 로직이 들어갑니다.
+            //주의 - 카드 수기결제일 경우 이 부분이 실행되지 않습니다.
+            console.log(data);
+            const enable = true; // 재고 수량 관리 로직 혹은 다른 처리
+            if (enable) {
+                BootPay.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
+            } else {
+                BootPay.removePaymentWindow(); // 조건이 맞지 않으면 결제 창을 닫고 결제를 승인하지 않는다.
+            }
+        }).close(function (data) {
+            // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
+            console.log(data);
+        }).done(function (data) {
+            console.log("_________________결제 성공__"+data);
+            //결제가 정상적으로 완료되면 수행됩니다
+            //비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
+            console.log("_____reciptId_________"+data.receipt_id);
+            reqId = data.receipt_id;
+        });
+    }
+
+    // 결제 취소 버튼
+    function btn_cancelPay() {
+        // TODO : requestId 받아서 취소페이지 넘겨주기
+        window.location.href = "http://localhost:4000/cancel/"+reqId;
     }
 
     return (
@@ -123,7 +184,7 @@ export default function FirstComponent(props) {
                                            readOnly={isTyped}/>
                                 </div>
                                 <div className='input_field'>
-                                    <input type={'text'} placeholder={'my phone...'} id="phoneNumber"
+                                    <input type={'text'} placeholder={'my phone...'}
                                            className={'input_my_phone ' + (isTyped ? 'readonly' : '')}
                                            readOnly={isTyped}
                                            onChange={e => {
@@ -136,7 +197,7 @@ export default function FirstComponent(props) {
                     </SlideToggle>
 
                     <div className='input_field'>
-                        <input type={'number'} placeholder={"♥'s phone..."} onChange={e => {
+                        <input type={'text'} placeholder={"♥'s phone..."} onChange={e => {
                             setLoveNumber(e.target.value)
                         }} className={'input_love_phone ' + (isVerified ? '' : 'hide')}/>
                     </div>
@@ -164,9 +225,16 @@ export default function FirstComponent(props) {
                     </div>
                     <div className='input_field'>
                         <button
-                            className={'btn ' + (isVerified ? '' : 'hide')}
+                            className={'btn ' + (true ? '' : 'hide')} // isVerified 임시
                             onClick={btn_sendLove}
                         >SEND
+                        </button>
+                    </div>
+                    <div className='input_field'>
+                        <button
+                            className={'btn ' + (true ? '' : 'hide')}
+                            onClick={btn_cancelPay}
+                        >결제취소
                         </button>
                     </div>
 
@@ -186,7 +254,7 @@ export default function FirstComponent(props) {
                     </svg>
                 </button>
             </footer>
-            <div id="recaptcha-container"></div>
+            <div id="recaptcha-container"/>
         </div>
     )
 }
