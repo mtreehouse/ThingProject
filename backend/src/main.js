@@ -33,23 +33,22 @@ router.get('/db', async (ctx) => {
     //.then(() => db.end());
 });
 
-// payment
+// cancel payment
 router.get('/cancel/:reqId', (ctx)=>{
     const { reqId } = ctx.params;
+    console.log("__reqId_______________: "+reqId);
     const BootpayRest = require('bootpay-rest-client');
 
     BootpayRest.setConfig(
         '5e38c26a02f57e00245c7596',
         'zprTbYxmryaiJ/aoYzXCSKk4MIEgUKp3W24lErlk9mM='
     );
-    console.log("_________________cancelpay start---------------");
 
     BootpayRest.getAccessToken().then(function (token) {
         if (token.status === 200) {
             BootpayRest.cancel(reqId, '', 'test', 'test').then(function (response) {
                 console.log("_________________token: "+JSON.stringify(token));
                 // 결제 취소가 완료되었다면
-                console.log("_________________"+response.status);
                 if (response.status === 200) {
                     // TODO: 결제 취소에 관련된 로직을 수행하시면 됩니다.
                     console.log("_________________취소완료");

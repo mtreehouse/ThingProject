@@ -159,7 +159,7 @@ export default function FirstComponent(props) {
             console.log("_________________결제 성공__"+data);
             //결제가 정상적으로 완료되면 수행됩니다
             //비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
-            console.log("_____reciptId_________"+data.receipt_id);
+            console.log("_____reciptId_________: "+data.receipt_id);
             reqId = data.receipt_id;
         });
     }
@@ -167,7 +167,10 @@ export default function FirstComponent(props) {
     // 결제 취소 버튼
     function btn_cancelPay() {
         // TODO : requestId 받아서 취소페이지 넘겨주기
-        window.location.href = "http://localhost:4000/cancel/"+reqId;
+        fetch('http://localhost:4000/cancel/'+reqId)
+            .catch(e=>{
+            console.log("________________fetch_error_:"+e);
+        })
     }
 
     return (
