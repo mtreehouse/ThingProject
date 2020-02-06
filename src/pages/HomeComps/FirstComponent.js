@@ -10,7 +10,7 @@
  *===================[ Thing-Project ]===================
  */
 import React, {useState, useEffect} from "react";
-import '../css/firstComponent.css';
+import '../../css/firstComponent.css';
 import * as firebase from "firebase/app";
 import 'firebase/auth';
 import SlideToggle from "react-slide-toggle";
@@ -235,7 +235,7 @@ export default function FirstComponent(props) {
 
                 </div>
                 <div className={'input_info_div'}>
-                    <img className={'svg_my_phone'} src={require('../img/svgmyphone.gif')} alt={'my phone-number'}/>
+                    <img className={'svg_my_phone'} src={require('../../img/svgmyphone.gif')} alt={'my phone-number'}/>
                 </div>
             </div>
             <footer>

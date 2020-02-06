@@ -8,7 +8,7 @@
  *===================[ Thing-Project ]===================
  */
 import React from "react";
-import "../css/secondComponent.css"
+import "../../css/secondComponent.css"
 
 export default () => {
 

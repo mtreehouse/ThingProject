@@ -1,6 +1,6 @@
 /**
  *======================================================
- * @파일명:App.js
+ * @파일명:Home.js
  * @작성일자:2020-01-14 오전 10:56
  * @작성자:Yunwoo Kim
  * @설명: 페이지 콤퍼넌트들을 불러와 Full Page Scroll 처리
@@ -9,38 +9,16 @@
  */
 
 import React, {} from 'react';
-import ReactPageScroller from "./page-scroller";
-import FirstComponent from "./pages/FirstComponent";
-import SecondComponent from "./pages/SecondComponent";
-import WindowSizeListener from 'react-window-size-listener'
+import { Route } from 'react-router-dom'
+import { Home, Admin } from 'pages'
 
 export default class App extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            currentPage: null
-        };
-    }
-
     render() {
         return (
-            <React.Fragment>
-                <WindowSizeListener
-                    onResize={(windowSize) => {
-                        document.getElementsByClassName('rps_div').item(0).children[0].classList.add('full_size')
-                        document.getElementsByClassName('full_size').item(0).style.height=windowSize.windowHeight+"px"
-                    }}
-                />
-                <div className={'rps_div'}>
-                    <ReactPageScroller
-                        renderAllPagesOnFirstRender={false}
-                    >
-                        <FirstComponent/>
-                        <SecondComponent/>
-                    </ReactPageScroller>
-                </div>
-            </React.Fragment>
+            <div>
+                <Route exact path="/" component={Home}/>
+                <Route exact path="/admin" component={Admin}/>
+            </div>
         );
     }
 }

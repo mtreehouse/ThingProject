@@ -1,19 +1,4 @@
 
-const posts = [
-    {
-        id: 1,
-        title: '제목',
-        body: '내용',
-    },
-];
-
-/* 포스트 작성
-* POST /api/posts
-* {title, body}
-* */
-export const pay = ctx => {
-
-};
 
 /* receipt_id 를 이용한 결제 취소
 * POST /api/bp/cancel
