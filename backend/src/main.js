@@ -19,19 +19,19 @@ const router = new Router();
 const {PORT} = process.env;
 
 // dbtest
-router.get('/db', async (ctx) => {
-    const db = require('../mysql-db');
-    await db.promise().query('select * from posts')
-        .then(([rows, fields]) => {
-            rows.map(row => {
-                const data = JSON.stringify(row);
-                ctx.body = data;
-                console.log("_________________" + data);
-            })
-        })
-        .catch(console.log)
-    //.then(() => db.end());
-});
+// router.get('/db', async (ctx) => {
+//     const db = require('../mysql-db');
+//     await db.promise().query('select * from posts')
+//         .then(([rows, fields]) => {
+//             rows.map(row => {
+//                 const data = JSON.stringify(row);
+//                 ctx.body = data;
+//                 console.log("_________________" + data);
+//             })
+//         })
+//         .catch(console.log)
+//     //.then(() => db.end());
+// });
 
 // 라우터 설정
 router.use('/api', api.routes());

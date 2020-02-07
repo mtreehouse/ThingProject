@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    padding: 5px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #7a7a7a;
+}
+
+header p{
+    margin-left: 10px;
+}
+
+#body{
+    height: 85vh;
+    text-align: center;
+}
+#body menu{
+    float: left;
+    width: 100px;
+    height: 100%;
+    background-color: #d6d6d6;
+}
+
+#body article{
+    background-color: beige;
+    width: 90%;
+    height: 100%;
+    float: left;
+}
+menu li{
+    margin: 4px;
+    background-color: #c1c1c1;
+}
+
+menu li a{
+    text-decoration: none;
+}
+
+thead{
+    background-color: #898989;
+    color: white;
+}

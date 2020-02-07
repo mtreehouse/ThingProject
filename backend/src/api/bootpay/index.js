@@ -14,6 +14,5 @@ import * as btCtrl from './bootpay.ctrl';
 const bp = new Router();
 
 bp.post('/cancel', btCtrl.cancel);
-bp.get('/pay', btCtrl.pay);
 
 export default bp;
