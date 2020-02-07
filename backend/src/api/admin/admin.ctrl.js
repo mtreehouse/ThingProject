@@ -14,7 +14,8 @@ export const list = async ctx => {
             // rows.map(row => {
             //     const data = JSON.stringify(row);
                 ctx.body = {
-                    member: rows
+                    member: rows,
+                    columns: fields
                 };
             //     console.log("_________________" + data);
             // })

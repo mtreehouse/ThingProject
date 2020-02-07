@@ -29,6 +29,8 @@
     "react": "^16.12.0",
     "react-axios": "^2.0.3",
     "react-bootstrap": "^0.32.4",
+    "react-bootstrap-table2-paginator": "^2.1.0",
+    "react-bootstrap-table2-toolkit": "^2.1.1",
     "react-device-detect": "^1.11.14",
     "react-dom": "^16.12.0",
     "react-firebaseui": "^4.1.0",
@@ -69,6 +71,7 @@
     "cross-env": "^7.0.0",
     "css-loader": "^3.4.1",
     "json-loader": "^0.5.7",
+    "react-bootstrap-table-next": "^3.3.3",
     "style-loader": "^1.1.2"
   },
   "proxy": "http://localhost:4000/"
