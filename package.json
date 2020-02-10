@@ -27,7 +27,6 @@
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "^16.12.0",
-    "react-axios": "^2.0.3",
     "react-bootstrap": "^0.32.4",
     "react-bootstrap-table2-paginator": "^2.1.0",
     "react-bootstrap-table2-toolkit": "^2.1.1",

@@ -26,10 +26,10 @@ header p{
 }
 
 #body article{
-    background-color: beige;
+    display: table-cell;
     width: 90%;
-    height: 100%;
-    float: left;
+    height: 85vh;
+    background-color: beige;
 }
 menu li{
     margin: 4px;

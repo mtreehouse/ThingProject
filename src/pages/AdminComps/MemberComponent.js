@@ -1,46 +1,48 @@
+/**
+ *======================================================
+ * @파일명:MemberComponent.js
+ * @작성일자:2020-02-07 오후 4:40
+ * @작성자:Yunwoo Kim
+ * @설명: React-Bootstrap-table2를 이용한 멤버 테이블 관리
+ * @변경이력: 20200210 오후 02:15 : axios & css 적용
+ *===================[ Thing-Project ]===================
+ */
+
 import React from "react";
 import BootstrapTable from 'react-bootstrap-table-next';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import paginationFactory, { PaginationProvider, PaginationListStandalone } from 'react-bootstrap-table2-paginator';
 import ToolkitProvider from 'react-bootstrap-table2-toolkit';
-import {Get} from 'react-axios'
-
+import '../../css/member.css';
+import axios from "axios";
 const {Search} = require("react-bootstrap-table2-toolkit");
 
-function productsGenerator(number) {
-    const columns = [{
-        dataField: 'id',
-        text: 'Product ID'
-    }, {
-        dataField: 'name',
-        text: 'Product Name'
-    }, {
-        dataField: 'price',
-        text: 'Product Price'
-    }];
-
-    return columns;
-}
-
-function columnsGenerator() {
-    const columns = [{
-        dataField: 'id',
-        text: 'Product ID'
-    }, {
-        dataField: 'name',
-        text: 'Product Name'
-    }, {
-        dataField: 'price',
-        text: 'Product Price'
-    }];
-
-    return columns
-}
-
 export default class Member extends React.Component {
-    //state = { products }
+    state = {
+        products: [],
+        columns: [{
+            dataField: 'id',
+            text: 'ID'
+        }, {
+            dataField: 'author',
+            text: 'NAME'
+        }, {
+            dataField: 'title',
+            text: 'TITLE'
+        }, {
+            dataField: 'created_date',
+            text: 'DATE'
+        }]
+    }
 
-    loadData = () => {
-        this.setState({ products: productsGenerator(17) });
+    componentDidMount() {
+        axios.get('/api/admin/list')
+            .then(res => {
+                this.setState({
+                    products: res.data.member
+                })
+            })
+            .catch(e => {console.log(e);})
     }
 
     render() {
@@ -58,25 +60,14 @@ export default class Member extends React.Component {
             firstPageTitle: 'Next page',
             lastPageTitle: 'Last page',
             showTotal: true,
-            totalSize: 17
+            totalSize: 7//this.products.length
         };
         const contentTable = ({ paginationProps, paginationTableProps }) => (
             <div>
-                <button className="btn btn-default" onClick={ this.loadData }>Load Another Data</button>
-                <PaginationListStandalone { ...paginationProps } />
                 <ToolkitProvider
                     keyField="id"
-                    columns={ columnsGenerator() }
-                    data={ [{
-                        dataField: 'id',
-                        text: 'Product ID'
-                    }, {
-                        dataField: 'name',
-                        text: 'Product Name'
-                    }, {
-                        dataField: 'price',
-                        text: 'Product Price'
-                    }] }
+                    columns={ this.state.columns }
+                    data={ this.state.products }
                     search
                 >
                     {
@@ -84,7 +75,7 @@ export default class Member extends React.Component {
                             <div>
                                 <SearchBar { ...toolkitprops.searchProps } />
                                 <BootstrapTable
-                                    striped
+                                    bordered
                                     hover
                                     { ...toolkitprops.baseProps }
                                     { ...paginationTableProps }
@@ -98,8 +89,7 @@ export default class Member extends React.Component {
         );
 
         return (
-            <div>
-                <h2>PaginationProvider will care the data size change. You dont do anything</h2>
+            <div className='member'>
                 <PaginationProvider
                     pagination={
                         paginationFactory(options)
@@ -112,60 +102,3 @@ export default class Member extends React.Component {
         );
     }
 }
-
-
-
-// import React from "react";
-// import {Get} from 'react-axios'
-// import { Table } from  'react-bootstrap'
-// import 'bootstrap/dist/css/bootstrap.min.css';
-//
-// export default class Member extends React.Component {
-//     render() {
-//         return (
-//             <div>
-//                 <div>
-//                     <Table bordered hover>
-//                         <thead>
-//                         <tr>
-//                             <th>id</th>
-//                             <th>name</th>
-//                             <th>title</th>
-//                             <th>date</th>
-//                         </tr>
-//                         </thead>
-//                         <tbody>
-//                         <Get url="/api/admin/list">
-//                             {(error, response, isLoading, makeRequest, axios) => {
-//                                 if (error) {
-//                                     return (<div>Something bad happened: {error.message}
-//                                         <button onClick={() => makeRequest({params: {reload: true}})}>Retry</button>
-//                                     </div>)
-//                                 } else if (response !== null) {
-//                                     console.log("_________________" + JSON.stringify(response));
-//                                     return (
-//                                         response.data.member.map(member => {
-//                                             return (
-//                                                 <tr>
-//                                                     <td>{member.id}</td>
-//                                                     <td>{member.author}</td>
-//                                                     <td>{member.title}</td>
-//                                                     <td>{member.created_date}</td>
-//                                                 </tr>
-//                                             )
-//                                         })
-//                                     )
-//                                 }
-//                                 return (
-//                                     <div>Default message before request is made.</div>
-//                                 )
-//                             }}
-//                         </Get>
-//                         </tbody>
-//                     </Table>
-//                 </div>
-//             </div>
-//         )
-//     }
-//
-// };
