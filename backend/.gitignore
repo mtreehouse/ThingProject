@@ -2,7 +2,7 @@
 
 # securities
 /src/api/security/SecurityUtils.js
-
+/src/api/security/SecurityUtils.js*
 # dependencies
 /node_modules
 /.pnp
