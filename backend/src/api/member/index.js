@@ -1,13 +1,8 @@
 import Router from 'koa-router';
-import * as postsCtrl from './posts.ctrl';
+import * as membersCtrl from './members.ctrl';
 
-const posts = new Router();
+const members = new Router();
 
-posts.get('/', postsCtrl.list);
-posts.post('/', postsCtrl.write);
-posts.get('/:id', postsCtrl.read);
-posts.delete('/:id', postsCtrl.remove);
-posts.put('/:id', postsCtrl.replace);
-posts.patch('/:id', postsCtrl.update);
+members.post('/insert', membersCtrl.insert);
 
-export default posts;
+export default members;

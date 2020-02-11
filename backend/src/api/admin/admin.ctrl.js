@@ -6,14 +6,14 @@
 import { enc, dec } from "../security/SecurityUtils"
 export const list = async ctx => {
     const db = require('../../../mysql-db');
-    await db.promise().query("select id, author, title, date_format(created_date,'%Y-%m-%d')created_date  from posts")
+    await db.promise().query("select id, name, my_phone, his_phone, receipt_id, date_format(created_date,'%Y-%m-%d')created_date from thing_members")
         .then(([rows, fields]) => {
                 ctx.body = {
-                    member: rows,
+                    members: rows,
                     columns: fields
                 };
         })
-        .catch(console.log)
+        .catch(e=>{console.log(e);})
 };
 
 /* 전화번호 암호화

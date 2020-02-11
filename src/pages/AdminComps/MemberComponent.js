@@ -34,13 +34,13 @@ export default class Member extends React.Component {
                 dataField: 'name',
                 text: 'NAME'
             }, {
-                dataField: 'myphone',
-                text: 'MY-PHONE'
+                dataField: 'my_phone',
+                text: 'MY ☎'
             }, {
-                dataField: 'hisphone',
-                text: 'HIS-PHONE'
+                dataField: 'his_phone',
+                text: 'LOVERS ☎'
             }, {
-                dataField: 'date',
+                dataField: 'created_date',
                 text: 'DATE'
             }, {
                 dataField: 'checked',
@@ -57,14 +57,7 @@ export default class Member extends React.Component {
         axios.get('/api/admin/list')
             .then(res => {
                 this.setState({
-                    products: [{
-                        id: 2,
-                        name: 'kim',
-                        myphone: '+821037373737',
-                        hisphone: '+821039487283',
-                        date: '2020-02-11',
-                        checked: 1
-                    }] //res.data.member
+                    products: res.data.members
                 })
             })
             .catch(e => {console.log(e);})

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="AWS RDS" uuid="2beae751-2900-41bc-a2e1-e888d7952d35">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://seed-springboot-webservice.cac6eisuepcp.us-east-1.rds.amazonaws.com:3306/mydb</jdbc-url>
+    </data-source>
+  </component>
+</project>

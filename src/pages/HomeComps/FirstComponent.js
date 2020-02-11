@@ -23,6 +23,7 @@ export default function FirstComponent(props) {
     const [isVerified, setIsVerified] = useState(false);
     const [toggleEvent, setToggleEvent] = useState(0);
     const [toggleEvent2, setToggleEvent2] = useState(0);
+    const [myName, setMyName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [loveNumber, setLoveNumber] = useState('');
 
@@ -92,7 +93,6 @@ export default function FirstComponent(props) {
                     setToggleEvent(Date.now());
                     setToggleEvent2(Date.now());
                     setIsVerified(true);
-                    console.log("성공 ^^");
                 })
                 .catch(function (error) {
                     alert("You have entered a wrong code")
@@ -145,15 +145,21 @@ export default function FirstComponent(props) {
             // 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
             console.log(data);
         }).confirm(function (data) {
-            //결제가 실행되기 전에 수행되며, 주로 재고를 확인하는 로직이 들어갑니다.
-            //주의 - 카드 수기결제일 경우 이 부분이 실행되지 않습니다.
-            console.log(data);
-            const enable = true; // 재고 수량 관리 로직 혹은 다른 처리
-            if (enable) {
-                BootPay.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
-            } else {
-                BootPay.removePaymentWindow(); // 조건이 맞지 않으면 결제 창을 닫고 결제를 승인하지 않는다.
-            }
+            // DB에 저장
+            axios.post('/api/member/insert', {
+                name: myName,
+                my_phone: phoneNumber,
+                his_phone: loveNumber,
+                receipt_id: data.receipt_id
+            })
+                .then(() => {
+                    BootPay.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
+                })
+                .catch(e => {
+                    BootPay.removePaymentWindow(); // 조건이 맞지 않으면 결제 창을 닫고 결제를 승인하지 않는다.
+                    console.log(e);
+                })
+
         }).close(function (data) {
             // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
             console.log(data);
@@ -184,7 +190,11 @@ export default function FirstComponent(props) {
                                 <div className='input_field'>
                                     <input type={'text'} placeholder={'my name...'}
                                            className={'input_my_name ' + (isTyped ? 'readonly' : '')}
-                                           readOnly={isTyped}/>
+                                           readOnly={isTyped}
+                                           onChange={e => {
+                                               setMyName(e.target.value)
+                                           }}
+                                    />
                                 </div>
                                 <div className='input_field'>
                                     <input type={'text'} placeholder={'my phone...'}
