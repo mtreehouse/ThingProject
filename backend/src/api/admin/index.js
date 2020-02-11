@@ -14,7 +14,7 @@ import * as adminCtrl from './admin.ctrl';
 const admin = new Router();
 
 admin.get('/list', adminCtrl.list);
-admin.get('/encode', adminCtrl.encode);
-admin.get('/decode', adminCtrl.decode);
+admin.get('/enc', adminCtrl.encode);
+admin.get('/dec', adminCtrl.decode);
 
 export default admin;
