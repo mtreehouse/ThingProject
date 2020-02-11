@@ -92,13 +92,14 @@ export default function FirstComponent(props) {
                     setToggleEvent(Date.now());
                     setToggleEvent2(Date.now());
                     setIsVerified(true);
-                    console.log("성공!!!!!!!!!!");
+                    console.log("성공 ^^");
                 })
                 .catch(function (error) {
-                    console.log("실패 ㅠㅠㅠ" + error);
+                    alert("You have entered a wrong code")
+                    console.log("Verify Failed : " + error);
                 });
         } else {
-            console.log("_________________메세지 전송이 안되었습니다.");
+            console.log("메세지 전송 실패");
         }
     }
 

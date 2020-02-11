@@ -13,33 +13,58 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import paginationFactory, { PaginationProvider, PaginationListStandalone } from 'react-bootstrap-table2-paginator';
 import ToolkitProvider from 'react-bootstrap-table2-toolkit';
+import { Type } from 'react-bootstrap-table2-editor';
 import '../../css/member.css';
 import axios from "axios";
+import Checkbox from "react-bootstrap/lib/Checkbox";
+
 const {Search} = require("react-bootstrap-table2-toolkit");
 
 export default class Member extends React.Component {
     state = {
         products: [],
-        columns: [{
-            dataField: 'id',
-            text: 'ID'
-        }, {
-            dataField: 'author',
-            text: 'NAME'
-        }, {
-            dataField: 'title',
-            text: 'TITLE'
-        }, {
-            dataField: 'created_date',
-            text: 'DATE'
-        }]
+        columns: [
+            {
+                dataField: 'id',
+                text: 'ID',
+                headerStyle: () => {
+                    return { width: '10%', textAlign: 'center' };
+                }
+            }, {
+                dataField: 'name',
+                text: 'NAME'
+            }, {
+                dataField: 'myphone',
+                text: 'MY-PHONE'
+            }, {
+                dataField: 'hisphone',
+                text: 'HIS-PHONE'
+            }, {
+                dataField: 'date',
+                text: 'DATE'
+            }, {
+                dataField: 'checked',
+                text: 'CHECKED',
+                formatter: (cell) => <Checkbox checked={cell} />,
+                editor: {
+                    type: Type.CHECKBOX
+                }
+            }
+        ]
     }
 
     componentDidMount() {
         axios.get('/api/admin/list')
             .then(res => {
                 this.setState({
-                    products: res.data.member
+                    products: [{
+                        id: 2,
+                        name: 'kim',
+                        myphone: '+821037373737',
+                        hisphone: '+821039487283',
+                        date: '2020-02-11',
+                        checked: 1
+                    }] //res.data.member
                 })
             })
             .catch(e => {console.log(e);})

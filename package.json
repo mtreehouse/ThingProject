@@ -28,6 +28,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.12.0",
     "react-bootstrap": "^0.32.4",
+    "react-bootstrap-table2-editor": "^1.4.0",
     "react-bootstrap-table2-paginator": "^2.1.0",
     "react-bootstrap-table2-toolkit": "^2.1.1",
     "react-device-detect": "^1.11.14",
