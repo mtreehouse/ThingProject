@@ -70,7 +70,8 @@ export default class Member extends React.Component {
                 text: 'NAME'
             }, {
                 dataField: 'my_phone',
-                text: 'MY ☎'
+                text: 'MY ☎',
+                rowClasses: 'column-phone'
             }, {
                 dataField: 'his_phone',
                 text: 'LOVERS ☎'
@@ -85,7 +86,7 @@ export default class Member extends React.Component {
                     type: Type.CHECKBOX
                 },
                 headerStyle: () => {
-                    return { width: '35px', textAlign: 'center' };
+                    return { width: '36px', textAlign: 'center' };
                 }
             },  {
                 dataField: 'receipt_id',

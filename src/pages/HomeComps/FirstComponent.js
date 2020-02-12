@@ -166,8 +166,14 @@ export default function FirstComponent(props) {
                 my_phone: phoneNumber,
                 his_phone: loveNumber,
                 receipt_id: rcptId
-            })
-                .catch(e => {console.log(e);})
+            }).catch(e => {console.log(e);})
+
+            // 문자 전송
+            axios.post('/api/aligo/send', {
+                my_phone: phoneNumber,
+                his_phone: loveNumber,
+            }).catch(e => {console.log(e);})
+
             console.log("_________________결제 성공__"+data);
             console.log("_____reciptId_________: "+data.receipt_id);
 
@@ -176,9 +182,14 @@ export default function FirstComponent(props) {
 
     // 결제 취소 버튼
     function btn_cancelPay() {
-        axios.post('/api/bp/cancel', {
-            data: rcptId
+        // 문자 전송
+        axios.post('/api/aligo/send', {
+            my_phone: phoneNumber,
+            his_phone: loveNumber,
         }).catch(e => {console.log(e);})
+        // axios.post('/api/bp/cancel', {
+        //     data: rcptId
+        // }).catch(e => {console.log(e);})
     }
 
     return (

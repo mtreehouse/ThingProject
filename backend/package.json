@@ -5,6 +5,7 @@
   "main": "src/main.js",
   "license": "ISC",
   "dependencies": {
+    "aligoapi": "^1.0.7",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "koa": "^2.11.0",
