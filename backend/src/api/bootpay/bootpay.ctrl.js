@@ -4,7 +4,7 @@
 * POST /api/bp/cancel
 * */
 export const cancel = ctx => {
-    ctx.body = "200"
+    ctx.body = "결제 취소가 진행되었습니다."
 
     const rcptId = ctx.request.body.data;
     console.log("_________________reqId : "+rcptId);
@@ -23,8 +23,8 @@ export const cancel = ctx => {
                     // TODO: 결제 취소에 관련된 로직을 수행하시면 됩니다.
                     console.log("_________________취소완료");
                 }
-            });
+            })
         }
-    });
+    })
 }
 

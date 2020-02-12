@@ -4,7 +4,9 @@
  * @작성일자:2020-02-07 오후 4:40
  * @작성자:Yunwoo Kim
  * @설명: React-Bootstrap-table2를 이용한 멤버 테이블 관리
- * @변경이력: 20200210 오후 02:15 : axios & css 적용
+ * @변경이력:
+ *  20200210 오후 02:15 : axios & css 적용
+ *  20200212 오후 03:38 : 삭제 & 취소 버튼
  *===================[ Thing-Project ]===================
  */
 
@@ -16,9 +18,41 @@ import ToolkitProvider from 'react-bootstrap-table2-toolkit';
 import { Type } from 'react-bootstrap-table2-editor';
 import '../../css/member.css';
 import axios from "axios";
-import Checkbox from "react-bootstrap/lib/Checkbox";
+import {Checkbox, Button} from "react-bootstrap";
 
 const {Search} = require("react-bootstrap-table2-toolkit");
+
+const delButton = (cell, row) => {
+    return (
+        <Button
+            onClick={()=>{
+                if(window.confirm('삭제하시겠습니까?')){
+                    axios.head('/api/member/del/'+cell)
+                        .then(()=>{
+                            window.location.reload();
+                        })
+                        .catch(e => {alert(e);})
+                }
+            }}
+        >{cell}</Button>
+    )
+}
+const cancelButton = (cell) => {
+    return (
+            <Button
+                    className={'cancle-btn'}
+                    onClick={()=>{
+                        axios.post('/api/bp/cancel', {
+                            data: cell
+                        })
+                            .then(res => {
+                                    alert(JSON.stringify(res.data))
+                            })
+                            .catch(e => {alert(e);})
+                    }}
+            >취소</Button>
+    )
+}
 
 export default class Member extends React.Component {
     state = {
@@ -27,8 +61,9 @@ export default class Member extends React.Component {
             {
                 dataField: 'id',
                 text: 'ID',
+                formatter: delButton,
                 headerStyle: () => {
-                    return { width: '10%', textAlign: 'center' };
+                    return { width: '68px', textAlign: 'center' };
                 }
             }, {
                 dataField: 'name',
@@ -44,10 +79,20 @@ export default class Member extends React.Component {
                 text: 'DATE'
             }, {
                 dataField: 'checked',
-                text: 'CHECKED',
+                text: '●',
                 formatter: (cell) => <Checkbox checked={cell} />,
                 editor: {
                     type: Type.CHECKBOX
+                },
+                headerStyle: () => {
+                    return { width: '35px', textAlign: 'center' };
+                }
+            },  {
+                dataField: 'receipt_id',
+                text: '결제',
+                formatter: cancelButton,
+                headerStyle: () => {
+                    return { width: '70px', textAlign: 'center' };
                 }
             }
         ]
@@ -67,18 +112,19 @@ export default class Member extends React.Component {
         const { SearchBar } = Search;
         const options = {
             custom: true,
-            paginationSize: 4,
+            sizePerPage: 8,
+            paginationSize: 10,
             pageStartIndex: 1,
-            firstPageText: 'First',
-            prePageText: 'Back',
-            nextPageText: 'Next',
-            lastPageText: 'Last',
+            firstPageText: '<<',
+            prePageText: '◀',
+            nextPageText: '▶',
+            lastPageText: '>>',
             nextPageTitle: 'First page',
             prePageTitle: 'Pre page',
             firstPageTitle: 'Next page',
             lastPageTitle: 'Last page',
             showTotal: true,
-            totalSize: 7//this.products.length
+            totalSize: 5
         };
         const contentTable = ({ paginationProps, paginationTableProps }) => (
             <div>

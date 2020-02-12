@@ -145,30 +145,32 @@ export default function FirstComponent(props) {
             // 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
             console.log(data);
         }).confirm(function (data) {
+            console.log(data);
+            let enable = true; // 재고 수량 관리 로직 혹은 다른 처리
+            if (enable) {
+                BootPay.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
+            } else {
+                BootPay.removePaymentWindow(); // 조건이 맞지 않으면 결제 창을 닫고 결제를 승인하지 않는다.
+            }
+        }).close(function (data) {
+            // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
+            console.log(data);
+        }).done(function (data) {
+            //결제가 정상적으로 완료되면 수행됩니다
+            //비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
+            rcptId = data.receipt_id;
+
             // DB에 저장
             axios.post('/api/member/insert', {
                 name: myName,
                 my_phone: phoneNumber,
                 his_phone: loveNumber,
-                receipt_id: data.receipt_id
+                receipt_id: rcptId
             })
-                .then(() => {
-                    BootPay.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
-                })
-                .catch(e => {
-                    BootPay.removePaymentWindow(); // 조건이 맞지 않으면 결제 창을 닫고 결제를 승인하지 않는다.
-                    console.log(e);
-                })
-
-        }).close(function (data) {
-            // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
-            console.log(data);
-        }).done(function (data) {
+                .catch(e => {console.log(e);})
             console.log("_________________결제 성공__"+data);
-            //결제가 정상적으로 완료되면 수행됩니다
-            //비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
             console.log("_____reciptId_________: "+data.receipt_id);
-            rcptId = data.receipt_id;
+
         });
     }
 

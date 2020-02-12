@@ -87,11 +87,11 @@ footer div {
     font-weight: bold;
     cursor: pointer;
 }
-.btn:hover {
+.first-component .btn:hover {
     font-style: italic;
 }
 
-.btn:active {
+.first-component .btn:active {
     color: #c7d3ff;
 }
 /*--------- button end ---------*/

@@ -421,3 +421,25 @@ table {
     border-top-right-radius: .2rem;
     border-bottom-right-radius: .2rem
 }
+
+.member .btn {
+    margin: 0;
+    line-height: 0px;
+    min-height: 0px;
+    min-width: auto;
+    width: 43px;
+}
+
+.cancle-btn {
+    background-color: #ff82ad !important;
+}
+
+.member .btn:hover {
+    color: #212529;
+    text-decoration: none;
+}
+
+.member .btn:focus, .btn.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
