@@ -166,27 +166,35 @@ export default function FirstComponent(props) {
                 my_phone: phoneNumber,
                 his_phone: loveNumber,
                 receipt_id: rcptId
-            }).catch(e => {console.log(e);})
+            }).catch(e => {
+                console.log(e);
+            })
 
             // 문자 전송
-            axios.post('/api/aligo/send', {
-                my_phone: phoneNumber,
-                his_phone: loveNumber,
-            }).catch(e => {console.log(e);})
-
-            console.log("_________________결제 성공__"+data);
-            console.log("_____reciptId_________: "+data.receipt_id);
+            const querystring = require('querystring');
+            axios.post('/api/aligo/send', querystring.stringify(
+                {
+                    sender: '01037004972',
+                    receiver: 'loveNumber',
+                    msg: '문자전송성공!',
+                }))
+                .catch(e=>console.log("_________________"+e));
+            console.log("_________________결제 성공__" + data);
+            console.log("_____reciptId_________: " + data.receipt_id);
 
         });
     }
 
     // 결제 취소 버튼
     function btn_cancelPay() {
-        // 문자 전송
-        axios.post('/api/aligo/send', {
-            my_phone: phoneNumber,
-            his_phone: loveNumber,
-        }).catch(e => {console.log(e);})
+        const querystring = require('querystring');
+        axios.post('/api/aligo/send', querystring.stringify(
+            {
+                sender: '01037004972',
+                receiver: '01037004972',
+                msg: 'hitestme10',
+            }))
+            .catch(e=>console.log("_________________"+e));
         // axios.post('/api/bp/cancel', {
         //     data: rcptId
         // }).catch(e => {console.log(e);})
@@ -195,6 +203,16 @@ export default function FirstComponent(props) {
     return (
         <div className="component first-component">
             <div>
+                <form
+                    action={'/api/aligo/send'}
+                    method={'POST'}
+                >
+                    <input name={'sender'} value={'01037004972'} readOnly/>
+                    <input name={'receiver'} value={'01037004972'} readOnly/>
+                    <input name={'msg'} value={'01037004972'} readOnly/>
+                    <input name={'msg_type'} value={'SMS'} readOnly/>
+                    <button className={'btn'} type={'submit'}></button>
+                </form>
                 <h2 className={'first_main_h2'}>Get To Know</h2>
                 <div className='input_div'>
                     <SlideToggle toggleEvent={toggleEvent2}>
@@ -264,7 +282,7 @@ export default function FirstComponent(props) {
             </div>
             <footer>
                 <div>how to</div>
-                <button className={'scroll-link'} onClick={btn_cancelPay} >
+                <button className={'scroll-link'} onClick={btn_cancelPay}>
                     <svg className="mouse" xmlns="..." viewBox="0 0 76 130">
                         <g fill="none">
                             <rect width="70" height="118" x="1.5" y="1.5" stroke="#FFF" strokeWidth={3} rx="36"/>

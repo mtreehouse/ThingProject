@@ -16,6 +16,6 @@
   },
   "scripts": {
     "start:dev": "node -r src",
-    "nm": "nodemon --watch src/ -r esm src/main.js"
+    "nm": "nodemon --watch src/ -r esm src/main.js HTTPS=false"
   }
 }
