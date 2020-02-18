@@ -5,17 +5,12 @@ const aligoapi = require('aligoapi');
 
 const AuthData = {
   key: 'w1c7id0q0llywwwzetrdfi1sm7zme9no',
-  // 이곳에 발급받으신 api key를 입력하세요
   user_id: 'sym3927',
-  // 이곳에 userid를 입력하세요
 }
-// 인증용 데이터는 모든 API 호출시 필수값입니다.
 
 //AuthData.testmode_yn = 'Y'
 // test 모드를 사용하시려면 'Y'값으로 설정하세요
-
 // form데이터를 포함한 request를 모두 보내시고 JSON data는 body pares를 사용하시기 바랍니다.
-
 const send = (req, res) => {
   // 메시지 발송하기
   aligoapi.send(req, AuthData)
@@ -26,7 +21,6 @@ const send = (req, res) => {
         console.log("_error________________"+e);
       })
 }
-
 
 const list = (req, res) => {
   // 전송결과보기
@@ -73,7 +67,6 @@ const smsList = (req, res) => {
 
 const remain = (req, res) => {
   // 발송가능건수
-
   aligoapi.remain(req, AuthData)
       .then((r) => {
         res.send(r)
@@ -85,7 +78,6 @@ const remain = (req, res) => {
 
 const cancel = (req, res) => {
   // 예약취소하기
-
   // req.body = {
   /*** 필수값입니다 ***/
   //   mid: 메세지 고유ID

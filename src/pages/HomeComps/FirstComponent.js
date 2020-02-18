@@ -181,38 +181,27 @@ export default function FirstComponent(props) {
                 .catch(e=>console.log("_________________"+e));
             console.log("_________________결제 성공__" + data);
             console.log("_____reciptId_________: " + data.receipt_id);
-
         });
     }
 
     // 결제 취소 버튼
     function btn_cancelPay() {
-        const querystring = require('querystring');
-        axios.post('/api/aligo/send', querystring.stringify(
-            {
-                sender: '01037004972',
-                receiver: '01037004972',
-                msg: 'hitestme10',
-            }))
-            .catch(e=>console.log("_________________"+e));
-        // axios.post('/api/bp/cancel', {
-        //     data: rcptId
-        // }).catch(e => {console.log(e);})
+        // const querystring = require('querystring');
+        // axios.post('/api/aligo/send', querystring.stringify(
+        //     {
+        //         sender: '01037004972',
+        //         receiver: '01037004972',
+        //         msg: 'hitestme10',
+        //     }))
+        //     .catch(e=>console.log("_________________"+e));
+        axios.post('/api/bp/cancel', {
+            data: rcptId
+        }).catch(e => {console.log(e);})
     }
 
     return (
         <div className="component first-component">
             <div>
-                <form
-                    action={'/api/aligo/send'}
-                    method={'POST'}
-                >
-                    <input name={'sender'} value={'01037004972'} readOnly/>
-                    <input name={'receiver'} value={'01037004972'} readOnly/>
-                    <input name={'msg'} value={'01037004972'} readOnly/>
-                    <input name={'msg_type'} value={'SMS'} readOnly/>
-                    <button className={'btn'} type={'submit'}></button>
-                </form>
                 <h2 className={'first_main_h2'}>Get To Know</h2>
                 <div className='input_div'>
                     <SlideToggle toggleEvent={toggleEvent2}>
