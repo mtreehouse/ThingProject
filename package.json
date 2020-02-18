@@ -78,5 +78,5 @@
     "request": "^2.88.2",
     "style-loader": "^1.1.2"
   },
-  "proxy": "http://localhost:4000/"
+  "proxy": "http://thinglove.herokuapp.com:4000"
 }
