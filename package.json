@@ -45,7 +45,8 @@
     "typescript": "^3.7.4"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=src HTTPS=false react-scripts start",
+    "start": "NODE_PATH=src HTTPS=false react-scripts start",
+    "startdev": "cross-env NODE_PATH=src HTTPS=false react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
