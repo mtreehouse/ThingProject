@@ -5,6 +5,9 @@
   "main": "src/main.js",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/register": "^7.8.3",
     "aligoapi": "^1.0.7",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
@@ -15,7 +18,7 @@
     "nodemon": "^2.0.2"
   },
   "scripts": {
-    "start:dev": "node -r src",
-    "nm": "nodemon --watch src/ -r esm src/main.js HTTPS=false"
+    "start": "nodemon --watch src/ -r esm src/main.js HTTPS=false",
+    "start:dev": "node -r src"
   }
 }

@@ -7,7 +7,10 @@
     "npm": "6.13.4"
   },
   "dependencies": {
+    "@babel/core": "^7.8.4",
     "@babel/polyfill": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/register": "^7.8.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
@@ -21,6 +24,7 @@
     "bootpay-rest-client": "^1.0.3",
     "bootstrap": "^4.4.1",
     "core-js": "^3.6.2",
+    "cross-env": "^7.0.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "firebase": "^7.6.2",
     "gh-pages": "^2.2.0",
@@ -45,8 +49,9 @@
     "typescript": "^3.7.4"
   },
   "scripts": {
-    "start": "NODE_PATH=src HTTPS=false react-scripts start",
-    "startdev": "cross-env NODE_PATH=src HTTPS=false react-scripts start",
+    "start": "cross-env NODE_PATH=src HTTPS=false react-scripts start",
+    "backend-start": "node -r ./server/src",
+    "startdev": "yarn start backend-start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -70,7 +75,6 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.8.3",
-    "cross-env": "^7.0.0",
     "css-loader": "^3.4.1",
     "form-data": "^3.0.0",
     "json-loader": "^0.5.7",
@@ -78,5 +82,5 @@
     "request": "^2.88.2",
     "style-loader": "^1.1.2"
   },
-  "proxy": "http://thinglove.herokuapp.com:4000"
+  "proxy": "http://0.0.0.0:4000"
 }
