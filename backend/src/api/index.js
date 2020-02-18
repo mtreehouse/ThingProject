@@ -11,5 +11,10 @@ api.use('/member', members.routes())
     .use('/admin', admin.routes())
     .use('/aligo', aligo.routes());
 
+// 서버 연결 테스트
+api.get('/connect', ctx=>{
+    ctx.body="200"
+})
+
 // 라우터 내보내기
 export default api;

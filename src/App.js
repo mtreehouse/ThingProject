@@ -10,7 +10,7 @@
 
 import React, {} from 'react';
 import { Route } from 'react-router-dom'
-import { Home, Admin } from 'pages'
+import { Home, Admin } from './pages'
 
 export default class App extends React.Component {
     render() {
