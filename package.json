@@ -23,6 +23,7 @@
     "bootpay-js": "^3.1.1",
     "bootpay-rest-client": "^1.0.3",
     "bootstrap": "^4.4.1",
+    "concurrently": "^5.1.0",
     "core-js": "^3.6.2",
     "cross-env": "^7.0.0",
     "eslint-plugin-react-hooks": "^2.3.0",
@@ -49,7 +50,8 @@
     "typescript": "^3.7.4"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=src HTTPS=false react-scripts start",
+    "start": "concurrently \"yarn cli-start\" \"yarn backend-start\"",
+    "cli-start": "cross-env NODE_PATH=src HTTPS=false react-scripts start",
     "backend-start": "node -r ./server/src",
     "startdev": "yarn start backend-start",
     "build": "react-scripts build",
@@ -82,5 +84,5 @@
     "request": "^2.88.2",
     "style-loader": "^1.1.2"
   },
-  "proxy": "http://0.0.0.0:4000"
+  "proxy": "http://thinglove.herokuapp.com:4000"
 }
