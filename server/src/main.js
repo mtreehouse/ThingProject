@@ -12,6 +12,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import api from './api';
+import kos from 'koa-static'
 const app = new Koa();
 const router = new Router();
 
@@ -25,7 +26,8 @@ app.use(bodyParser());
 
 // app 인스턴스에 라우터 적용
 app.use(router.routes()).use(router.allowedMethods());
-app.get("/", (req, res) => {
+app.use(require('koa-static')('../../build'))
+router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../../build", "index.html"));
 });
 
