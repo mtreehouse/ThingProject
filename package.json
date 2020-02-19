@@ -54,7 +54,7 @@
   "scripts": {
     "start": "concurrently \"yarn cli-start\" \"yarn backend-start\"",
     "cli-start": "cross-env NODE_PATH=src HTTPS=false react-scripts start",
-    "backend-start": "node -r ./server/src",
+    "backend-start": "node ./server/src",
     "startdev": "yarn start backend-start",
     "build": "react-scripts build",
     "test": "react-scripts test",
