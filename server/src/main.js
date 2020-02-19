@@ -25,7 +25,9 @@ app.use(bodyParser());
 
 // app 인스턴스에 라우터 적용
 app.use(router.routes()).use(router.allowedMethods());
-app.use(require('koa-static')('../../build'))
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "../../build", "index.html"));
+});
 
 const port = PORT || 5000;
 app.listen(port, () => {
