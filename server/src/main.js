@@ -42,7 +42,7 @@ app.use(bodyParser());
 // app 인스턴스에 라우터 적용
 app.use(router.routes()).use(router.allowedMethods());
 
-const port = PORT || 4000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
     console.log("Listening to port " + port);
 })
