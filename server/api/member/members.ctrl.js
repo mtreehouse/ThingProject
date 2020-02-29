@@ -4,7 +4,7 @@
 * {name, my_phone, his_phone, receipt_id}
 * */
 export const insert = ctx => {
-    const db = require('../../../mysql-db');
+    const db = require('../../mysql-db');
     const name = ctx.request.body.name;
     const my_phone = ctx.request.body.my_phone;
     const his_phone = ctx.request.body.his_phone;
@@ -27,7 +27,7 @@ export const insert = ctx => {
 export const del = ctx => {
     ctx.body=200;
     const { id } = ctx.params;
-    const db = require('../../../mysql-db');
+    const db = require('../../mysql-db');
     db.promise().execute("delete from thing_members where id=?"
         , [id])
         .then(e => {

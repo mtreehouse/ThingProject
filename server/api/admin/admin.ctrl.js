@@ -4,7 +4,7 @@
 // *
 // * */
 export const list = async ctx => {
-    const db = require('../../../mysql-db');
+    const db = require('../../mysql-db');
     await db.promise().query("select id, name, my_phone, his_phone, receipt_id, date_format(created_date,'%Y-%m-%d')created_date from thing_members ORDER BY id DESC")
         .then(([rows, fields]) => {
                 ctx.body = {

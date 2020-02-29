@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="e8e7e8c3-00a9-4f97-b852-e4885048afdb" name="EC2-RH" url="http://54.90.91.132">
-        <fileTransfer host="54.90.91.132" port="22" privateKey="C:\Users\admin\Downloads\mtreeubuntu.pem" accessType="SFTP" keyPair="true">
+        <fileTransfer host="54.90.91.132" port="22" privateKey="C:\Users\Business\Downloads\mtreeubuntu.pem" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
