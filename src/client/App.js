@@ -9,16 +9,18 @@
  */
 
 import React, {} from 'react';
-import { Route } from 'react-router-dom'
-import { Home, Admin } from './pages'
+import {Route, Switch, Redirect} from 'react-router-dom'
+import {Home, Admin} from './pages'
 
 export default class App extends React.Component {
     render() {
         return (
-            <div>
-                <Route exact path="/" component={Home}/>
-                <Route exact path="/admin" component={Admin}/>
-            </div>
+            <Switch>
+                <div>
+                    <Route exact path="/" component={Home}/>
+                    <Route exact path="/admin" component={Admin}/>
+                </div>
+            </Switch>
         );
     }
 }

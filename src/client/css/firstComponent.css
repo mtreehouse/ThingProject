@@ -44,7 +44,9 @@ footer div {
     color: blanchedalmond;
     margin-bottom: 5px;
 }
-
+.sentimg {
+    height: 50vh;
+}
 /*--------- input start ---------*/
 .input_div {
     display: inline-block;

@@ -62,8 +62,9 @@
   },
   "scripts": {
     "start": "node server",
-    "build": "cross-env NODE_PATH=src react-scripts build",
-    "test": "react-scripts test --env=jsdom"
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "dstart": "cross-env NODE_PATH=src HTTPS=false react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"

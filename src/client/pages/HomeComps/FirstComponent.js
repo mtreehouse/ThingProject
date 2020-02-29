@@ -17,11 +17,13 @@ import 'firebase/auth';
 import SlideToggle from "react-slide-toggle";
 import BootPay from "bootpay-js"
 import axios from "axios"
+import sentlove from '../../img/runlove.gif'
 
 export default function FirstComponent(props) {
     // TODO: 데이터베이스연결
     const [isTyped, setIsTyped] = useState(false);
     const [isVerified, setIsVerified] = useState(false);
+    const [isSent, setIsSent] = useState(false);
     const [toggleEvent, setToggleEvent] = useState(0);
     const [toggleEvent2, setToggleEvent2] = useState(0);
     const [myName, setMyName] = useState('');
@@ -179,15 +181,21 @@ export default function FirstComponent(props) {
                                     msg: '문자전송성공!',
                                 }))
                                 .catch(e => console.log("_________________" + e));
-                        }).catch(e => {
-                            console.log(e);
-                            axios.post('/api/bp/cancel', {
-                                data: rcptId
-                            }).then(() => console.log('결제취소되었습니다.'))
-                                .catch(e => {
-                                    console.log(e);
-                                })
+                        }).then(r => {
+                            setIsSent(true)
                         })
+                            .catch(e => {
+                                console.log(e);
+                                axios.post('/api/bp/cancel', {
+                                    data: rcptId
+                                }).then(() => {
+                                    console.log('결제취소되었습니다.');
+                                    alert("문자전송에 실패하여 결제가 취소되었습니다.")
+                                })
+                                    .catch(e => {
+                                        console.log(e);
+                                    })
+                            })
                         console.log("_________________결제 성공__" + data);
                         console.log("_____reciptId_________: " + data.receipt_id);
                     });
@@ -200,6 +208,7 @@ export default function FirstComponent(props) {
 
     // 결제 취소 버튼
     function btn_cancelPay() {
+        // 메세지 전송 테스트
         // const querystring = require('querystring');
         // axios.post('/api/aligo/send', querystring.stringify(
         //     {
@@ -219,69 +228,72 @@ export default function FirstComponent(props) {
         <div className="component first-component">
             <div>
                 <h2 className={'first_main_h2'}>Get To Know</h2>
-                <div className='input_div'>
-                    <SlideToggle toggleEvent={toggleEvent2}>
-                        {({setCollapsibleElement}) => (
-                            <div className="my-collapsible" ref={setCollapsibleElement}>
-                                <div className='input_field'>
-                                    <input type={'text'} placeholder={'my name...'}
-                                           className={'input_my_name ' + (isTyped ? 'readonly' : '')}
-                                           readOnly={isTyped}
-                                           onChange={e => {
-                                               setMyName(e.target.value)
-                                           }}
-                                    />
-                                </div>
-                                <div className='input_field'>
-                                    <input type={'text'} placeholder={'my phone...'}
-                                           className={'input_my_phone ' + (isTyped ? 'readonly' : '')}
-                                           readOnly={isTyped}
-                                           onChange={e => {
-                                               setPhoneNumber(e.target.value)
-                                           }}
-                                    />
-                                </div>
-                            </div>
-                        )}
-                    </SlideToggle>
-
-                    <div className='input_field'>
-                        <input type={'text'} placeholder={"♥'s phone..."} onChange={e => {
-                            setLoveNumber(e.target.value)
-                        }} className={'input_love_phone ' + (isVerified ? '' : 'hide')}/>
-                    </div>
-                    <div className='input_field vchide'>
-                        <SlideToggle collapsed toggleEvent={toggleEvent}>
+                {isSent ?
+                    <img src={sentlove} alt='sentlovelogo' className={'runloveimg'}/>
+                    :
+                    <div className='input_div'>
+                        <SlideToggle toggleEvent={toggleEvent2}>
                             {({setCollapsibleElement}) => (
                                 <div className="my-collapsible" ref={setCollapsibleElement}>
-                                    <input type={'text'} placeholder={'verification code...'} id="code"/>
+                                    <div className='input_field'>
+                                        <input type={'text'} placeholder={'my name...'}
+                                               className={'input_my_name ' + (isTyped ? 'readonly' : '')}
+                                               readOnly={isTyped}
+                                               onChange={e => {
+                                                   setMyName(e.target.value)
+                                               }}
+                                        />
+                                    </div>
+                                    <div className='input_field'>
+                                        <input type={'text'} placeholder={'my phone...'}
+                                               className={'input_my_phone ' + (isTyped ? 'readonly' : '')}
+                                               readOnly={isTyped}
+                                               onChange={e => {
+                                                   setPhoneNumber(e.target.value)
+                                               }}
+                                        />
+                                    </div>
                                 </div>
                             )}
                         </SlideToggle>
-                    </div>
-                    <div className='input_field'>
-                        {isTyped ?
-                            <button
-                                className={'btn ' + (isVerified ? 'hide' : '')}
-                                onClick={submitPhoneNumberAuthCode}
-                            >OK</button>
-                            :
-                            <button
-                                className={'btn btntest'}
-                                onClick={btn_verify}
-                            >Verify</button>
-                        }
-                    </div>
-                    <div className='input_field'>
-                        <button
-                            className={'btn ' + (isVerified ? '' : 'hide')} // isVerified 임시
-                            onClick={btn_sendLove}
-                        >SEND
-                        </button>
-                    </div>
 
-                </div>
-                <div className={'input_info_div'}>
+                        <div className='input_field'>
+                            <input type={'text'} placeholder={"♥'s phone..."} onChange={e => {
+                                setLoveNumber(e.target.value)
+                            }} className={'input_love_phone ' + (isVerified ? '' : 'hide')}/>
+                        </div>
+                        <div className='input_field vchide'>
+                            <SlideToggle collapsed toggleEvent={toggleEvent}>
+                                {({setCollapsibleElement}) => (
+                                    <div className="my-collapsible" ref={setCollapsibleElement}>
+                                        <input type={'text'} placeholder={'verification code...'} id="code"/>
+                                    </div>
+                                )}
+                            </SlideToggle>
+                        </div>
+                        <div className='input_field'>
+                            {isTyped ?
+                                <button
+                                    className={'btn ' + (isVerified ? 'hide' : '')}
+                                    onClick={submitPhoneNumberAuthCode}
+                                >OK</button>
+                                :
+                                <button
+                                    className={'btn btntest'}
+                                    onClick={btn_verify}
+                                >Verify</button>
+                            }
+                        </div>
+                        <div className='input_field'>
+                            <button
+                                className={'btn ' + (isVerified ? '' : 'hide')} // isVerified 임시
+                                onClick={btn_sendLove}
+                            >SEND
+                            </button>
+                        </div>
+                    </div>
+                }
+                <div className={'input_info_div' + (isSent ? 'hide' : '')}>
                     <img className={'svg_my_phone'} src={require('../../img/svgmyphone.gif')} alt={'my phone-number'}/>
                 </div>
             </div>
