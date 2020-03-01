@@ -21,7 +21,6 @@ import sentlove from '../../img/runlove.gif'
 import querystring from 'querystring'
 
 export default function FirstComponent(props) {
-    // TODO: 데이터베이스연결
     const [isTyped, setIsTyped] = useState(false);
     const [isVerified, setIsVerified] = useState(false);
     const [isSent, setIsSent] = useState(false);
@@ -173,7 +172,7 @@ export default function FirstComponent(props) {
                             his_phone: loveNumber,
                             receipt_id: rcptId
                         }).then(r => {
-                            // TODO : 매칭여부 확인 후 '개인' 혹은 '매칭 성공' 메세지 전송
+                            // 매칭여부 확인 후 '개인' 혹은 '매칭 성공' 메세지 전송
                             axios.post('/api/member/matchCheck', {
                                 my_phone: phoneNumber,
                                 his_phone: loveNumber
