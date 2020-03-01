@@ -48,6 +48,14 @@ export const matchCheck = async ctx => {
     const db = require('../../mysql-db');
     const my_phone = ctx.request.body.my_phone;
     const his_phone = ctx.request.body.his_phone;
+    // 나에게 보낸 멤버들의 check 컬럼 1로 수정
+    db.promise().execute("UPDATE thing_members set checked=1 where his_phone=?"
+        , [my_phone])
+        .catch(e => {
+            console.log(e);
+        })
+
+    // 매칭 확인
     await db.promise().execute("SELECT id FROM thing_members WHERE my_phone=? AND his_phone=?"
         , [his_phone, my_phone])
         .then(r => {

@@ -115,6 +115,9 @@ export default function FirstComponent(props) {
 
     // 결제 > DB저장 > 문자전송
     function btn_sendLove() {
+        const korMyPhone = phoneNumber.replace('+82','')
+        const korHisPhone = loveNumber.replace('+82','')
+
         axios.get('/api/connect') /* 서버 연결 확인 */
             .then(r => {
                 if (r.status == 200) {
@@ -168,22 +171,22 @@ export default function FirstComponent(props) {
                         // DB에 저장
                         axios.post('/api/member/insert', {
                             name: myName,
-                            my_phone: phoneNumber,
-                            his_phone: loveNumber,
+                            my_phone: korMyPhone,
+                            his_phone: korHisPhone,
                             receipt_id: rcptId
                         }).then(r => {
                             // 매칭여부 확인 후 '개인' 혹은 '매칭 성공' 메세지 전송
                             axios.post('/api/member/matchCheck', {
-                                my_phone: phoneNumber,
-                                his_phone: loveNumber
+                                my_phone: korMyPhone,
+                                his_phone: korHisPhone
                             }).then(r => {
                                 if(r.data){ // 매칭 됐을 시
                                     // 문자 전송
                                     axios.post('/api/aligo/sendMass', querystring.stringify(
                                         {
                                             sender: '01037004972',
-                                            rec_1: phoneNumber,
-                                            rec_2: loveNumber,
+                                            rec_1: korMyPhone,
+                                            rec_2: korHisPhone,
                                             msg_type: 'SMS',
                                             msg: '서로의 썸이 연결되었습니다!',
                                             cnt: 2
@@ -194,7 +197,7 @@ export default function FirstComponent(props) {
                                     axios.post('/api/aligo/send', querystring.stringify(
                                         {
                                             sender: '01037004972',
-                                            receiver: loveNumber,
+                                            receiver: korHisPhone,
                                             msg: '문자전송성공!',
                                             msg_type: 'SMS'
                                         })).catch(e => console.log("_________________" + e));
@@ -230,17 +233,42 @@ export default function FirstComponent(props) {
 
     // 결제 취소 버튼
     function btn_cancelPay() {
-        axios.post('/api/aligo/sendMass', querystring.stringify(
-            {
-                sender: '01037004972',
-                rec_1: '01037004972',
-                rec_2: '01073201637',
-                msg_type: 'SMS',
-                msg_1: '서로의 썸이 연결되었습니다!',
-                msg_2: '서로의 썸이 연결되었습니다!',
-                cnt: 2
-            })).catch(e => console.log("_________________" + e));
-        console.log("___________매칭성공")
+        axios.post('/api/bp/cancel', {
+            data: rcptId
+        }).catch(e => {
+            console.log(e);
+        })
+        //매칭 테스트
+        // axios.post('/api/member/matchCheck', {
+        //     my_phone: "82820101",
+        //     his_phone: '01037004972'
+        // }).then(r => {
+        //     if(r.data){ // 매칭 됐을 시
+        //         // 문자 전송
+        //         axios.post('/api/aligo/sendMass', querystring.stringify(
+        //             {
+        //                 sender: '01037004972',
+        //                 rec_1: '01037004972',
+        //                 rec_2: '01037004972',
+        //                 msg_type: 'SMS',
+        //                 msg: '서로의 썸이 연결되었습니다!',
+        //                 cnt: 2
+        //             })).catch(e => console.log("_________________" + e));
+        //         console.log("___________매칭성공")
+        //     }else{ // 매칭 실패 시
+        //         // 문자 전송
+        //         axios.post('/api/aligo/send', querystring.stringify(
+        //             {
+        //                 sender: '01037004972',
+        //                 receiver: '01037004972',
+        //                 msg: '문자전송성공!',
+        //                 msg_type: 'SMS'
+        //             })).catch(e => console.log("_________________" + e));
+        //         console.log("___________매칭실패")
+        //     }
+        // }).catch(r=>{
+        //     console.log(r)
+        // })
 
         // 메세지 전송 테스트
         // const querystring = require('querystring');
@@ -252,11 +280,6 @@ export default function FirstComponent(props) {
         //     }))
         //     .catch(e=>console.log("_________________"+e));
 
-        // axios.post('/api/bp/cancel', {
-        //     data: rcptId
-        // }).catch(e => {
-        //     console.log(e);
-        // })
     }
 
     return (
