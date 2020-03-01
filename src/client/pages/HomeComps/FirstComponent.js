@@ -238,9 +238,10 @@ export default function FirstComponent(props) {
         }).catch(e => {
             console.log(e);
         })
+
         //매칭 테스트
         // axios.post('/api/member/matchCheck', {
-        //     my_phone: "82820101",
+        //     my_phone: "123",
         //     his_phone: '01037004972'
         // }).then(r => {
         //     if(r.data){ // 매칭 됐을 시

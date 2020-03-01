@@ -49,7 +49,7 @@ export const matchCheck = async ctx => {
     const my_phone = ctx.request.body.my_phone;
     const his_phone = ctx.request.body.his_phone;
     // 나에게 보낸 멤버들의 check 컬럼 1로 수정
-    db.promise().execute("UPDATE thing_members set checked=1 where his_phone=?"
+    db.promise().execute("UPDATE thing_members set ischecked=1 where his_phone=?"
         , [my_phone])
         .catch(e => {
             console.log(e);
