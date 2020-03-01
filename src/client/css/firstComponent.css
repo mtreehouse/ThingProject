@@ -44,7 +44,7 @@ footer div {
     color: blanchedalmond;
     margin-bottom: 5px;
 }
-.sentimg {
+.sentloveimg {
     height: 50vh;
 }
 /*--------- input start ---------*/
@@ -54,7 +54,7 @@ footer div {
     background-position: center;
     border-radius: 8px;
     padding: 3px;
-    margin-left: 90px;
+    /*margin-left: 90px;*/
 }
 
 .input_div input {

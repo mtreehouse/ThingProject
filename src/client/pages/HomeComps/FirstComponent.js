@@ -18,6 +18,7 @@ import SlideToggle from "react-slide-toggle";
 import BootPay from "bootpay-js"
 import axios from "axios"
 import sentlove from '../../img/runlove.gif'
+import querystring from 'querystring'
 
 export default function FirstComponent(props) {
     // TODO: 데이터베이스연결
@@ -115,7 +116,7 @@ export default function FirstComponent(props) {
 
     // 결제 > DB저장 > 문자전송
     function btn_sendLove() {
-        axios.get('/api/connect')
+        axios.get('/api/connect') /* 서버 연결 확인 */
             .then(r => {
                 if (r.status == 200) {
                     BootPay.request({
@@ -172,15 +173,37 @@ export default function FirstComponent(props) {
                             his_phone: loveNumber,
                             receipt_id: rcptId
                         }).then(r => {
-                            // 문자 전송
-                            const querystring = require('querystring');
-                            axios.post('/api/aligo/send', querystring.stringify(
-                                {
-                                    sender: '01037004972',
-                                    receiver: loveNumber,
-                                    msg: '문자전송성공!',
-                                }))
-                                .catch(e => console.log("_________________" + e));
+                            // TODO : 매칭여부 확인 후 '개인' 혹은 '매칭 성공' 메세지 전송
+                            axios.post('/api/member/matchCheck', {
+                                my_phone: phoneNumber,
+                                his_phone: loveNumber
+                            }).then(r => {
+                                if(r.data){ // 매칭 됐을 시
+                                    // 문자 전송
+                                    axios.post('/api/aligo/sendMass', querystring.stringify(
+                                        {
+                                            sender: '01037004972',
+                                            rec_1: phoneNumber,
+                                            rec_2: loveNumber,
+                                            msg_type: 'SMS',
+                                            msg: '서로의 썸이 연결되었습니다!',
+                                            cnt: 2
+                                        })).catch(e => console.log("_________________" + e));
+                                    console.log("___________매칭성공")
+                                }else{ // 매칭 실패 시
+                                    // 문자 전송
+                                    axios.post('/api/aligo/send', querystring.stringify(
+                                        {
+                                            sender: '01037004972',
+                                            receiver: loveNumber,
+                                            msg: '문자전송성공!',
+                                            msg_type: 'SMS'
+                                        })).catch(e => console.log("_________________" + e));
+                                    console.log("___________매칭실패")
+                                }
+                            }).catch(r=>{
+                                console.log(r)
+                            })
                         }).then(r => {
                             setIsSent(true)
                         })
@@ -208,6 +231,18 @@ export default function FirstComponent(props) {
 
     // 결제 취소 버튼
     function btn_cancelPay() {
+        axios.post('/api/aligo/sendMass', querystring.stringify(
+            {
+                sender: '01037004972',
+                rec_1: '01037004972',
+                rec_2: '01073201637',
+                msg_type: 'SMS',
+                msg_1: '서로의 썸이 연결되었습니다!',
+                msg_2: '서로의 썸이 연결되었습니다!',
+                cnt: 2
+            })).catch(e => console.log("_________________" + e));
+        console.log("___________매칭성공")
+
         // 메세지 전송 테스트
         // const querystring = require('querystring');
         // axios.post('/api/aligo/send', querystring.stringify(
@@ -217,11 +252,12 @@ export default function FirstComponent(props) {
         //         msg: 'hitestme10',
         //     }))
         //     .catch(e=>console.log("_________________"+e));
-        axios.post('/api/bp/cancel', {
-            data: rcptId
-        }).catch(e => {
-            console.log(e);
-        })
+
+        // axios.post('/api/bp/cancel', {
+        //     data: rcptId
+        // }).catch(e => {
+        //     console.log(e);
+        // })
     }
 
     return (
@@ -229,7 +265,7 @@ export default function FirstComponent(props) {
             <div>
                 <h2 className={'first_main_h2'}>Get To Know</h2>
                 {isSent ?
-                    <img src={sentlove} alt='sentlovelogo' className={'runloveimg'}/>
+                    <img src={sentlove} alt='sentlovelogo' className={'sentloveimg'}/>
                     :
                     <div className='input_div'>
                         <SlideToggle toggleEvent={toggleEvent2}>
@@ -293,9 +329,10 @@ export default function FirstComponent(props) {
                         </div>
                     </div>
                 }
+                {/* svg my phone
                 <div className={'input_info_div' + (isSent ? 'hide' : '')}>
                     <img className={'svg_my_phone'} src={require('../../img/svgmyphone.gif')} alt={'my phone-number'}/>
-                </div>
+                </div>*/}
             </div>
             <footer>
                 <div>how to</div>

@@ -64,7 +64,8 @@
     "start": "node server",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "dstart": "cross-env NODE_PATH=src HTTPS=false react-scripts start"
+    "dstart": "cross-env NODE_PATH=src HTTPS=false react-scripts start",
+    "bstart": "nodemon --watch server/ -r esm server/main.js HTTPS=false"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -88,5 +89,6 @@
     "json-loader": "^0.5.7",
     "request": "^2.88.2",
     "style-loader": "^1.1.2"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }

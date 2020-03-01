@@ -19,8 +19,8 @@ const router = new Router();
 
 const {PORT} = process.env;
 
-
-app.use(serve(path.resolve(__dirname, '../build/')));
+// 개발용 임시 주석처리
+//app.use(serve(path.resolve(__dirname, '../build/')));
 
 // 라우터 설정
 router.use('/api', api.routes());
