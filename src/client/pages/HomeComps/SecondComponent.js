@@ -23,7 +23,7 @@ export default () => {
                 </div>
                 <div id="address">
                     <p>
-                        <span>Copyright</span> 2020 CA. All rights reserved.
+                        <span>Copyright</span> 2020 CA. All rights reserved. / 광고문의 : 010-3700-4972
                     </p>
                 </div>
         </div>

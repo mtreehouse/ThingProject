@@ -32,6 +32,7 @@ export default function FirstComponent(props) {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [loveNumber, setLoveNumber] = useState('');
     const [codeNumber, setCodeNumber] = useState('');
+    const [modalVerified, setModalVerified] = useState(false);
 
     let rcptId = "";
 
@@ -97,6 +98,23 @@ export default function FirstComponent(props) {
                     setToggleEvent(Date.now());
                     setToggleEvent2(Date.now());
                     setIsVerified(true);
+                })
+                .catch(function (error) {
+                    alert("You have entered a wrong code")
+                    console.log("Verify Failed : " + error);
+                });
+        } else {
+            console.log("메세지 전송 실패");
+        }
+    }
+
+    function submitModalPhoneNumberAuthCode(codeNum) {
+        if (window.confirmResult != null) {
+            window.confirmResult
+                .confirm(codeNum)
+                .then(function (result) {
+                    alert("aa")
+                    setModalVerified(true)
                 })
                 .catch(function (error) {
                     alert("You have entered a wrong code")
@@ -370,7 +388,7 @@ export default function FirstComponent(props) {
                     </div>
                 }
                 <ModalApp>
-                    <Modal resMyNum={resSetMyNumber} submitPhone={submitPhoneNumberAuth} submitCode={submitPhoneNumberAuthCode}/>
+                    <Modal resMyNum={resSetMyNumber} submitPhone={submitPhoneNumberAuth} submitCode={submitModalPhoneNumberAuthCode} verified={modalVerified}/>
                 </ModalApp>
 
             </div>
