@@ -17,16 +17,21 @@ import 'firebase/auth';
 import SlideToggle from "react-slide-toggle";
 import BootPay from "bootpay-js"
 import axios from "axios"
+import sentlove from '../../img/runlove.gif'
+import querystring from 'querystring'
+import Modal from '../Modal/responseModal'
+import { Container } from "semantic-ui-react";
 
 export default function FirstComponent(props) {
-    // TODO: 데이터베이스연결
     const [isTyped, setIsTyped] = useState(false);
     const [isVerified, setIsVerified] = useState(false);
+    const [isSent, setIsSent] = useState(false);
     const [toggleEvent, setToggleEvent] = useState(0);
     const [toggleEvent2, setToggleEvent2] = useState(0);
     const [myName, setMyName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [loveNumber, setLoveNumber] = useState('');
+    const [codeNumber, setCodeNumber] = useState('');
 
     let rcptId = "";
 
@@ -68,14 +73,14 @@ export default function FirstComponent(props) {
         /**
          *===================[ Firebase sms End ]===================
          */
-
     }, [])
 
-    function submitPhoneNumberAuth() {
+
+    function submitPhoneNumberAuth(phoneNum) {
         const appVerifier = window.recaptchaVerifier;
         firebase
             .auth()
-            .signInWithPhoneNumber(phoneNumber, appVerifier)
+            .signInWithPhoneNumber(phoneNum, appVerifier)
             .then(function (confirmationResult) {
                 window.confirmResult = confirmationResult;
             })
@@ -84,12 +89,10 @@ export default function FirstComponent(props) {
             });
     }
 
-    function submitPhoneNumberAuthCode(e) {
-        e.preventDefault();
+    function submitPhoneNumberAuthCode(codeNum) {
         if (window.confirmResult != null) {
-            const code = document.getElementById("code").value;
             window.confirmResult
-                .confirm(code)
+                .confirm(codeNum)
                 .then(function (result) {
                     setToggleEvent(Date.now());
                     setToggleEvent2(Date.now());
@@ -108,12 +111,15 @@ export default function FirstComponent(props) {
     function btn_verify() {
         setIsTyped(true);
         onToggle();
-        submitPhoneNumberAuth();
+        submitPhoneNumberAuth(phoneNumber);
     }
 
     // 결제 > DB저장 > 문자전송
     function btn_sendLove() {
-        axios.get('/api/connect')
+        const korMyPhone = phoneNumber.replace('+82','')
+        const korHisPhone = loveNumber.replace('+82','')
+
+        axios.get('/api/connect') /* 서버 연결 확인 */
             .then(r => {
                 if (r.status == 200) {
                     BootPay.request({
@@ -166,28 +172,56 @@ export default function FirstComponent(props) {
                         // DB에 저장
                         axios.post('/api/member/insert', {
                             name: myName,
-                            my_phone: phoneNumber,
-                            his_phone: loveNumber,
+                            my_phone: korMyPhone,
+                            his_phone: korHisPhone,
                             receipt_id: rcptId
                         }).then(r => {
-                            // 문자 전송
-                            const querystring = require('querystring');
-                            axios.post('/api/aligo/send', querystring.stringify(
-                                {
-                                    sender: '01037004972',
-                                    receiver: loveNumber,
-                                    msg: '문자전송성공!',
-                                }))
-                                .catch(e => console.log("_________________" + e));
-                        }).catch(e => {
-                            console.log(e);
-                            axios.post('/api/bp/cancel', {
-                                data: rcptId
-                            }).then(() => console.log('결제취소되었습니다.'))
-                                .catch(e => {
-                                    console.log(e);
-                                })
+                            // 매칭여부 확인 후 '개인' 혹은 '매칭 성공' 메세지 전송
+                            axios.post('/api/member/matchCheck', {
+                                my_phone: korMyPhone,
+                                his_phone: korHisPhone
+                            }).then(r => {
+                                if(r.data){ // 매칭 됐을 시
+                                    // 문자 전송
+                                    axios.post('/api/aligo/sendMass', querystring.stringify(
+                                        {
+                                            sender: '01037004972',
+                                            rec_1: korMyPhone,
+                                            rec_2: korHisPhone,
+                                            msg_type: 'SMS',
+                                            msg: '서로의 썸이 연결되었습니다!',
+                                            cnt: 2
+                                        })).catch(e => console.log("_________________" + e));
+                                    console.log("___________매칭성공")
+                                }else{ // 매칭 실패 시
+                                    // 문자 전송
+                                    axios.post('/api/aligo/send', querystring.stringify(
+                                        {
+                                            sender: '01037004972',
+                                            receiver: korHisPhone,
+                                            msg: '문자전송성공!',
+                                            msg_type: 'SMS'
+                                        })).catch(e => console.log("_________________" + e));
+                                    console.log("___________매칭실패")
+                                }
+                            }).catch(r=>{
+                                console.log(r)
+                            })
+                        }).then(r => {
+                            setIsSent(true)
                         })
+                            .catch(e => {
+                                console.log(e);
+                                axios.post('/api/bp/cancel', {
+                                    data: rcptId
+                                }).then(() => {
+                                    console.log('결제취소되었습니다.');
+                                    alert("문자전송에 실패하여 결제가 취소되었습니다.")
+                                })
+                                    .catch(e => {
+                                        console.log(e);
+                                    })
+                            })
                         console.log("_________________결제 성공__" + data);
                         console.log("_____reciptId_________: " + data.receipt_id);
                     });
@@ -200,6 +234,45 @@ export default function FirstComponent(props) {
 
     // 결제 취소 버튼
     function btn_cancelPay() {
+        axios.post('/api/bp/cancel', {
+            data: rcptId
+        }).catch(e => {
+            console.log(e);
+        })
+
+        //매칭 테스트
+        // axios.post('/api/member/matchCheck', {
+        //     my_phone: "123",
+        //     his_phone: '01037004972'
+        // }).then(r => {
+        //     if(r.data){ // 매칭 됐을 시
+        //         // 문자 전송
+        //         axios.post('/api/aligo/sendMass', querystring.stringify(
+        //             {
+        //                 sender: '01037004972',
+        //                 rec_1: '01037004972',
+        //                 rec_2: '01037004972',
+        //                 msg_type: 'SMS',
+        //                 msg: '서로의 썸이 연결되었습니다!',
+        //                 cnt: 2
+        //             })).catch(e => console.log("_________________" + e));
+        //         console.log("___________매칭성공")
+        //     }else{ // 매칭 실패 시
+        //         // 문자 전송
+        //         axios.post('/api/aligo/send', querystring.stringify(
+        //             {
+        //                 sender: '01037004972',
+        //                 receiver: '01037004972',
+        //                 msg: '문자전송성공!',
+        //                 msg_type: 'SMS'
+        //             })).catch(e => console.log("_________________" + e));
+        //         console.log("___________매칭실패")
+        //     }
+        // }).catch(r=>{
+        //     console.log(r)
+        // })
+
+        // 메세지 전송 테스트
         // const querystring = require('querystring');
         // axios.post('/api/aligo/send', querystring.stringify(
         //     {
@@ -208,62 +281,77 @@ export default function FirstComponent(props) {
         //         msg: 'hitestme10',
         //     }))
         //     .catch(e=>console.log("_________________"+e));
-        axios.post('/api/bp/cancel', {
-            data: rcptId
-        }).catch(e => {
-            console.log(e);
-        })
+
+    }
+    const ModalApp = ({ children }) => (
+        <Container style={{  }}>
+            {children}
+        </Container>
+    );
+
+    function resSetMyNumber(phoneNum) {
+        // setPhoneNumber(phoneNum)
+        console.log("_________________"+phoneNum);
     }
 
     return (
         <div className="component first-component">
+
             <div>
                 <h2 className={'first_main_h2'}>Get To Know</h2>
-                <div className='input_div'>
-                    <SlideToggle toggleEvent={toggleEvent2}>
-                        {({setCollapsibleElement}) => (
-                            <div className="my-collapsible" ref={setCollapsibleElement}>
-                                <div className='input_field'>
-                                    <input type={'text'} placeholder={'my name...'}
-                                           className={'input_my_name ' + (isTyped ? 'readonly' : '')}
-                                           readOnly={isTyped}
-                                           onChange={e => {
-                                               setMyName(e.target.value)
-                                           }}
-                                    />
-                                </div>
-                                <div className='input_field'>
-                                    <input type={'text'} placeholder={'my phone...'}
-                                           className={'input_my_phone ' + (isTyped ? 'readonly' : '')}
-                                           readOnly={isTyped}
-                                           onChange={e => {
-                                               setPhoneNumber(e.target.value)
-                                           }}
-                                    />
-                                </div>
-                            </div>
-                        )}
-                    </SlideToggle>
-
-                    <div className='input_field'>
-                        <input type={'text'} placeholder={"♥'s phone..."} onChange={e => {
-                            setLoveNumber(e.target.value)
-                        }} className={'input_love_phone ' + (isVerified ? '' : 'hide')}/>
-                    </div>
-                    <div className='input_field vchide'>
-                        <SlideToggle collapsed toggleEvent={toggleEvent}>
+                {isSent ?
+                    <img src={sentlove} alt='sentlovelogo' className={'sentloveimg'}/>
+                    :
+                    <div className='input_div'>
+                        <SlideToggle toggleEvent={toggleEvent2}>
                             {({setCollapsibleElement}) => (
                                 <div className="my-collapsible" ref={setCollapsibleElement}>
-                                    <input type={'text'} placeholder={'verification code...'} id="code"/>
+                                    <div className='input_field'>
+                                        <input type={'text'} placeholder={'my name...'}
+                                               className={'input_my_name ' + (isTyped ? 'readonly' : '')}
+                                               readOnly={isTyped}
+                                               onChange={e => {
+                                                   setMyName(e.target.value)
+                                               }}
+                                        />
+                                    </div>
+                                    <div className='input_field'>
+                                        <input type={'text'} placeholder={'my phone...'}
+                                               className={'input_my_phone ' + (isTyped ? 'readonly' : '')}
+                                               readOnly={isTyped}
+                                               onChange={e => {
+                                                   setPhoneNumber(e.target.value)
+                                               }}
+                                        />
+                                    </div>
                                 </div>
                             )}
                         </SlideToggle>
-                    </div>
-                    <div className='input_field'>
-                        {isTyped ?
+
+                        <div className='input_field'>
+                            <input type={'text'} placeholder={"♥'s phone..."} onChange={e => {
+                                setLoveNumber(e.target.value)
+                            }} className={'input_love_phone ' + (isVerified ? '' : 'hide')}/>
+                        </div>
+                        <div className='input_field vchide'>
+                            <SlideToggle collapsed toggleEvent={toggleEvent}>
+                                {({setCollapsibleElement}) => (
+                                    <div className="my-collapsible" ref={setCollapsibleElement}>
+                                        <input type={'text'} placeholder={'verification code...'} onChange={e => {
+                                            setCodeNumber(e.target.value)
+                                        }}/>
+                                    </div>
+                                )}
+                            </SlideToggle>
+                        </div>
+                        <div className='input_field'>
+                            {isTyped ?
                             <button
                                 className={'btn ' + (isVerified ? 'hide' : '')}
-                                onClick={submitPhoneNumberAuthCode}
+                                onClick={e=>{
+                                    e.preventDefault()
+                                    submitPhoneNumberAuthCode(codeNumber)
+                                }}
                             >OK</button>
                             :
                             <button
@@ -271,20 +359,22 @@ export default function FirstComponent(props) {
                                 onClick={btn_verify}
                             >Verify</button>
                         }
+                        </div>
+                        <div className='input_field'>
+                            <button
+                                className={'btn ' + (isVerified ? '' : 'hide')} // isVerified 임시
+                                onClick={btn_sendLove}
+                            >SEND
+                            </button>
+                        </div>
                     </div>
-                    <div className='input_field'>
-                        <button
-                            className={'btn ' + (isVerified ? '' : 'hide')} // isVerified 임시
-                            onClick={btn_sendLove}
-                        >SEND
-                        </button>
-                    </div>
+                }
+                <ModalApp>
+                    <Modal resMyNum={resSetMyNumber} submitPhone={submitPhoneNumberAuth} submitCode={submitPhoneNumberAuthCode}/>
+                </ModalApp>
 
-                </div>
-                <div className={'input_info_div'}>
-                    <img className={'svg_my_phone'} src={require('../../img/svgmyphone.gif')} alt={'my phone-number'}/>
-                </div>
             </div>
+
             <footer>
                 <div>how to</div>
                 <button className={'scroll-link'} onClick={btn_cancelPay}>

@@ -14,5 +14,6 @@ import * as aligoCtrl from './aligo.ctrl';
 const aligo = new Router();
 
 aligo.post('/send', aligoCtrl.sends);
+aligo.post('/sendMass', aligoCtrl.sendsMass);
 
 export default aligo;

@@ -22,6 +22,17 @@ const send = (req, res) => {
       })
 }
 
+const sendMass = (req, res) => {
+    // 메시지 대량발송하기
+    aligoapi.sendMass(req, AuthData)
+        .then((r) => {
+            console.log("_response________________"+JSON.stringify(r));
+        })
+        .catch((e) => {
+            console.log("_error________________"+e);
+        })
+}
+
 const list = (req, res) => {
   // 전송결과보기
   // req.body = {
@@ -96,6 +107,7 @@ const cancel = (req, res) => {
 
 module.exports = {
   send,
+  sendMass,
   list,
   smsList,
   remain,

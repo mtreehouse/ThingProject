@@ -12,10 +12,15 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import api from './api';
+import serve from 'koa-static'
+import path from 'path'
 const app = new Koa();
 const router = new Router();
 
 const {PORT} = process.env;
+
+// 개발용 임시 주석처리
+//app.use(serve(path.resolve(__dirname, '../build/')));
 
 // 라우터 설정
 router.use('/api', api.routes());
@@ -25,9 +30,9 @@ app.use(bodyParser());
 
 // app 인스턴스에 라우터 적용
 app.use(router.routes()).use(router.allowedMethods());
-app.use(require('koa-static')('../../build'))
 
-const port = PORT || 4000;
+
+const port = PORT || 3001;
 app.listen(port, () => {
     console.log("Listening to port " + port);
 })

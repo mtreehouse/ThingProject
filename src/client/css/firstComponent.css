@@ -44,7 +44,9 @@ footer div {
     color: blanchedalmond;
     margin-bottom: 5px;
 }
-
+.sentloveimg {
+    height: 50vh;
+}
 /*--------- input start ---------*/
 .input_div {
     display: inline-block;
@@ -52,7 +54,7 @@ footer div {
     background-position: center;
     border-radius: 8px;
     padding: 3px;
-    margin-left: 90px;
+    /*margin-left: 90px;*/
 }
 
 .input_div input {
@@ -93,6 +95,17 @@ footer div {
 
 .first-component .btn:active {
     color: #c7d3ff;
+}
+.modalBtn{
+    margin-top: 35px;
+    width: 200px;
+    height: 30px;
+    background-color: rgba(255, 244, 0, 0.86) !important;
+    border-radius: 3px;
+    border: none;
+    color: #000000;
+    font-weight: bold;
+    cursor: pointer;
 }
 /*--------- button end ---------*/
 

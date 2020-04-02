@@ -79,9 +79,9 @@ export default class Member extends React.Component {
                 dataField: 'created_date',
                 text: 'DATE'
             }, {
-                dataField: 'checked',
+                dataField: 'ischecked',
                 text: '●',
-                formatter: (cell) => <Checkbox checked={cell} />,
+                formatter: cell => <Checkbox checked={cell} />,
                 editor: {
                     type: Type.CHECKBOX
                 },
