@@ -8,6 +8,7 @@
  *===================[ Thing-Project ]===================
  */
 
+// firebase 번호 확인
 export function submitPhoneNumberAuth(firebase, phoneNum) {
     const appVerifier = window.recaptchaVerifier;
     firebase
@@ -22,6 +23,7 @@ export function submitPhoneNumberAuth(firebase, phoneNum) {
         });
 }
 
+// firebase SMS 전송 코드 확인
 export async function submitPhoneNumberAuthCode(codeNum) {
     let done = false;
     if (window.confirmResult != null) {
@@ -38,21 +40,4 @@ export async function submitPhoneNumberAuthCode(codeNum) {
         console.log("메세지 전송 실패");
     }
     return done
-}
-
-export function submitModalPhoneNumberAuthCode(codeNum) {
-    if (window.confirmResult != null) {
-        window.confirmResult
-            .confirm(codeNum)
-            .then(function (result) {
-                alert("aa")
-                // setModalVerified(true)
-            })
-            .catch(function (error) {
-                alert("You have entered a wrong code")
-                console.log("Verify Failed : " + error);
-            });
-    } else {
-        console.log("메세지 전송 실패");
-    }
 }

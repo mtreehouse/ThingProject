@@ -16,10 +16,10 @@ export default class App extends React.Component {
     render() {
         return (
             <Switch>
-                <div>
+                <>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/admin" component={Admin}/>
-                </div>
+                </>
             </Switch>
         );
     }

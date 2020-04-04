@@ -14,6 +14,7 @@ import * as common from '../../js/common'
 
 export default function ModalExampleShorthand(props) {
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [loveName, setLoveName] = useState('');
     const [loveNumber, setLoveNumber] = useState('');
     const [codeNumber, setCodeNumber] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
@@ -24,6 +25,10 @@ export default function ModalExampleShorthand(props) {
         textAlign: "center"
     };
 
+    function responseCheck() {
+        alert(phoneNumber+"__"+loveName+"__"+loveNumber+"__")
+    }
+
     return(
         <Modal trigger={<Button className={'modalBtn'}
                                 onClick={e=>{
@@ -32,21 +37,36 @@ export default function ModalExampleShorthand(props) {
                 basic size="mini"
                 open={modalOpen}>
             <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css"/>
-            <Header content="Response " />
+            <Header content="Response Check" />
             <Modal.Content>
                 <div style={styles}>
-                    <Input placeholder={'Enter your phone number.'}
-                           onChange={e => {
-                               setPhoneNumber(e.target.value)
-                           }}
-                           className={(isTyped ? 'hide' : '')}
-                    />
-                    <Input placeholder={'Enter Code.'}
-                           onChange={e => {
-                               setCodeNumber(e.target.value)
-                           }}
-                           className={(isTyped ? '' : 'hide')}
-                    />
+                        <div className={(isVerified ? 'hide' : '')}>
+                            <Input placeholder={'Enter your phone number.'}
+                                   onChange={e => {
+                                       setPhoneNumber(e.target.value)
+                                   }}
+                                   className={(isTyped ? 'hide' : '')}
+                            />
+                            <Input placeholder={'Enter Code.'}
+                                   onChange={e => {
+                                       setCodeNumber(e.target.value)
+                                   }}
+                                   className={(isTyped ? '' : 'hide')}
+                            />
+                        </div>
+                        <div className={(isVerified ? '' : 'hide')}>
+                            <Input placeholder={'Enter Lovers Name.'}
+                                   onChange={e => {
+                                       setLoveName(e.target.value)
+                                   }}
+                            />
+                            <br/><br/>
+                            <Input placeholder={'Enter Lovers Phone.'}
+                                   onChange={e => {
+                                       setLoveNumber(e.target.value)
+                                   }}
+                            />
+                        </div>
                 </div>
             </Modal.Content>
             <Modal.Actions>
@@ -54,6 +74,7 @@ export default function ModalExampleShorthand(props) {
                     e.preventDefault();
                     setModalOpen(false)
                     setIsTyped(false)
+                    setIsVerified(false)
                 }}>
                     <Icon name="remove" /> Cancel
                 </Button>
@@ -63,10 +84,11 @@ export default function ModalExampleShorthand(props) {
                         common.submitPhoneNumberAuthCode(codeNumber)
                             .then(result => {
                                 if(result){
-
+                                    setIsVerified(true)
                                 }
-                        })
-                    }}>
+                        })}}
+                        className={(isVerified ? 'hide' : '')}
+                    >
                         <Icon name="checkmark" /> Check Code
                     </Button>
                     :
@@ -78,6 +100,14 @@ export default function ModalExampleShorthand(props) {
                         <Icon name="checkmark" /> Verify
                     </Button>
                 }
+                <Button basic color="blue" inverted onClick={e=>{
+                    e.preventDefault();
+                        responseCheck()
+                    }}
+                    className={(isVerified ? '' : 'hide')}
+                >
+                    <Icon name="checkmark" /> SEND
+                </Button>
             </Modal.Actions>
         </Modal>
     )
