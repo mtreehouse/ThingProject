@@ -10,17 +10,17 @@
  *  2020-02-18 : Bootpay & Aligo API 적용
  *===================[ Thing-Project ]===================
  */
-import React, {useEffect, useState} from "react";
-import '../../css/firstComponent.css';
-import * as firebase from "firebase/app";
-import 'firebase/auth';
-import SlideToggle from "react-slide-toggle";
+import React, {useEffect, useState} from "react"
+import '../../css/firstComponent.css'
+import * as firebase from "firebase"
+import SlideToggle from "react-slide-toggle"
 import BootPay from "bootpay-js"
 import axios from "axios"
 import sentlove from '../../img/runlove.gif'
 import querystring from 'querystring'
 import Modal from '../Modal/responseModal'
-import { Container } from "semantic-ui-react";
+import { Container } from "semantic-ui-react"
+import * as common from '../../js/common'
 
 export default function FirstComponent(props) {
     const [isTyped, setIsTyped] = useState(false);
@@ -32,7 +32,6 @@ export default function FirstComponent(props) {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [loveNumber, setLoveNumber] = useState('');
     const [codeNumber, setCodeNumber] = useState('');
-    const [modalVerified, setModalVerified] = useState(false);
 
     let rcptId = "";
 
@@ -46,7 +45,7 @@ export default function FirstComponent(props) {
          * @파일명:verifyPhone.js -> FirstComponent.js
          * @작성일자:2020-01-17 오전 10:51
          * @작성자:Yunwoo Kim
-         * @설명:문자 인증
+         * @설명:문자 인증용 recaptcha 초기화
          * @변경이력: 외부 파일에서 안으로 이동함.
         *===================[ Firebase sms Start]===================
         */
@@ -76,60 +75,11 @@ export default function FirstComponent(props) {
          */
     }, [])
 
-
-    function submitPhoneNumberAuth(phoneNum) {
-        const appVerifier = window.recaptchaVerifier;
-        firebase
-            .auth()
-            .signInWithPhoneNumber(phoneNum, appVerifier)
-            .then(function (confirmationResult) {
-                window.confirmResult = confirmationResult;
-            })
-            .catch(function (error) {
-                console.log("______--ERROR--__" + error);
-            });
-    }
-
-    function submitPhoneNumberAuthCode(codeNum) {
-        if (window.confirmResult != null) {
-            window.confirmResult
-                .confirm(codeNum)
-                .then(function (result) {
-                    setToggleEvent(Date.now());
-                    setToggleEvent2(Date.now());
-                    setIsVerified(true);
-                })
-                .catch(function (error) {
-                    alert("You have entered a wrong code")
-                    console.log("Verify Failed : " + error);
-                });
-        } else {
-            console.log("메세지 전송 실패");
-        }
-    }
-
-    function submitModalPhoneNumberAuthCode(codeNum) {
-        if (window.confirmResult != null) {
-            window.confirmResult
-                .confirm(codeNum)
-                .then(function (result) {
-                    alert("aa")
-                    setModalVerified(true)
-                })
-                .catch(function (error) {
-                    alert("You have entered a wrong code")
-                    console.log("Verify Failed : " + error);
-                });
-        } else {
-            console.log("메세지 전송 실패");
-        }
-    }
-
     // 전화번호 인증
     function btn_verify() {
         setIsTyped(true);
         onToggle();
-        submitPhoneNumberAuth(phoneNumber);
+        common.submitPhoneNumberAuth(firebase, phoneNumber);
     }
 
     // 결제 > DB저장 > 문자전송
@@ -368,7 +318,14 @@ export default function FirstComponent(props) {
                                 className={'btn ' + (isVerified ? 'hide' : '')}
                                 onClick={e=>{
                                     e.preventDefault()
-                                    submitPhoneNumberAuthCode(codeNumber)
+                                    common.submitPhoneNumberAuthCode(codeNumber)
+                                        .then(result => {
+                                            if(result){
+                                                setToggleEvent(Date.now());
+                                                setToggleEvent2(Date.now());
+                                                setIsVerified(true);
+                                            }
+                                    })
                                 }}
                             >OK</button>
                             :
@@ -388,7 +345,7 @@ export default function FirstComponent(props) {
                     </div>
                 }
                 <ModalApp>
-                    <Modal resMyNum={resSetMyNumber} submitPhone={submitPhoneNumberAuth} submitCode={submitModalPhoneNumberAuthCode} verified={modalVerified}/>
+                    <Modal resMyNum={resSetMyNumber}/>
                 </ModalApp>
 
             </div>

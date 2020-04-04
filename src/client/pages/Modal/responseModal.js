@@ -1,5 +1,16 @@
-import React, {useEffect, useState} from "react";
+/**
+ *=========================[  ]=========================
+ * @파일명:responseModal.js
+ * @작성일자:2020-04-02 오전 11:00
+ * @작성자:Yunwoo Kim
+ * @설명: 응답자 확인 모달
+ * @변경이력:
+ *===================[ Thing-Project ]===================
+ */
+import React, {useState} from "react";
 import { Button, Header, Icon, Modal, Input } from "semantic-ui-react";
+import * as firebase from "firebase"
+import * as common from '../../js/common'
 
 export default function ModalExampleShorthand(props) {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -49,26 +60,24 @@ export default function ModalExampleShorthand(props) {
                 {isTyped ?
                     <Button color="blue" inverted onClick={e=>{
                         e.preventDefault()
-                        props.submitCode(codeNumber)
+                        common.submitPhoneNumberAuthCode(codeNumber)
+                            .then(result => {
+                                if(result){
+
+                                }
+                        })
                     }}>
                         <Icon name="checkmark" /> Check Code
                     </Button>
                     :
                     <Button color="green" inverted onClick={e=>{
                         e.preventDefault()
-                        props.submitPhone(phoneNumber)
+                        common.submitPhoneNumberAuth(firebase, phoneNumber)
                         setIsTyped(true)
                     }}>
                         <Icon name="checkmark" /> Verify
                     </Button>
                 }
-                <Button color="green" inverted onClick={e=>{
-                    e.preventDefault()
-                    alert(props.verified)
-                }}>
-                    <Icon name="checkmark" /> tset
-                </Button>
-
             </Modal.Actions>
         </Modal>
     )
