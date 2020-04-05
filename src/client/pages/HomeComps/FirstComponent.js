@@ -89,7 +89,7 @@ export default function FirstComponent(props) {
 
         axios.get('/api/connect') /* 서버 연결 확인 */
             .then(r => {
-                if (r.status == 200) {
+                if (r.status === 200) {
                     BootPay.request({
                         price: '1000', //실제 결제되는 가격
                         application_id: "5e38c26a02f57e00245c7593",
