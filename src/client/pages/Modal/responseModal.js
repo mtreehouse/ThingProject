@@ -28,6 +28,7 @@ export default function ModalExampleShorthand(props) {
     };
 
     function responseCheck() {
+        alert(phoneNumber+"__"+loveNumber+"__"+loveName)
         axios.post('/api/member/matchCheck', {
             my_phone: phoneNumber
         }).then(r=>{

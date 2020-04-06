@@ -8,7 +8,7 @@ const AuthData = {
   user_id: 'sym3927',
 }
 
-AuthData.testmode_yn = 'Y'
+AuthData.testmode_yn = 'N'
 // test 모드를 사용하시려면 'Y'값으로 설정하세요
 // form데이터를 포함한 request를 모두 보내시고 JSON data는 body pares를 사용하시기 바랍니다.
 const send = (req, res) => {

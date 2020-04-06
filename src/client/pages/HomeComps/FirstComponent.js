@@ -30,6 +30,7 @@ export default function FirstComponent(props) {
     const [toggleEvent2, setToggleEvent2] = useState(0);
     const [myName, setMyName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [loveName, setLoveName] = useState('');
     const [loveNumber, setLoveNumber] = useState('');
     const [codeNumber, setCodeNumber] = useState('');
 
@@ -138,9 +139,9 @@ export default function FirstComponent(props) {
 
                         // DB에 저장
                         axios.post('/api/member/insert', {
-                            name: myName,
-                            my_phone: korMyPhone,
-                            his_phone: korHisPhone,
+                            my_name: myName,
+                            my_phone: phoneNumber,
+                            his_phone: loveNumber,
                             receipt_id: rcptId
                         }).then(r => {
                             // 상대에게 메세지 전송
@@ -176,14 +177,14 @@ export default function FirstComponent(props) {
 
     // 결제 취소 버튼
     function btn_cancelPay() {
-        console.log("_________________");
-                axios.post('/api/aligo/send', querystring.stringify(
-                    {
-                        sender: '01037004972',
-                        receiver: '01037004972',
-                        msg: '문자전송성공!',
-                        msg_type: 'SMS'
-                    })).catch(e => console.log("_________________" + e));
+        // console.log("_________________");
+        //         axios.post('/api/aligo/send', querystring.stringify(
+        //             {
+        //                 sender: '01037004972',
+        //                 receiver: '01037004972',
+        //                 msg: '문자전송성공!',
+        //                 msg_type: 'SMS'
+        //             })).catch(e => console.log("_________________" + e));
         // axios.post('/api/aligo/sendMass', querystring.stringify(
         //     {
         //         sender: '01037004972',
@@ -197,11 +198,11 @@ export default function FirstComponent(props) {
         //     .catch(e => console.log("_________________" + e));
 
 
-        // axios.post('/api/bp/cancel', {
-        //     data: rcptId
-        // }).catch(e => {
-        //     console.log(e);
-        // })
+        axios.post('/api/bp/cancel', {
+            data: '5e8acace4f74b40038f91299'
+        }).catch(e => {
+            console.log(e);
+        })
 
         //매칭 테스트
         // axios.post('/api/member/matchCheck', {

@@ -6,13 +6,13 @@
 export const insert = ctx => {
     ctx.body = 'db insert'
     const db = require('../../mysql-db');
-    const name = ctx.request.body.name;
+    const my_name = ctx.request.body.my_name;
     const my_phone = ctx.request.body.my_phone;
     const his_phone = ctx.request.body.his_phone;
     const receipt_id = ctx.request.body.receipt_id;
     console.log("___________recptid:______"+receipt_id);
     db.promise().execute("INSERT INTO thing_members (my_name, my_phone, his_phone, receipt_id) VALUES (?, ?, ?, ?)"
-        , [name, my_phone, his_phone, receipt_id])
+        , [my_name, my_phone, his_phone, receipt_id])
         .then(e => {
             console.log("_________________db입력성공");
 
@@ -50,6 +50,7 @@ export const matchCheck = async ctx => {
     await db.promise().execute("SELECT * FROM thing_members WHERE his_phone=?"
         , [my_phone])
         .then(r => {
+            console.log("_________________"+r[0]);
             // 응답자 번호로 등록된 모든 요청자 반환
             ctx.body=r[0]
         })
