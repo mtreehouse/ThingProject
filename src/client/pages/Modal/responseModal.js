@@ -11,6 +11,8 @@ import React, {useState} from "react";
 import { Button, Header, Icon, Modal, Input } from "semantic-ui-react";
 import * as firebase from "firebase"
 import * as common from '../../js/common'
+import axios from 'axios'
+import querystring from "querystring";
 
 export default function ModalExampleShorthand(props) {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -27,6 +29,48 @@ export default function ModalExampleShorthand(props) {
 
     function responseCheck() {
         alert(phoneNumber+"__"+loveName+"__"+loveNumber+"__")
+        axios.post('/api/member/matchCheck', {
+            my_phone: phoneNumber
+        }).then(r=>{
+            r.data.forEach(r=>{
+                const korMyPhone = r.my_phone.replace('+82','0')
+                const korHisPhone = r.his_phone.replace('+82','0')
+
+                if(r.my_phone===loveNumber){
+                    // 매칭 성공 문자 전송 후 DB에서 삭제
+                    console.log("______________매칭성공: "+korMyPhone+"__"+korHisPhone);
+                    axios.post('/api/aligo/sendMass', querystring.stringify(
+                        {
+                            sender: '01037004972',
+                            rec_1: korMyPhone,
+                            rec_2: korHisPhone,
+                            msg_type: 'SMS',
+                            msg: '서로의 썸이 연결되었습니다!',
+                            cnt: 2
+                        }))
+                        .then(()=>{
+                            axios.head('/api/member/del/'+r.id)
+                                .catch(e=>{console.log("______"+e);})
+                        })
+                        .catch(e => console.log("_________________" + e));
+                }else{
+                    // 매칭 실패 문자 전송 후 DB에서 삭제
+                    console.log("______________매칭실패: "+korMyPhone+"__"+korHisPhone);
+                    axios.post('/api/aligo/send', querystring.stringify(
+                        {
+                            sender: '01037004972',
+                            receiver: korMyPhone,
+                            msg: '매칭실패되었습니다.',
+                            msg_type: 'SMS'
+                        }))
+                        .then(()=>{
+                            axios.head('/api/member/del/'+r.id)
+                                .catch(e=>{console.log("______"+e);})
+                        })
+                        .catch(e => console.log("_________________" + e));
+                }
+            })
+        })
     }
 
     return(
