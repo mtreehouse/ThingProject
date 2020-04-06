@@ -28,7 +28,6 @@ export default function ModalExampleShorthand(props) {
     };
 
     function responseCheck() {
-        alert(phoneNumber+"__"+loveName+"__"+loveNumber+"__")
         axios.post('/api/member/matchCheck', {
             my_phone: phoneNumber
         }).then(r=>{
@@ -45,7 +44,8 @@ export default function ModalExampleShorthand(props) {
                             rec_1: korMyPhone,
                             rec_2: korHisPhone,
                             msg_type: 'SMS',
-                            msg: '서로의 썸이 연결되었습니다!',
+                            msg_1: '서로의 썸이 연결되었습니다!',
+                            msg_2: '서로의 썸이 연결되었습니다!',
                             cnt: 2
                         }))
                         .then(()=>{
@@ -70,6 +70,12 @@ export default function ModalExampleShorthand(props) {
                         .catch(e => console.log("_________________" + e));
                 }
             })
+        })
+        .then(r=>{
+            alert("결과 메세지가 전송되었습니다!")
+            setModalOpen(false)
+            setIsTyped(false)
+            setIsVerified(false)
         })
     }
 

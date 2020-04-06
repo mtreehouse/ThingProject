@@ -131,7 +131,6 @@ export default function FirstComponent(props) {
                         }
                     }).close(function (data) {
                         // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
-                        console.log(data);
                     }).done(function (data) {
                         //결제가 정상적으로 완료되면 수행됩니다
                         //비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
@@ -159,7 +158,7 @@ export default function FirstComponent(props) {
                                 axios.post('/api/bp/cancel', {
                                     data: rcptId
                                 }).then(() => {
-                                    console.log('결제취소되었습니다.');
+                                    console.log('문자전송에 실패하여 결제가 취소되었습니다.');
                                     alert("문자전송에 실패하여 결제가 취소되었습니다.")
                                 }).catch(e => {
                                     console.log(e);
@@ -178,49 +177,24 @@ export default function FirstComponent(props) {
     // 결제 취소 버튼
     function btn_cancelPay() {
         console.log("_________________");
-        // axios.post('/api/member/matchCheck', {
-        //     my_phone: "+821037004972",
-        //     his_phone: "00",
-        // }).then(r=>{
-        //     r.data.forEach(r=>{
-        //         const korMyPhone = r.my_phone.replace('+82','0')
-        //         const korHisPhone = r.his_phone.replace('+82','0')
-        //
-        //         if(r.my_phone==="+821024623737"){
-        //             // 매칭 성공 문자 전송 후 DB에서 삭제
-        //             console.log("______________매칭성공: "+korMyPhone+"__"+korHisPhone);
-        //             axios.post('/api/aligo/sendMass', querystring.stringify(
-        //                 {
-        //                     sender: '01037004972',
-        //                     rec_1: korMyPhone,
-        //                     rec_2: korHisPhone,
-        //                     msg_type: 'SMS',
-        //                     msg: '서로의 썸이 연결되었습니다!',
-        //                     cnt: 2
-        //                 }))
-        //                 .then(()=>{
-        //                     axios.head('/api/member/del/'+r.id)
-        //                         .catch(e=>{console.log("______"+e);})
-        //                 })
-        //                 .catch(e => console.log("_________________" + e));
-        //         }else{
-        //             // 매칭 실패 문자 전송 후 DB에서 삭제
-        //             console.log("______________매칭실패: "+korMyPhone+"__"+korHisPhone);
-        //             axios.post('/api/aligo/send', querystring.stringify(
-        //                 {
-        //                     sender: '01037004972',
-        //                     receiver: korMyPhone,
-        //                     msg: '매칭실패되었습니다.',
-        //                     msg_type: 'SMS'
-        //                 }))
-        //                 .then(()=>{
-        //                     axios.head('/api/member/del/'+r.id)
-        //                         .catch(e=>{console.log("______"+e);})
-        //                 })
-        //                 .catch(e => console.log("_________________" + e));
-        //         }
-        //     })
-        // })
+                axios.post('/api/aligo/send', querystring.stringify(
+                    {
+                        sender: '01037004972',
+                        receiver: '01037004972',
+                        msg: '문자전송성공!',
+                        msg_type: 'SMS'
+                    })).catch(e => console.log("_________________" + e));
+        // axios.post('/api/aligo/sendMass', querystring.stringify(
+        //     {
+        //         sender: '01037004972',
+        //         rec_1: "01037004972",
+        //         rec_2: "01037000691",
+        //         msg_type: 'SMS',
+        //         msg_1: '서로의 썸이 연결되었습니다!',
+        //         msg_2: '서로의 썸이 연결되었습니다!',
+        //         cnt: 2
+        //     }))
+        //     .catch(e => console.log("_________________" + e));
 
 
         // axios.post('/api/bp/cancel', {

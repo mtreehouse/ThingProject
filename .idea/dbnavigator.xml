@@ -35,8 +35,8 @@
 
 INSERT INTO thing_members (my_phone, his_phone, my_name, receipt_id) values ( '+821039504949', '+821037004972', '', '')
 INSERT INTO thing_members (my_phone, his_phone, my_name, receipt_id) values ( '+821042732737', '+821037004972', '', '')
-INSERT INTO thing_members (my_phone, his_phone, my_name, receipt_id) values ( '+821044552934', '+821037004972', '', '')
-INSERT INTO thing_members (my_phone, his_phone, my_name, receipt_id) values ( '+821024623737', '+821037004972', '', '')
+INSERT INTO thing_members (my_phone, his_phone, my_name, receipt_id) values ( '+821044552935', '+823927392733', '', '')
+INSERT INTO thing_members (my_phone, his_phone, my_name, receipt_id) values ( '+821024623736', '+821037004972', '', '')
 commit]]></console>
     </connection>
   </component>
