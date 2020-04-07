@@ -29,7 +29,6 @@ export default function ModalExampleShorthand(props) {
     };
 
     function responseCheck() {
-        alert(phoneNumber+"__"+loveNumber+"__"+loveName)
         let notConnected = true
         axios.post('/api/member/matchCheck', {
             my_phone: phoneNumber
@@ -39,18 +38,17 @@ export default function ModalExampleShorthand(props) {
                 alert("당신의 번호로 등록된 썸이 존재하지 않습니다.")
             }else{
                 r.data.forEach(member=>{
-                    const korMyPhone = member.my_phone.replace('+82','0')
+                    const myPhone = member.my_phone
                     if(member.my_phone===loveNumber){
                         // 매칭 성공 문자 전송 후 DB에서 삭제
                         notConnected = false
-                        console.log("______________매칭성공: "+korMyPhone+"__"+member.his_phone);
-                        const match_Message = member.my_name+'님의 '+member.his_name+'에 대한 사랑이 이루어졌습니다.\n'
-                            + '\n'
+                        console.log("______________매칭성공: "+myPhone+"__"+member.his_phone);
+                        const match_Message = member.my_name+'님과 '+member.his_name+'님의 사랑이 이루어졌습니다♥\n\n'
                             + member.my_name+'님의 사랑, Thing Love가 응원합니다♥\n'
                         axios.post('/api/aligo/send', querystring.stringify(
                             {
                                 sender: '01037004972',
-                                receiver: korMyPhone,
+                                receiver: myPhone,
                                 msg: match_Message,
                                 msg_type: 'SMS',
                             }))
@@ -62,14 +60,14 @@ export default function ModalExampleShorthand(props) {
                             .catch(e => console.log("_________________" + e));
                     }else{
                         // 매칭 실패 문자 전송 후 DB에서 삭제
-                        console.log("______________매칭실패: "+korMyPhone+"__"+member.his_phone);
+                        console.log("______________매칭실패: "+myPhone+"__"+member.his_phone);
                         const fail_Message = member.my_name+'님의 '+member.his_name+'님에 대한 사랑이 빗나갔습니다.\n'
                             + '\n'
                             + member.my_name+'님의 사랑, Thing Love가 응원합니다♥\n'
                         axios.post('/api/aligo/send', querystring.stringify(
                             {
                                 sender: '01037004972',
-                                receiver: korMyPhone,
+                                receiver: myPhone,
                                 msg: fail_Message,
                                 msg_type: 'SMS'
                             }))
@@ -165,7 +163,7 @@ export default function ModalExampleShorthand(props) {
                         })}}
                         className={(isVerified ? 'hide' : '')}
                     >
-                        <Icon name="checkmark" /> Check Code
+                        <Icon name="checkmark" /> Verify
                     </Button>
                     :
                     <Button color="green" inverted onClick={e=>{
@@ -173,7 +171,7 @@ export default function ModalExampleShorthand(props) {
                         common.submitPhoneNumberAuth(firebase, phoneNumber)
                         setIsTyped(true)
                     }}>
-                        <Icon name="checkmark" /> Verify
+                        <Icon name="checkmark" /> Send Code
                     </Button>
                 }
                 <Button basic color="blue" inverted onClick={e=>{
@@ -182,7 +180,7 @@ export default function ModalExampleShorthand(props) {
                     }}
                     className={(isVerified ? '' : 'hide')}
                 >
-                    <Icon name="checkmark" /> SEND
+                    <Icon name="checkmark" /> CHECK
                 </Button>
             </Modal.Actions>
         </Modal>

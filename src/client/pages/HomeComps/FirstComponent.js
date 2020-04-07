@@ -85,8 +85,6 @@ export default function FirstComponent(props) {
 
     // 결제 > DB저장 > 문자전송
     function btn_sendLove() {
-        const korMyPhone = phoneNumber.replace('+82','0')
-        const korHisPhone = loveNumber.replace('+82','0')
 
         axios.get('/api/connect') /* 서버 연결 확인 */
             .then(r => {
@@ -151,17 +149,18 @@ export default function FirstComponent(props) {
                                         + 'thinglove.herokuapp.com \n'
                                         + loveName+'님의 사랑, Thing Love가 응원합니다♥\n'
                                         + '\n'
-                                        + '여성가족부(교촌치킨)가 응원합니다.'
+                                        + '사랑하는 이와 함께 닭다리! 교촌치킨이 응원합니다!'
                             axios.post('/api/aligo/send', querystring.stringify(
                                 {
                                     title: '[THING LOVE]',
                                     sender: '01037004972',
-                                    receiver: korHisPhone,
+                                    receiver: loveNumber,
                                     msg: sms_message,
                                     msg_type: 'LMS'
                                 })).catch(e => console.log("_________________" + e));
                         }).then(r => {
                             setIsSent(true)
+                            alert(myName+'님의 썸이 전송되었습니다!')
                         }).catch(e => {
                                 console.log(e);
                                 console.log('문자전송에 실패하였습니다.');

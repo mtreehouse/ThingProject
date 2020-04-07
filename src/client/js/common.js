@@ -10,6 +10,7 @@
 
 // firebase 번호 확인
 export function submitPhoneNumberAuth(firebase, phoneNum) {
+    phoneNum ='+82'+phoneNum.substring(1)
     const appVerifier = window.recaptchaVerifier;
     firebase
         .auth()
