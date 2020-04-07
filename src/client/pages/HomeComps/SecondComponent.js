@@ -11,7 +11,12 @@ import React from "react";
 import "../../css/secondComponent.css"
 
 export default () => {
-
+    function adClick(e){
+        e.preventDefault()
+        alert('담당자      : 김윤우\n' +
+            '전화번호   : 010-3700-4972\n' +
+            '메일주소   : ywpartner@naver.com')
+    }
     return (
         <div className="component second-component">
                 <h2>How To Know Minds</h2>
@@ -23,7 +28,7 @@ export default () => {
                 </div>
                 <div id="address">
                     <p>
-                        <span>Copyright</span> 2020 CA. All rights reserved. / 광고문의 : 010-3700-4972
+                        <span>Copyright</span> 2020 CA. All rights reserved. / <a onClick={adClick}>광고문의</a>
                     </p>
                 </div>
         </div>

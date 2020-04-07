@@ -144,8 +144,8 @@ export default function FirstComponent(props) {
                             receipt_id: rcptId
                         }).then(r => {
                             // 상대에게 메세지 전송
-                            const sms_message = loveName+'님, 주변의 누군가가 당신을 사랑한다고 합니다.\n'
-                                        + loveName+'님이 사랑하는 분이 있다면 지금 확인해보세요!\n'
+                            const sms_message = loveName+'님, 주변의 누군가가 당신에게 호감을 가지고있습니다!\n'
+                                        + loveName+'님이 마음에 두고있는 분이 있다면 지금 확인해보세요!\n'
                                         + 'thinglove.herokuapp.com \n'
                                         + loveName+'님의 사랑, Thing Love가 응원합니다♥\n'
                                         + '\n'
@@ -160,7 +160,7 @@ export default function FirstComponent(props) {
                                 })).catch(e => console.log("_________________" + e));
                         }).then(r => {
                             setIsSent(true)
-                            alert(myName+'님의 썸이 전송되었습니다!')
+                            alert(myName+'님의 마음이 출발했습니다!')
                         }).catch(e => {
                                 console.log(e);
                                 console.log('문자전송에 실패하였습니다.');

@@ -16,6 +16,14 @@ export const insert = ctx => {
         , [my_name, his_name, my_phone, his_phone, receipt_id])
         .then(e => {
             console.log("_________________db입력성공");
+            db.promise().execute("INSERT INTO thing_backup (my_name, his_name, my_phone, his_phone, receipt_id) VALUES (?, ?, ?, ?, ?)"
+                , [my_name, his_name, my_phone, his_phone, receipt_id])
+                .then(e => {
+                    console.log("_________________백업 db입력성공");
+                })
+                .catch(e => {
+                    console.log(e);
+                })
         })
         .catch(e => {
             console.log(e);

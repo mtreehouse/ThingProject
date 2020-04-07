@@ -30,3 +30,11 @@
 #address span{
     color: #ff5656;
 }
+
+#address a{
+    cursor: pointer;
+}
+
+#address a:hover{
+    color: blue;
+}
