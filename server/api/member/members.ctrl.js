@@ -7,15 +7,15 @@ export const insert = ctx => {
     ctx.body = 'db insert'
     const db = require('../../mysql-db');
     const my_name = ctx.request.body.my_name;
+    const his_name = ctx.request.body.his_name;
     const my_phone = ctx.request.body.my_phone;
     const his_phone = ctx.request.body.his_phone;
     const receipt_id = ctx.request.body.receipt_id;
     console.log("___________recptid:______"+receipt_id);
-    db.promise().execute("INSERT INTO thing_members (my_name, my_phone, his_phone, receipt_id) VALUES (?, ?, ?, ?)"
-        , [my_name, my_phone, his_phone, receipt_id])
+    db.promise().execute("INSERT INTO thing_members (my_name, his_name, my_phone, his_phone, receipt_id) VALUES (?, ?, ?, ?, ?)"
+        , [my_name, his_name, my_phone, his_phone, receipt_id])
         .then(e => {
             console.log("_________________db입력성공");
-
         })
         .catch(e => {
             console.log(e);

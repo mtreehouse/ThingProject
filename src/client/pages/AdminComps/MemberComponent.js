@@ -37,6 +37,7 @@ const delButton = (cell, row) => {
         >{cell}</Button>
     )
 }
+
 const cancelButton = (cell) => {
     return (
             <Button
@@ -66,11 +67,15 @@ export default class Member extends React.Component {
                     return { width: '68px', textAlign: 'center' };
                 }
             }, {
-                dataField: 'name',
+                dataField: 'my_name',
                 text: 'NAME'
             }, {
                 dataField: 'my_phone',
                 text: 'MY ☎',
+                rowClasses: 'column-phone'
+            }, {
+                dataField: 'his_name',
+                text: 'LOVER',
                 rowClasses: 'column-phone'
             }, {
                 dataField: 'his_phone',
@@ -78,16 +83,6 @@ export default class Member extends React.Component {
             }, {
                 dataField: 'created_date',
                 text: 'DATE'
-            }, {
-                dataField: 'ischecked',
-                text: '●',
-                formatter: cell => <Checkbox checked={cell} />,
-                editor: {
-                    type: Type.CHECKBOX
-                },
-                headerStyle: () => {
-                    return { width: '36px', textAlign: 'center' };
-                }
             },  {
                 dataField: 'receipt_id',
                 text: '결제',

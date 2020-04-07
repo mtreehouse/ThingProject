@@ -91,14 +91,17 @@ export default function ModalExampleShorthand(props) {
             <Header content="Response Check" />
             <Modal.Content>
                 <div style={styles}>
+
                         <div className={(isVerified ? 'hide' : '')}>
                             <Input placeholder={'Enter your phone number.'}
                                    onChange={e => {
                                        setPhoneNumber(e.target.value)
                                    }}
                                    className={(isTyped ? 'hide' : '')}
+                                   onFocus={e=>{e.target.setAttribute("autocomplete","nope")}}
                             />
                             <Input placeholder={'Enter Code.'}
+                                   type={'number'}
                                    onChange={e => {
                                        setCodeNumber(e.target.value)
                                    }}
@@ -110,12 +113,14 @@ export default function ModalExampleShorthand(props) {
                                    onChange={e => {
                                        setLoveName(e.target.value)
                                    }}
+                                   onFocus={e=>{e.target.setAttribute("autocomplete","nope")}}
                             />
                             <br/><br/>
                             <Input placeholder={'Enter Lovers Phone.'}
                                    onChange={e => {
                                        setLoveNumber(e.target.value)
                                    }}
+                                   onFocus={e=>{e.target.setAttribute("autocomplete","nope")}}
                             />
                         </div>
                 </div>

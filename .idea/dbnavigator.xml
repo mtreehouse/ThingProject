@@ -25,19 +25,19 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="038c9e3f-9952-42ff-974c-a49f07d5bf5b">
-        <schema name="mydb" object-types="view, column, table, function" />
+        <schema name="mydb" object-types="table, view, column" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="038c9e3f-9952-42ff-974c-a49f07d5bf5b">
-      <console name="Connection" type="STANDARD" schema="mydb" session="Main"><![CDATA[select * from thing_members
+      <console name="Connection" type="STANDARD" schema="mydb" session="Main">select * from thing_members
 
 INSERT INTO thing_members (my_phone, his_phone, my_name, receipt_id) values ( '+821039504949', '+821037004972', '', '')
 INSERT INTO thing_members (my_phone, his_phone, my_name, receipt_id) values ( '+821042732737', '+821037004972', '', '')
 INSERT INTO thing_members (my_phone, his_phone, my_name, receipt_id) values ( '+821044552935', '+823927392733', '', '')
 INSERT INTO thing_members (my_phone, his_phone, my_name, receipt_id) values ( '+821024623736', '+821037004972', '', '')
-commit]]></console>
+commit</console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
