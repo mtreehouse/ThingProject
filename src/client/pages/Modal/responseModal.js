@@ -16,6 +16,7 @@ import querystring from "querystring";
 
 export default function ModalExampleShorthand(props) {
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [myName, setMyName] = useState('');
     const [loveName, setLoveName] = useState('');
     const [loveNumber, setLoveNumber] = useState('');
     const [codeNumber, setCodeNumber] = useState('');
@@ -29,51 +30,62 @@ export default function ModalExampleShorthand(props) {
 
     function responseCheck() {
         alert(phoneNumber+"__"+loveNumber+"__"+loveName)
+        let notConnected = true
         axios.post('/api/member/matchCheck', {
             my_phone: phoneNumber
         }).then(r=>{
-            r.data.forEach(r=>{
-                const korMyPhone = r.my_phone.replace('+82','0')
-                const korHisPhone = r.his_phone.replace('+82','0')
-
-                if(r.my_phone===loveNumber){
-                    // 매칭 성공 문자 전송 후 DB에서 삭제
-                    console.log("______________매칭성공: "+korMyPhone+"__"+korHisPhone);
-                    axios.post('/api/aligo/sendMass', querystring.stringify(
-                        {
-                            sender: '01037004972',
-                            rec_1: korMyPhone,
-                            rec_2: korHisPhone,
-                            msg_type: 'SMS',
-                            msg_1: '서로의 썸이 연결되었습니다!',
-                            msg_2: '서로의 썸이 연결되었습니다!',
-                            cnt: 2
-                        }))
-                        .then(()=>{
-                            axios.head('/api/member/del/'+r.id)
-                                .catch(e=>{console.log("______"+e);})
-                        })
-                        .catch(e => console.log("_________________" + e));
-                }else{
-                    // 매칭 실패 문자 전송 후 DB에서 삭제
-                    console.log("______________매칭실패: "+korMyPhone+"__"+korHisPhone);
-                    axios.post('/api/aligo/send', querystring.stringify(
-                        {
-                            sender: '01037004972',
-                            receiver: korMyPhone,
-                            msg: '매칭실패되었습니다.',
-                            msg_type: 'SMS'
-                        }))
-                        .then(()=>{
-                            axios.head('/api/member/del/'+r.id)
-                                .catch(e=>{console.log("______"+e);})
-                        })
-                        .catch(e => console.log("_________________" + e));
-                }
-            })
-        })
-        .then(r=>{
-            alert("결과 메세지가 전송되었습니다!")
+            console.log("_________________"+JSON.stringify(r));
+            if(r.data.length===0){
+                alert("당신의 번호로 등록된 썸이 존재하지 않습니다.")
+            }else{
+                r.data.forEach(member=>{
+                    const korMyPhone = member.my_phone.replace('+82','0')
+                    if(member.my_phone===loveNumber){
+                        // 매칭 성공 문자 전송 후 DB에서 삭제
+                        notConnected = false
+                        console.log("______________매칭성공: "+korMyPhone+"__"+member.his_phone);
+                        const match_Message = member.my_name+'님의 '+member.his_name+'에 대한 사랑이 이루어졌습니다.\n'
+                            + '\n'
+                            + member.my_name+'님의 사랑, Thing Love가 응원합니다♥\n'
+                        axios.post('/api/aligo/send', querystring.stringify(
+                            {
+                                sender: '01037004972',
+                                receiver: korMyPhone,
+                                msg: match_Message,
+                                msg_type: 'SMS',
+                            }))
+                            .then(()=>{
+                                axios.head('/api/member/del/'+member.id)
+                                    .catch(e=>{console.log("______"+e);})
+                                alert(myName+"님의 "+loveName+"님에 대한 사랑이 이루어졌습니다!\n\n"+myName+"님의 사랑,\nThing Love가 응원합니다♥")
+                            })
+                            .catch(e => console.log("_________________" + e));
+                    }else{
+                        // 매칭 실패 문자 전송 후 DB에서 삭제
+                        console.log("______________매칭실패: "+korMyPhone+"__"+member.his_phone);
+                        const fail_Message = member.my_name+'님의 '+member.his_name+'님에 대한 사랑이 빗나갔습니다.\n'
+                            + '\n'
+                            + member.my_name+'님의 사랑, Thing Love가 응원합니다♥\n'
+                        axios.post('/api/aligo/send', querystring.stringify(
+                            {
+                                sender: '01037004972',
+                                receiver: korMyPhone,
+                                msg: fail_Message,
+                                msg_type: 'SMS'
+                            }))
+                            .then(()=>{
+                                axios.head('/api/member/del/'+member.id)
+                                    .catch(e=>{console.log("______"+e);})
+                            })
+                            .catch(e => console.log("_________________" + e));
+                    }
+                })
+            }
+        }).then(()=>{
+            if(notConnected){
+                alert("고객님의 사랑이 빗나갔습니다..\n\n"+myName+"님의 사랑,\nThing Love가 응원합니다!")
+            }
+        }).then(r=>{
             setModalOpen(false)
             setIsTyped(false)
             setIsVerified(false)
@@ -93,6 +105,14 @@ export default function ModalExampleShorthand(props) {
                 <div style={styles}>
 
                         <div className={(isVerified ? 'hide' : '')}>
+                            <Input placeholder={'Enter your Name.'}
+                                   onChange={e => {
+                                       setMyName(e.target.value)
+                                   }}
+                                   className={(isTyped ? 'hide' : '')}
+                                   onFocus={e=>{e.target.setAttribute("autocomplete","nope")}}
+                            />
+                            <br/><br/>
                             <Input placeholder={'Enter your phone number.'}
                                    onChange={e => {
                                        setPhoneNumber(e.target.value)

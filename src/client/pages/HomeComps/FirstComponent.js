@@ -146,12 +146,19 @@ export default function FirstComponent(props) {
                             receipt_id: rcptId
                         }).then(r => {
                             // 상대에게 메세지 전송
+                            const sms_message = loveName+'님, 주변의 누군가가 당신을 사랑한다고 합니다.\n'
+                                        + loveName+'님이 사랑하는 분이 있다면 지금 확인해보세요!\n'
+                                        + 'thinglove.herokuapp.com \n'
+                                        + loveName+'님의 사랑, Thing Love가 응원합니다♥\n'
+                                        + '\n'
+                                        + '여성가족부(교촌치킨)가 응원합니다.'
                             axios.post('/api/aligo/send', querystring.stringify(
                                 {
+                                    title: '[THING LOVE]',
                                     sender: '01037004972',
                                     receiver: korHisPhone,
-                                    msg: '문자전송성공!',
-                                    msg_type: 'SMS'
+                                    msg: sms_message,
+                                    msg_type: 'LMS'
                                 })).catch(e => console.log("_________________" + e));
                         }).then(r => {
                             setIsSent(true)
@@ -188,11 +195,6 @@ export default function FirstComponent(props) {
             {children}
         </Container>
     );
-
-    function resSetMyNumber(phoneNum) {
-        // setPhoneNumber(phoneNum)
-        console.log("_________________"+phoneNum);
-    }
 
     return (
         <div className="component first-component">
@@ -282,7 +284,7 @@ export default function FirstComponent(props) {
                     </div>
                 }
                 <ModalApp>
-                    <Modal resMyNum={resSetMyNumber}/>
+                    <Modal />
                 </ModalApp>
 
             </div>
