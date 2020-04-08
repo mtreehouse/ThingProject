@@ -61,7 +61,7 @@ export default function ModalExampleShorthand(props) {
                     }else{
                         // 매칭 실패 문자 전송 후 DB에서 삭제
                         console.log("______________매칭실패: "+myPhone+"__"+member.his_phone);
-                        const fail_Message = member.my_name+'님의 '+member.his_name+'님에 대한 마음이 어긋났습니다...\n'
+                        const fail_Message = member.my_name+'님의 '+member.his_name+'님에 대한 마음이 어긋났습니다.\n'
                             + '\n'
                             + member.my_name+'님의 사랑, Thing Love가 응원합니다♥\n'
                         axios.post('/api/aligo/send', querystring.stringify(
