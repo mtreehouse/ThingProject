@@ -61,7 +61,7 @@ export default function ModalExampleShorthand(props) {
                     }else{
                         // 매칭 실패 문자 전송 후 DB에서 삭제
                         console.log("______________매칭실패: "+myPhone+"__"+member.his_phone);
-                        const fail_Message = member.my_name+'님의 '+member.his_name+'님에 대한 마음이 어긋났습니다.\n'
+                        const fail_Message = member.my_name+'님의 '+member.his_name+'님에 대한 마음이 빗나갔습니다.\n'
                             + '\n'
                             + member.my_name+'님의 사랑, Thing Love가 응원합니다♥\n'
                         axios.post('/api/aligo/send', querystring.stringify(
@@ -81,7 +81,7 @@ export default function ModalExampleShorthand(props) {
             }
         }).then(()=>{
             if(notConnected){
-                alert("고객님의 마음이 어긋났습니다..\n\n"+myName+"님의 사랑,\nThing Love가 응원합니다!")
+                alert("고객님의 마음이 빗나갔습니다..\n\n"+myName+"님의 사랑,\nThing Love가 응원합니다!")
             }
         }).then(r=>{
             setModalOpen(false)
@@ -94,7 +94,7 @@ export default function ModalExampleShorthand(props) {
         <Modal trigger={<Button className={'modalBtn'}
                                 onClick={e=>{
                                     e.preventDefault();
-                                    setModalOpen(true) }}>Check</Button>}
+                                    setModalOpen(true) }}>문자를 받으셨다면 여기로!</Button>}
                 basic size="mini"
                 open={modalOpen}>
             <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css"/>
