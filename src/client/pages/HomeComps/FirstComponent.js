@@ -308,6 +308,8 @@ export default function FirstComponent(props) {
                         </div>
                     </div>
                 }
+
+                <br/><br/>
                 <ModalApp>
                     <Modal />
                 </ModalApp>

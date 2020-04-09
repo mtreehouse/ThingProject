@@ -28,6 +28,7 @@ export default function ModalExampleShorthand(props) {
     const styles = {
         textAlign: "center"
     };
+
     function initState(){
         setPhoneNumber('')
         setMyName('')

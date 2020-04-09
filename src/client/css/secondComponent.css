@@ -38,3 +38,10 @@
 #address a:hover{
     color: blue;
 }
+
+.modalBtn:hover {
+    font-size: 13px;
+}
+.modalBtn:active {
+    color:grey;
+}
