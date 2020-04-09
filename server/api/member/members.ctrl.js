@@ -1,4 +1,5 @@
 import * as phoneSec from '../security/SecurityUtils'
+
 /* 멤버 등록
 * POST /api/member/insert
 * {name, my_phone, his_phone, receipt_id}

@@ -12,7 +12,8 @@
  */
 import React, {useEffect, useState} from "react"
 import '../../css/firstComponent.css'
-import * as firebase from "firebase"
+import firebase from "firebase/app";
+import 'firebase/auth';
 import SlideToggle from "react-slide-toggle"
 import BootPay from "bootpay-js"
 import axios from "axios"
@@ -21,6 +22,7 @@ import querystring from 'querystring'
 import Modal from '../Modal/responseModal'
 import { Container } from "semantic-ui-react"
 import * as common from '../../js/common'
+import * as Sentry from "@sentry/browser";
 
 export default function FirstComponent(props) {
     const [isTyped, setIsTyped] = useState(false);
@@ -74,6 +76,8 @@ export default function FirstComponent(props) {
         /**
          *===================[ Firebase sms End ]===================
          */
+
+        Sentry.init({dsn: "https://0554b0406469483d96b7f43e9298ccb9@o375237.ingest.sentry.io/5194338"});
     }, [])
 
     // 전화번호 인증
@@ -85,7 +89,6 @@ export default function FirstComponent(props) {
 
     // 결제 > DB저장 > 문자전송
     function btn_sendLove() {
-
         axios.get('/api/connect') /* 서버 연결 확인 */
             .then(r => {
                 if (r.status === 200) {
@@ -113,6 +116,7 @@ export default function FirstComponent(props) {
                     //     params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
                     // }).error(function (data) {
                     //     //결제 진행시 에러가 발생하면 수행됩니다.
+                    //     Sentry.captureException(data)
                     //     console.log(data);
                     // }).cancel(function (data) {
                     //     //결제가 취소되면 수행됩니다.
@@ -157,12 +161,16 @@ export default function FirstComponent(props) {
                                     receiver: loveNumber,
                                     msg: sms_message,
                                     msg_type: 'LMS'
-                                })).catch(e => console.log("_________________" + e));
+                                })).catch(e => {
+                                    console.log("_________________" + e)
+                                    Sentry.captureException(e)
+                                });
                         }).then(r => {
                             setIsSent(true)
                             alert(myName+'님의 마음이 출발했습니다!')
                         }).catch(e => {
                                 console.log(e);
+                                Sentry.captureException(e)
                                 console.log('문자전송에 실패하였습니다.');
                                 alert("문자전송에 실패하였습니다.")
                                 // axios.post('/api/bp/cancel', {
@@ -180,12 +188,19 @@ export default function FirstComponent(props) {
                 }
             }).catch(e => {
             console.log("_________________" + e);
+            Sentry.captureException(e)
             alert('서버가 원활하지 않습니다.\n잠시 후 재시도 해주세요.')
         });
     }
 
     // 테스트 버튼
     function btn_cancelPay() {
+        axios.post('/api/member/matchCheck',{my_phone: '01037004972'})
+            .then((r)=>{
+                r.forEach(r=>{
+
+                })
+            })
     }
 
     const ModalApp = ({ children }) => (

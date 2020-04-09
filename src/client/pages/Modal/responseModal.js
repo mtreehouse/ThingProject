@@ -9,10 +9,11 @@
  */
 import React, {useState} from "react";
 import { Button, Header, Icon, Modal, Input } from "semantic-ui-react";
-import * as firebase from "firebase"
+import firebase from "firebase/app"
 import * as common from '../../js/common'
 import axios from 'axios'
 import querystring from "querystring";
+import * as Sentry from "@sentry/browser";
 
 export default function ModalExampleShorthand(props) {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -29,11 +30,12 @@ export default function ModalExampleShorthand(props) {
     };
 
     function responseCheck() {
+        Sentry.init({dsn: "https://0554b0406469483d96b7f43e9298ccb9@o375237.ingest.sentry.io/5194338"});
+
         let notConnected = true
         axios.post('/api/member/matchCheck', {
             my_phone: phoneNumber
         }).then(r=>{
-            console.log("_________________"+JSON.stringify(r));
             if(r.data.length===0){
                 notConnected = false
                 alert("당신의 번호로 등록된 썸이 존재하지 않습니다.")
@@ -55,10 +57,16 @@ export default function ModalExampleShorthand(props) {
                             }))
                             .then(()=>{
                                 axios.head('/api/member/del/'+member.id)
-                                    .catch(e=>{console.log("______"+e);})
+                                    .catch(e=>{
+                                        console.log("______"+e);
+                                        Sentry.captureException(e)
+                                    })
                                 alert(myName+"님의 "+loveName+"님에 대한 사랑이 이루어졌습니다!\n\n"+myName+"님의 사랑,\nThing Love가 응원합니다♥")
                             })
-                            .catch(e => console.log("_________________" + e));
+                            .catch(e => {
+                                console.log("_________________" + e)
+                                Sentry.captureException(e)
+                            });
                     }else{
                         // 매칭 실패 문자 전송 후 DB에서 삭제
                         console.log("______________매칭실패: "+myPhone+"__"+member.his_phone);
@@ -74,9 +82,15 @@ export default function ModalExampleShorthand(props) {
                             }))
                             .then(()=>{
                                 axios.head('/api/member/del/'+member.id)
-                                    .catch(e=>{console.log("______"+e);})
+                                    .catch(e=>{
+                                        console.log("______"+e);
+                                        Sentry.captureException(e)
+                                    })
                             })
-                            .catch(e => console.log("_________________" + e));
+                            .catch(e => {
+                                console.log("_________________" + e)
+                                Sentry.captureException(e)
+                            });
                     }
                 })
             }
