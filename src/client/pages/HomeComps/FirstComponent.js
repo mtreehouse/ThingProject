@@ -82,13 +82,23 @@ export default function FirstComponent(props) {
 
     // 전화번호 인증
     function btn_verify() {
-        setIsTyped(true);
-        onToggle();
-        common.submitPhoneNumberAuth(firebase, phoneNumber);
+        console.log("_________________"+phoneNumber.length);
+        if(myName !== '' && phoneNumber.length==11){
+            setIsTyped(true);
+            onToggle();
+            common.submitPhoneNumberAuth(firebase, phoneNumber);
+        }else{
+            alert('정확한 내 정보를 입력해주세요!')
+        }
     }
 
     // 결제 > DB저장 > 문자전송
     function btn_sendLove() {
+        if(loveName == '' || loveNumber.length!=11){
+            alert('정확한 상대방 정보를 입력해주세요!')
+            return;
+        }
+
         axios.get('/api/connect') /* 서버 연결 확인 */
             .then(r => {
                 if (r.status === 200) {
@@ -195,10 +205,6 @@ export default function FirstComponent(props) {
 
     // 테스트 버튼
     function btn_test() {
-        axios.post('/api/member/matchCheck',{my_phone: '01037004972'})
-            .then((r)=>{
-                console.log("_________________"+r);
-            })
     }
 
     const ModalApp = ({ children }) => (
@@ -232,8 +238,12 @@ export default function FirstComponent(props) {
                                                className={'input_my_phone ' + (isTyped ? 'readonly' : '')}
                                                readOnly={isTyped}
                                                onChange={e => {
-                                                   setPhoneNumber(e.target.value)
+                                                   setPhoneNumber(e.target.value.replace(/-/gi,''))
                                                }}
+                                               onKeyUp={e=>{
+                                                   e.target.value = e.target.value.replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})/,"$1-$2-$3").replace("--", "-")
+                                               }}
+                                               maxLength={13}
                                         />
                                     </div>
                                 </div>
@@ -247,8 +257,13 @@ export default function FirstComponent(props) {
                         </div>
                         <div className='input_field'>
                             <input type={'text'} placeholder={"♥'s phone..."} onChange={e => {
-                                setLoveNumber(e.target.value)
-                            }} className={'input_love_phone ' + (isVerified ? '' : 'hide')}/>
+                                setLoveNumber(e.target.value.replace(/-/gi,''))
+                            }} className={'input_love_phone ' + (isVerified ? '' : 'hide')}
+                               onKeyUp={e=>{
+                                   e.target.value = e.target.value.replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})/,"$1-$2-$3").replace("--", "-")
+                               }}
+                               maxLength={13}
+                            />
                         </div>
                         <div className='input_field vchide'>
                             <SlideToggle collapsed toggleEvent={toggleEvent}>

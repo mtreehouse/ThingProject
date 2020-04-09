@@ -28,6 +28,16 @@ export default function ModalExampleShorthand(props) {
     const styles = {
         textAlign: "center"
     };
+    function initState(){
+        setPhoneNumber('')
+        setMyName('')
+        setLoveName('')
+        setLoveNumber('')
+        setCodeNumber('')
+        setIsTyped(false)
+        setIsVerified(false)
+        setModalOpen(false)
+    }
 
     function responseCheck() {
         Sentry.init({dsn: "https://0554b0406469483d96b7f43e9298ccb9@o375237.ingest.sentry.io/5194338"});
@@ -64,6 +74,7 @@ export default function ModalExampleShorthand(props) {
                                 alert(myName+"님의 "+loveName+"님에 대한 사랑이 이루어졌습니다!\n\n"+myName+"님의 사랑,\nThing Love가 응원합니다♥")
                             })
                             .catch(e => {
+                                initState()
                                 console.log("_________________" + e)
                                 Sentry.captureException(e)
                             });
@@ -88,6 +99,7 @@ export default function ModalExampleShorthand(props) {
                                     })
                             })
                             .catch(e => {
+                                initState()
                                 console.log("_________________" + e)
                                 Sentry.captureException(e)
                             });
@@ -99,9 +111,7 @@ export default function ModalExampleShorthand(props) {
                 alert("고객님의 마음이 빗나갔습니다..\n\n"+myName+"님의 사랑,\nThing Love가 응원합니다!")
             }
         }).then(r=>{
-            setModalOpen(false)
-            setIsTyped(false)
-            setIsVerified(false)
+            initState()
         })
     }
 
@@ -116,7 +126,6 @@ export default function ModalExampleShorthand(props) {
             <Header content="Response Check" />
             <Modal.Content>
                 <div style={styles}>
-
                         <div className={(isVerified ? 'hide' : '')}>
                             <Input placeholder={'Enter your Name.'}
                                    onChange={e => {
@@ -128,9 +137,13 @@ export default function ModalExampleShorthand(props) {
                             <br/><br/>
                             <Input placeholder={'Enter your phone number.'}
                                    onChange={e => {
-                                       setPhoneNumber(e.target.value)
+                                       setPhoneNumber(e.target.value.replace(/-/gi,''))
                                    }}
                                    className={(isTyped ? 'hide' : '')}
+                                   onKeyUp={e=>{
+                                       e.target.value = e.target.value.replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})/,"$1-$2-$3").replace("--", "-")
+                                   }}
+                                   maxLength={13}
                                    onFocus={e=>{e.target.setAttribute("autocomplete","nope")}}
                             />
                             <Input placeholder={'Enter Code.'}
@@ -151,9 +164,13 @@ export default function ModalExampleShorthand(props) {
                             <br/><br/>
                             <Input placeholder={'Enter Lovers Phone.'}
                                    onChange={e => {
-                                       setLoveNumber(e.target.value)
+                                       setLoveNumber(e.target.value.replace(/-/gi,''))
                                    }}
                                    onFocus={e=>{e.target.setAttribute("autocomplete","nope")}}
+                                   onKeyUp={e=>{
+                                       e.target.value = e.target.value.replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})/,"$1-$2-$3").replace("--", "-")
+                                   }}
+                                   maxLength={13}
                             />
                         </div>
                 </div>
@@ -161,9 +178,7 @@ export default function ModalExampleShorthand(props) {
             <Modal.Actions>
                 <Button basic color="red" inverted onClick={e=>{
                     e.preventDefault();
-                    setModalOpen(false)
-                    setIsTyped(false)
-                    setIsVerified(false)
+                    initState()
                 }}>
                     <Icon name="remove" /> Cancel
                 </Button>
@@ -183,6 +198,10 @@ export default function ModalExampleShorthand(props) {
                     :
                     <Button color="green" inverted onClick={e=>{
                         e.preventDefault()
+                        if(myName == '' || phoneNumber.length!=11){
+                            alert('정확한 내 정보를 입력해주세요!')
+                            return;
+                        }
                         common.submitPhoneNumberAuth(firebase, phoneNumber)
                         setIsTyped(true)
                     }}>
@@ -191,6 +210,10 @@ export default function ModalExampleShorthand(props) {
                 }
                 <Button basic color="blue" inverted onClick={e=>{
                     e.preventDefault();
+                        if(loveName == '' || loveNumber.length!=11){
+                            alert('정확한 상대방 정보를 입력해주세요!')
+                            return;
+                        }
                         responseCheck()
                     }}
                     className={(isVerified ? '' : 'hide')}
