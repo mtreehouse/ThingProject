@@ -150,7 +150,7 @@ export default function FirstComponent(props) {
                             // 상대에게 메세지 전송
                             const sms_message = loveName+'님, 주변의 누군가가 당신에게 호감을 가지고있습니다!\n'
                                         + loveName+'님이 마음에 두고있는 분이 있다면 지금 확인해보세요!\n'
-                                        + 'mtree.shop:3001 \n'
+                                        + 'http://mtree.shop:3001 \n'
                                         + loveName+'님의 사랑, Thing Love가 응원합니다♥\n'
                                         + '\n'
                                         + '사랑하는 이와 함께 닭다리! 교촌치킨이 응원합니다!'
@@ -194,12 +194,10 @@ export default function FirstComponent(props) {
     }
 
     // 테스트 버튼
-    function btn_cancelPay() {
+    function btn_test() {
         axios.post('/api/member/matchCheck',{my_phone: '01037004972'})
             .then((r)=>{
-                r.forEach(r=>{
-
-                })
+                console.log("_________________"+r);
             })
     }
 
@@ -303,7 +301,7 @@ export default function FirstComponent(props) {
 
             <footer>
                 <div>how to</div>
-                <button className={'scroll-link'} onClick={btn_cancelPay}>
+                <button className={'scroll-link'} onClick={btn_test}>
                     <svg className="mouse" xmlns="..." viewBox="0 0 76 130">
                         <g fill="none">
                             <rect width="70" height="118" x="1.5" y="1.5" stroke="#FFF" strokeWidth={3} rx="36"/>

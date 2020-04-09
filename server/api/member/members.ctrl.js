@@ -1,4 +1,9 @@
 import * as phoneSec from '../security/SecurityUtils'
+import * as Sentry from '@sentry/node';
+
+Sentry.init({
+    dsn: 'https://0554b0406469483d96b7f43e9298ccb9@o375237.ingest.sentry.io/5194338'
+});
 
 /* 멤버 등록
 * POST /api/member/insert
@@ -24,10 +29,12 @@ export const insert = ctx => {
                 })
                 .catch(e => {
                     console.log(e);
+                    Sentry.captureException(e)
                 })
         })
         .catch(e => {
             console.log(e);
+            Sentry.captureException(e)
         })
 };
 
@@ -46,6 +53,7 @@ export const del = ctx => {
         })
         .catch(e => {
             console.log(e);
+            Sentry.captureException(e)
         })
 };
 
@@ -64,8 +72,13 @@ export const matchCheck = async ctx=> {
             await new Promise(resolve => {
                 if(Array.isArray(r[0]) && r[0].length){
                     r[0].forEach((re, index)=>{
-                        re.my_phone = phoneSec.dec(re.my_phone)
-                        re.his_phone = phoneSec.dec(re.his_phone)
+                        try {
+                            re.my_phone = phoneSec.dec(re.my_phone)
+                            re.his_phone = phoneSec.dec(re.his_phone)
+                        }catch (e) {
+                            console.log(e);
+                            Sentry.captureException(e)
+                        }
                         if(re.his_phone==my_phone)members.push(re)
                         if(index+1===r[0].length)resolve()
                     })
@@ -79,5 +92,6 @@ export const matchCheck = async ctx=> {
         })
         .catch(e => {
             console.log(e);
+            Sentry.captureException(e)
         })
 };
