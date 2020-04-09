@@ -186,7 +186,6 @@ export default function FirstComponent(props) {
 
     // 테스트 버튼
     function btn_cancelPay() {
-
     }
 
     const ModalApp = ({ children }) => (

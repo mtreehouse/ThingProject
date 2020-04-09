@@ -27,7 +27,8 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="038c9e3f-9952-42ff-974c-a49f07d5bf5b">
-      <console name="Connection" type="STANDARD" schema="" session="Main" />
+      <console name="Connection" type="STANDARD" schema="mydb" session="Main"><![CDATA[delete from thing_members where id <97
+commit]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

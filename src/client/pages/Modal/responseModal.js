@@ -35,6 +35,7 @@ export default function ModalExampleShorthand(props) {
         }).then(r=>{
             console.log("_________________"+JSON.stringify(r));
             if(r.data.length===0){
+                notConnected = false
                 alert("당신의 번호로 등록된 썸이 존재하지 않습니다.")
             }else{
                 r.data.forEach(member=>{
