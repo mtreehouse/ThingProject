@@ -156,14 +156,14 @@ export default function ModalExampleShorthand(props) {
                             />
                         </div>
                         <div className={(isVerified ? '' : 'hide')}>
-                            <Input placeholder={'내가 생각하는 이름'}
+                            <Input placeholder={'내가 좋아하는 이의 이름'}
                                    onChange={e => {
                                        setLoveName(e.target.value)
                                    }}
                                    onFocus={e=>{e.target.setAttribute("autocomplete","nope")}}
                             />
                             <br/><br/>
-                            <Input placeholder={'내가 생각하는 번호'}
+                            <Input placeholder={'내가 좋아하는 이의 번호'}
                                    onChange={e => {
                                        setLoveNumber(e.target.value.replace(/-/gi,''))
                                    }}

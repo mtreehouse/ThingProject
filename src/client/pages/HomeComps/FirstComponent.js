@@ -178,6 +178,9 @@ export default function FirstComponent(props) {
                         }).then(r => {
                             setIsSent(true)
                             alert(myName+'님의 마음이 출발했습니다!')
+                            setTimeout(()=>{
+                                window.location.reload();
+                            },4000)
                         }).catch(e => {
                                 console.log(e);
                                 Sentry.captureException(e)
@@ -271,7 +274,9 @@ export default function FirstComponent(props) {
                                     <div className="my-collapsible" ref={setCollapsibleElement}>
                                         <input type={'text'} placeholder={'인증 번호'} onChange={e => {
                                             setCodeNumber(e.target.value)
-                                        }}/>
+                                        }}
+                                        type={'number'}
+                                        />
                                     </div>
                                 )}
                             </SlideToggle>
@@ -310,9 +315,11 @@ export default function FirstComponent(props) {
                 }
 
                 <br/><br/>
-                <ModalApp className={(isTyped ? '' : 'hide')}>
-                    <Modal />
-                </ModalApp>
+                <div className={(isTyped ? 'hide' : '')}>
+                    <ModalApp>
+                        <Modal />
+                    </ModalApp>
+                </div>
 
             </div>
 
