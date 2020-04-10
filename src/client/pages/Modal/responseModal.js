@@ -199,7 +199,7 @@ export default function ModalExampleShorthand(props) {
                     :
                     <Button color="green" inverted onClick={e=>{
                         e.preventDefault()
-                        if(myName == '' || phoneNumber.length!=11){
+                        if(myName === '' || phoneNumber.length!=11){
                             alert('정확한 내 정보를 입력해주세요!')
                             return;
                         }
@@ -211,7 +211,7 @@ export default function ModalExampleShorthand(props) {
                 }
                 <Button basic color="blue" inverted onClick={e=>{
                     e.preventDefault();
-                        if(loveName == '' || loveNumber.length!=11){
+                        if(loveName === '' || loveNumber.length!=11){
                             alert('정확한 상대방 정보를 입력해주세요!')
                             return;
                         }

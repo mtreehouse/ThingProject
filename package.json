@@ -61,7 +61,8 @@
     "react-window-size-listener": "^1.5.4",
     "semantic-ui-react": "^0.88.2",
     "typescript": "^3.7.4",
-    "@sentry/node": "latest"
+    "@sentry/node": "latest",
+    "node-schedule": "latest"
   },
   "scripts": {
     "start": "node server",

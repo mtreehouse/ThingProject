@@ -16,6 +16,7 @@ import serve from 'koa-static'
 import path from 'path'
 const app = new Koa();
 const router = new Router();
+const schedule = require('node-schedule');
 
 const {PORT} = process.env;
 
@@ -31,6 +32,9 @@ app.use(bodyParser());
 // app 인스턴스에 라우터 적용
 app.use(router.routes()).use(router.allowedMethods());
 
+schedule.scheduleJob('12 * * * *', function(fireDate){
+    console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
+});
 
 const port = PORT || 3001;
 app.listen(port, () => {

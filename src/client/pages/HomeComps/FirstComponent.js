@@ -83,7 +83,7 @@ export default function FirstComponent(props) {
     // 전화번호 인증
     function btn_verify() {
         console.log("_________________"+phoneNumber.length);
-        if(myName !== '' && phoneNumber.length==11){
+        if(myName != '' && phoneNumber.length===11){
             setIsTyped(true);
             onToggle();
             common.submitPhoneNumberAuth(firebase, phoneNumber);
@@ -94,7 +94,7 @@ export default function FirstComponent(props) {
 
     // 결제 > DB저장 > 문자전송
     function btn_sendLove() {
-        if(loveName == '' || loveNumber.length!=11){
+        if(loveName != '' || loveNumber.length!=11){
             alert('정확한 상대방 정보를 입력해주세요!')
             return;
         }
