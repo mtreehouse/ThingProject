@@ -124,11 +124,11 @@ export default function ModalExampleShorthand(props) {
                 basic size="mini"
                 open={modalOpen}>
             <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css"/>
-            <Header content="Response Check" />
+            <Header content="문자 응답 확인" />
             <Modal.Content>
                 <div style={styles}>
                         <div className={(isVerified ? 'hide' : '')}>
-                            <Input placeholder={'Enter your Name.'}
+                            <Input placeholder={'조회할 내 이름...'}
                                    onChange={e => {
                                        setMyName(e.target.value)
                                    }}
@@ -136,7 +136,7 @@ export default function ModalExampleShorthand(props) {
                                    onFocus={e=>{e.target.setAttribute("autocomplete","nope")}}
                             />
                             <br/><br/>
-                            <Input placeholder={'Enter your phone number.'}
+                            <Input placeholder={'조회할 내 번호...'}
                                    onChange={e => {
                                        setPhoneNumber(e.target.value.replace(/-/gi,''))
                                    }}
@@ -147,7 +147,7 @@ export default function ModalExampleShorthand(props) {
                                    maxLength={13}
                                    onFocus={e=>{e.target.setAttribute("autocomplete","nope")}}
                             />
-                            <Input placeholder={'Enter Code.'}
+                            <Input placeholder={'인증번호 입력'}
                                    type={'number'}
                                    onChange={e => {
                                        setCodeNumber(e.target.value)
@@ -156,14 +156,14 @@ export default function ModalExampleShorthand(props) {
                             />
                         </div>
                         <div className={(isVerified ? '' : 'hide')}>
-                            <Input placeholder={'Enter Lovers Name.'}
+                            <Input placeholder={'내가 생각하는 이름'}
                                    onChange={e => {
                                        setLoveName(e.target.value)
                                    }}
                                    onFocus={e=>{e.target.setAttribute("autocomplete","nope")}}
                             />
                             <br/><br/>
-                            <Input placeholder={'Enter Lovers Phone.'}
+                            <Input placeholder={'내가 생각하는 번호'}
                                    onChange={e => {
                                        setLoveNumber(e.target.value.replace(/-/gi,''))
                                    }}
@@ -181,7 +181,7 @@ export default function ModalExampleShorthand(props) {
                     e.preventDefault();
                     initState()
                 }}>
-                    <Icon name="remove" /> Cancel
+                    <Icon name="remove" /> 닫기
                 </Button>
                 {isTyped ?
                     <Button color="blue" inverted onClick={e=>{
@@ -194,7 +194,7 @@ export default function ModalExampleShorthand(props) {
                         })}}
                         className={(isVerified ? 'hide' : '')}
                     >
-                        <Icon name="checkmark" /> Verify
+                        <Icon name="checkmark" /> 확인
                     </Button>
                     :
                     <Button color="green" inverted onClick={e=>{
@@ -206,7 +206,7 @@ export default function ModalExampleShorthand(props) {
                         common.submitPhoneNumberAuth(firebase, phoneNumber)
                         setIsTyped(true)
                     }}>
-                        <Icon name="checkmark" /> Send Code
+                        <Icon name="checkmark" /> 인증
                     </Button>
                 }
                 <Button basic color="blue" inverted onClick={e=>{
@@ -219,7 +219,7 @@ export default function ModalExampleShorthand(props) {
                     }}
                     className={(isVerified ? '' : 'hide')}
                 >
-                    <Icon name="checkmark" /> CHECK
+                    <Icon name="checkmark" /> 조회
                 </Button>
             </Modal.Actions>
         </Modal>

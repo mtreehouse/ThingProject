@@ -160,7 +160,7 @@ export default function FirstComponent(props) {
                             // 상대에게 메세지 전송
                             const sms_message = loveName+'님, 주변의 누군가가 당신에게 호감을 가지고있습니다!\n'
                                         + loveName+'님이 마음에 두고있는 분이 있다면 지금 확인해보세요!\n'
-                                        + 'http://mtree.shop:3001 \n'
+                                        + 'http://mtree.shop \n'
                                         + loveName+'님의 사랑, Thing Love가 응원합니다♥\n'
                                         + '\n'
                                         + '사랑하는 이와 함께 닭다리! 교촌치킨이 응원합니다!'
@@ -225,7 +225,7 @@ export default function FirstComponent(props) {
                             {({setCollapsibleElement}) => (
                                 <div className="my-collapsible" ref={setCollapsibleElement}>
                                     <div className='input_field'>
-                                        <input type={'text'} placeholder={'my name...'}
+                                        <input type={'text'} placeholder={'나의 이름...'}
                                                className={'input_my_name ' + (isTyped ? 'readonly' : '')}
                                                readOnly={isTyped}
                                                onChange={e => {
@@ -234,7 +234,7 @@ export default function FirstComponent(props) {
                                         />
                                     </div>
                                     <div className='input_field'>
-                                        <input type={'text'} placeholder={'my phone...'}
+                                        <input type={'text'} placeholder={'나의 번호...'}
                                                className={'input_my_phone ' + (isTyped ? 'readonly' : '')}
                                                readOnly={isTyped}
                                                onChange={e => {
@@ -251,12 +251,12 @@ export default function FirstComponent(props) {
                         </SlideToggle>
 
                         <div className='input_field'>
-                            <input type={'text'} placeholder={"♥'s name..."} onChange={e => {
+                            <input type={'text'} placeholder={"♥의 이름..."} onChange={e => {
                                 setLoveName(e.target.value)
                             }} className={'input_love_phone ' + (isVerified ? '' : 'hide')}/>
                         </div>
                         <div className='input_field'>
-                            <input type={'text'} placeholder={"♥'s phone..."} onChange={e => {
+                            <input type={'text'} placeholder={"♥의 번호..."} onChange={e => {
                                 setLoveNumber(e.target.value.replace(/-/gi,''))
                             }} className={'input_love_phone ' + (isVerified ? '' : 'hide')}
                                onKeyUp={e=>{
@@ -269,7 +269,7 @@ export default function FirstComponent(props) {
                             <SlideToggle collapsed toggleEvent={toggleEvent}>
                                 {({setCollapsibleElement}) => (
                                     <div className="my-collapsible" ref={setCollapsibleElement}>
-                                        <input type={'text'} placeholder={'verification code...'} onChange={e => {
+                                        <input type={'text'} placeholder={'인증 번호'} onChange={e => {
                                             setCodeNumber(e.target.value)
                                         }}/>
                                     </div>
@@ -291,26 +291,26 @@ export default function FirstComponent(props) {
                                             }
                                     })
                                 }}
-                            >OK</button>
+                            >확인</button>
                             :
                             <button
                                 className={'btn btntest'}
                                 onClick={btn_verify}
-                            >Verify</button>
+                            >인증</button>
                         }
                         </div>
                         <div className='input_field'>
                             <button
                                 className={'btn ' + (isVerified ? '' : 'hide')} // isVerified 임시
                                 onClick={btn_sendLove}
-                            >SEND
+                            >전송
                             </button>
                         </div>
                     </div>
                 }
 
                 <br/><br/>
-                <ModalApp>
+                <ModalApp className={(isTyped ? '' : 'hide')}>
                     <Modal />
                 </ModalApp>
 
