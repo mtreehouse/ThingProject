@@ -8248,6 +8248,14 @@ koa-convert@^1.2.0:
     co "^4.6.0"
     koa-compose "^3.0.0"
 
+koa-create-context@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/koa-create-context/-/koa-create-context-1.0.2.tgz#b157464990ba58422ee036686dc229368e4695c4"
+  integrity sha512-8ol+pprFO10qAzns42GE0QayVfa9ZiNNsExTidyLyl0Ar2VZ6wnVw5Ts0wR1onSkjwgf3u9m1INEydfdpY6fsw==
+  dependencies:
+    mock-req "^0.2.0"
+    mock-res "^0.5.0"
+
 koa-router@^8.0.6:
   version "8.0.8"
   resolved "https://registry.yarnpkg.com/koa-router/-/koa-router-8.0.8.tgz#f0b70f90dae275db8c71a41e1efb625581fb3b5a"
@@ -9153,6 +9161,16 @@ mkdirp@0.5.1, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@~0.5.1:
   dependencies:
     minimist "0.0.8"
 
+mock-req@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/mock-req/-/mock-req-0.2.0.tgz#749446804d2c006169342ee7be6bba1cffd534c2"
+  integrity sha1-dJRGgE0sAGFpNC7nvmu6HP/VNMI=
+
+mock-res@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/mock-res/-/mock-res-0.5.0.tgz#98368beb09df753f64f66d94e5536a97b36a2430"
+  integrity sha1-mDaL6wnfdT9k9m2U5VNql7NqJDA=
+
 moment-timezone@^0.5.25:
   version "0.5.28"
   resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.28.tgz#f093d789d091ed7b055d82aa81a82467f72e4338"
@@ -9426,7 +9444,7 @@ node-releases@^1.1.47:
   dependencies:
     semver "^6.3.0"
 
-node-schedule@^1.3.2:
+node-schedule@latest:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/node-schedule/-/node-schedule-1.3.2.tgz#d774b383e2a6f6ade59eecc62254aea07cd758cb"
   integrity sha512-GIND2pHMHiReSZSvS6dpZcDH7pGPGFfWBIEud6S00Q8zEIzAs9ommdyRK1ZbQt8y1LyZsJYZgPnyi7gpU2lcdw==

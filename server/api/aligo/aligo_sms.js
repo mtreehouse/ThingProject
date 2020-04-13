@@ -9,13 +9,13 @@ const AuthData = {
 }
 
 // test 모드를 사용하시려면 'Y'값으로 설정하세요
-// AuthData.testmode_yn = 'Y'
+ AuthData.testmode_yn = 'Y'
 // form데이터를 포함한 request를 모두 보내시고 JSON data는 body pares를 사용하시기 바랍니다.
 const send = (req, res) => {
   // 메시지 발송하기
   aligoapi.send(req, AuthData)
       .then((r) => {
-        console.log("_response________________"+JSON.stringify(r));
+        console.log("________Aligo result : "+JSON.stringify(r));
       })
       .catch((e) => {
         console.log("_error________________"+e);

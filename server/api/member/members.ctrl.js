@@ -20,10 +20,10 @@ export const insert = ctx => {
     console.log("___________recptid:______"+receipt_id);
     db.promise().execute("INSERT INTO thing_members (my_name, his_name, my_phone, his_phone, receipt_id) VALUES (?, ?, ?, ?, ?)"
         , [my_name, his_name, my_phone, his_phone, receipt_id])
-        .then(e => {
+        .then(result => {
             console.log("_________________db입력성공");
-            db.promise().execute("INSERT INTO thing_backup (my_name, his_name, my_phone, his_phone, receipt_id) VALUES (?, ?, ?, ?, ?)"
-                , [my_name, his_name, my_phone, his_phone, receipt_id])
+            db.promise().execute("INSERT INTO thing_backup (id, my_name, his_name, my_phone, his_phone, receipt_id) VALUES (?, ?, ?, ?, ?, ?)"
+                , [result[0].insertId, my_name, his_name, my_phone, his_phone, receipt_id])
                 .then(e => {
                     console.log("_________________백업 db입력성공");
                 })
