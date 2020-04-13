@@ -17,10 +17,18 @@ export default function Admin() {
     return (
         <div>
             { !password ?
-                <input autoFocus onChange={r=>{
-                        if(r.target.value==='thing'){
-                            setPassword(true)
-                        }}}/>
+                <div>
+                    <h3>404 Error</h3>
+                    <br/>
+                    <p>페이지를 찾을 수 없습니다.</p>
+                    <br/><br/><br/><br/><br/><br/>
+                    <input autoFocus onChange={r=>{
+                            if(r.target.value==='thing'){
+                                setPassword(true)
+                            }}}
+                           style={{border:'none'}}
+                    />
+                </div>
                 :
                 <div>
                     <header><p>관리자 페이지</p></header>
