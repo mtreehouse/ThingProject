@@ -324,7 +324,9 @@ export default function FirstComponent(props) {
                 </div>
 
             </div>
+            <div className={'ad'}>
 
+            </div>
             <footer>
                 <div>how to</div>
                 <button className={'scroll-link'} onClick={btn_test}>

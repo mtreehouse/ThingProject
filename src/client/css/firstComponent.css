@@ -47,6 +47,11 @@ footer div {
 .sentloveimg {
     height: 50vh;
 }
+
+.ad {
+    margin-top: 10px;
+}
+
 /*--------- input start ---------*/
 .input_div {
     display: inline-block;
