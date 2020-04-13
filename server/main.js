@@ -48,7 +48,7 @@ app.listen(port, () => {
 schedule.scheduleJob('* 8 * * *', function(){
     console.log('__Check expired members : '+new Date().toLocaleString('ko-KR', { timeZone: 'GMT' }));
     const db = require('./mysql-db');
-    db.promise().execute("SELECT * FROM thing_members WHERE created_date < SUBDATE(NOW(), INTERVAL 1 MINUTE )")
+    db.promise().execute("SELECT * FROM thing_members WHERE created_date < SUBDATE(NOW(), INTERVAL 7 DAY )")
         .then((data)=>{
             if(Array.isArray(data[0]) && data[0].length){
                 data[0].forEach(member=>{

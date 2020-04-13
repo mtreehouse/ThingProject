@@ -183,7 +183,6 @@ export default function FirstComponent(props) {
                                     window.location.reload();
                                 },4000)
                             },4500)
-
                         }).catch(e => {
                                 console.log(e);
                                 Sentry.captureException(e)
