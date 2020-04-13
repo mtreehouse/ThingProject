@@ -7,25 +7,39 @@
  * @변경이력:
  *===================[ Thing-Project ]===================
  */
-import React, {} from 'react';
+import React, {useState} from 'react';
 import '../css/admin.css'
 import Member from './AdminComps/MemberComponent'
+
+
 export default function Admin() {
+    const [password, setPassword] = useState(false);
     return (
         <div>
-            <header><p>관리자 페이지</p></header>
-            <div id={'body'}>
-                <menu>
-                    <ul>
-                        <li><a href="">Members</a></li>
-                        <li><a href=""></a></li>
-                        <li><a href=""></a></li>
-                    </ul>
-                </menu>
-                <article>
-                    <Member/>
-                </article>
-            </div>
+            { !password ?
+                <input autoFocus onChange={r=>{
+                        if(r.target.value==='thing'){
+                            setPassword(true)
+                        }}}/>
+                :
+                <div>
+                    <header><p>관리자 페이지</p></header>
+                    <div id={'body'}>
+                        <menu>
+                            <ul>
+                                <li><a href="">Members</a></li>
+                                <li><a href=""></a></li>
+                                <li><a href=""></a></li>
+                            </ul>
+                        </menu>
+                        <article>
+                            <Member/>
+                        </article>
+                    </div>
+                </div>
+
+            }
+
         </div>
 
     )
