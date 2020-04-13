@@ -13,14 +13,23 @@ import ReactPageScroller from "../page-scroller";
 import FirstComponent from "./HomeComps/FirstComponent";
 import SecondComponent from "./HomeComps/SecondComponent";
 import WindowSizeListener from 'react-window-size-listener'
+import LoadingOverlay from 'react-loading-overlay';
 
 export default class Home extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            currentPage: null
+            currentPage: null,
+            isLoading: false
         };
+    }
+
+    setLoading(){
+        this.setState({isLoading: true})
+        setTimeout(()=>{
+            this.setState({isLoading:false})
+        },4000)
     }
 
     render() {
@@ -33,12 +42,17 @@ export default class Home extends React.Component {
                     }}
                 />
                 <div className={'rps_div'}>
-                    <ReactPageScroller
-                        renderAllPagesOnFirstRender={false}
+                    <LoadingOverlay
+                        active={this.state.isLoading}
+                        spinner
                     >
-                        <FirstComponent/>
-                        <SecondComponent/>
-                    </ReactPageScroller>
+                        <ReactPageScroller
+                            renderAllPagesOnFirstRender={false}
+                        >
+                                <FirstComponent load={this.setLoading.bind(this)}/>
+                                <SecondComponent/>
+                        </ReactPageScroller>
+                    </LoadingOverlay>
                 </div>
             </React.Fragment>
         );

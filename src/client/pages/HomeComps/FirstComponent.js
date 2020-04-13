@@ -175,11 +175,15 @@ export default function FirstComponent(props) {
                                     Sentry.captureException(e)
                                 });
                         }).then(r => {
-                            setIsSent(true)
-                            alert(myName+'님의 마음이 출발했습니다!')
+                            props.load()
                             setTimeout(()=>{
-                                window.location.reload();
-                            },4000)
+                                setIsSent(true)
+                                alert(myName+'님의 마음이 출발했습니다!')
+                                setTimeout(()=>{
+                                    window.location.reload();
+                                },4000)
+                            },4500)
+
                         }).catch(e => {
                                 console.log(e);
                                 Sentry.captureException(e)
