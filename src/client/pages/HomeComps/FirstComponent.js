@@ -162,7 +162,7 @@ export default function FirstComponent(props) {
                                         + 'http://mtree.shop \n'
                                         + loveName+'님의 사랑, Thing Love가 응원합니다♥\n'
                                         + '\n'
-                                        + '사랑하는 이와 함께 닭다리! 교촌치킨이 응원합니다!'
+                                        + '청년세대 창업지원, D.CAMP가 응원합니다!'
                             axios.post('/api/aligo/send', querystring.stringify(
                                 {
                                     title: '[THING LOVE]',
@@ -324,9 +324,11 @@ export default function FirstComponent(props) {
                 </div>
 
             </div>
-            <div className={'ad'}>
 
+            <div className={'ad'}>
+                
             </div>
+
             <footer>
                 <div>how to</div>
                 <button className={'scroll-link'} onClick={btn_test}>

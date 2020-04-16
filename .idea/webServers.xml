@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="813019bc-bc91-43a0-a3bc-68d14440a711" name="EC2-USER" url="http://54.90.91.132">
-        <fileTransfer host="54.90.91.132" port="22" privateKey="C:\Users\admin\Downloads\serverkey\mtreeubuntu.pem" accessType="SFTP" keyPair="true">
+      <webServer id="813019bc-bc91-43a0-a3bc-68d14440a711" name="EC2-USER" url="http://15.164.214.247">
+        <fileTransfer host="15.164.214.247" port="22" privateKey="C:\Users\admin\Downloads\serverkey\AsiaRH.pem" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
