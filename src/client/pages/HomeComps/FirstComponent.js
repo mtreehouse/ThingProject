@@ -161,7 +161,7 @@ export default function FirstComponent(props) {
                                         + loveName+'님이 마음에 두고있는 분이 있다면 지금 확인해보세요!\n'
                                         + 'http://mtree.shop \n\n'
                                         + loveName+'님의 사랑,\n청년세대 창업지원의 리더\nD.CAMP가 함께 응원합니다♥\n\n'
-                                        + 'Thing Love 올림'
+                                        + '- Thing Love -'
                             axios.post('/api/aligo/send', querystring.stringify(
                                 {
                                     title: '[THING LOVE]',
