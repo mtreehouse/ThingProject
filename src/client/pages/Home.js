@@ -9,11 +9,11 @@
  */
 
 import React, {} from 'react';
-import ReactPageScroller from "../page-scroller";
 import FirstComponent from "./HomeComps/FirstComponent";
 import SecondComponent from "./HomeComps/SecondComponent";
 import WindowSizeListener from 'react-window-size-listener'
 import LoadingOverlay from 'react-loading-overlay';
+import ReactFullpage from '@fullpage/react-fullpage';
 
 export default class Home extends React.Component {
 
@@ -49,12 +49,24 @@ export default class Home extends React.Component {
                     <LoadingOverlay
                         active={this.state.isLoading} spinner
                     >
-                        <ReactPageScroller
-                            renderAllPagesOnFirstRender={false}
-                        >
-                                <FirstComponent load={this.setLoading.bind(this)}/>
-                                <SecondComponent/>
-                        </ReactPageScroller>
+                        <ReactFullpage
+                            //fullpage options
+                            licenseKey = {'YOUR_KEY_HERE'}
+                            scrollingSpeed = {800} /* Options here */
+
+                            render={({ state, fullpageApi }) => {
+                                return (
+                                    <ReactFullpage.Wrapper>
+                                        <div className="section">
+                                            <FirstComponent load={this.setLoading.bind(this)}/>
+                                        </div>
+                                        <div className="section">
+                                            <SecondComponent/>
+                                        </div>
+                                    </ReactFullpage.Wrapper>
+                                );
+                            }}
+                        />
                     </LoadingOverlay>
                 </div>
             </React.Fragment>
