@@ -53,7 +53,6 @@ export default class Home extends React.Component {
                             //fullpage options
                             licenseKey = {'YOUR_KEY_HERE'}
                             scrollingSpeed = {800} /* Options here */
-
                             render={({ state, fullpageApi }) => {
                                 return (
                                     <ReactFullpage.Wrapper>
