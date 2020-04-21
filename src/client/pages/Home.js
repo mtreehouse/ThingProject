@@ -11,7 +11,6 @@
 import React, {} from 'react';
 import FirstComponent from "./HomeComps/FirstComponent";
 import SecondComponent from "./HomeComps/SecondComponent";
-import WindowSizeListener from 'react-window-size-listener'
 import LoadingOverlay from 'react-loading-overlay';
 import ReactFullpage from '@fullpage/react-fullpage';
 
@@ -35,30 +34,19 @@ export default class Home extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <WindowSizeListener
-                    onResize={(windowSize) => {
-                        document.getElementsByClassName('rps_div').item(0).children[0].classList.add('full_size')
-                        document.getElementsByClassName('full_size').item(0).style.height=windowSize.windowHeight+"px"
-
-                        // const $videoIframe = document.getElementById('video');
-                        // let responsiveHeight = $videoIframe.offsetWidth * 0.5625;
-                        // $videoIframe.setAttribute('height', responsiveHeight);
-                    }}
-                />
                 <div className={'rps_div'}>
-                    <LoadingOverlay
-                        active={this.state.isLoading} spinner
-                    >
                         <ReactFullpage
-                            //fullpage options
                             licenseKey = {'YOUR_KEY_HERE'}
-                            scrollingSpeed = {800} /* Options here */
+                            scrollingSpeed = {800}
                             render={({ state, fullpageApi }) => {
                                 return (
                                     <ReactFullpage.Wrapper>
-                                        <div className="section">
-                                            <FirstComponent load={this.setLoading.bind(this)}/>
-                                        </div>
+                                        <LoadingOverlay
+                                            className="section"
+                                            active={this.state.isLoading} spinner
+                                        >
+                                                <FirstComponent load={this.setLoading.bind(this)} fullApi={fullpageApi}/>
+                                        </LoadingOverlay>
                                         <div className="section">
                                             <SecondComponent/>
                                         </div>
@@ -66,7 +54,7 @@ export default class Home extends React.Component {
                                 );
                             }}
                         />
-                    </LoadingOverlay>
+
                 </div>
             </React.Fragment>
         );

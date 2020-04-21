@@ -210,6 +210,7 @@ export default function FirstComponent(props) {
 
     // 테스트 버튼
     function btn_test() {
+        props.fullApi.moveTo(2,1)
     }
 
     const ModalApp = ({ children }) => (
@@ -332,7 +333,6 @@ export default function FirstComponent(props) {
             </div>
 
             <footer>
-                <div>how to</div>
                 <button className={'scroll-link'} onClick={btn_test}>
                     <svg className="mouse" xmlns="..." viewBox="0 0 76 130">
                         <g fill="none">
