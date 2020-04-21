@@ -15,6 +15,6 @@ const admin = new Router();
 
 admin.get('/list', adminCtrl.list);
 // admin.get('/enc', adminCtrl.encode);
-// admin.get('/dec', adminCtrl.decode);
+admin.post('/dec', adminCtrl.decode);
 
 export default admin;

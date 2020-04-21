@@ -48,13 +48,13 @@ app.listen(port, () => {
 schedule.scheduleJob('* 8 * * *', function(){
     console.log('__Check expired members : '+new Date().toLocaleString('ko-KR', { timeZone: 'GMT' }));
     const db = require('./mysql-db');
-    db.promise().execute("SELECT * FROM thing_members WHERE created_date < SUBDATE(NOW(), INTERVAL 7 DAY )")
+    db.promise().execute("SELECT * FROM thing_members WHERE created_date < SUBDATE(NOW(), INTERVAL 3 DAY )")
         .then((data)=>{
             if(Array.isArray(data[0]) && data[0].length){
                 data[0].forEach(member=>{
                     db.promise().execute("DELETE FROM thing_members WHERE id=?",[member.id])
                         .then(()=>{
-                            const msg = "7일이 지나 "+member.my_name+"님의 매칭이 실패하였습니다.\n" +
+                            const msg = "3일이 지나 "+member.my_name+"님의 매칭이 실패하였습니다.\n" +
                                 "Thing Love가 응원합니다♥\n" +
                                 "http://mtree.shop"
                             const context = createContext({

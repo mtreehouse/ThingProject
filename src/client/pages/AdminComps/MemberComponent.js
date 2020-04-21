@@ -7,6 +7,7 @@
  * @변경이력:
  *  20200210 오후 02:15 : axios & css 적용
  *  20200212 오후 03:38 : 삭제 & 취소 버튼
+ *  20200421 오전 10:50 : 암호화 번호 클릭 시 복호화
  *===================[ Thing-Project ]===================
  */
 
@@ -55,6 +56,20 @@ const cancelButton = (cell) => {
     )
 }
 
+const decPhone = (cell) => {
+    return (
+        <div
+            className={'div_phone'}
+            onClick={()=>{
+                axios.post('/api/admin/dec',{phoneNum:cell})
+                    .then(res=>{
+                        alert(JSON.stringify(res.data))
+                    })
+            }}
+        >{cell}</div>
+    )
+}
+
 export default class Member extends React.Component {
     state = {
         products: [],
@@ -71,6 +86,7 @@ export default class Member extends React.Component {
                 text: 'NAME'
             }, {
                 dataField: 'my_phone',
+                formatter: decPhone,
                 text: 'MY ☎',
                 rowClasses: 'column-phone'
             }, {
@@ -79,6 +95,7 @@ export default class Member extends React.Component {
                 rowClasses: 'column-phone'
             }, {
                 dataField: 'his_phone',
+                formatter: decPhone,
                 text: 'LOVERS ☎'
             }, {
                 dataField: 'created_date',
