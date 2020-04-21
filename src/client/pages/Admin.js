@@ -35,7 +35,7 @@ export default function Admin() {
                     <div id={'body'}>
                         <menu>
                             <ul>
-                                <li><a href="">Members</a></li>
+                                <li><a href="/#/admin">Members</a></li>
                                 <li><a href=""></a></li>
                                 <li><a href=""></a></li>
                             </ul>

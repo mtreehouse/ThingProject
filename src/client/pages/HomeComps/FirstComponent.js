@@ -18,6 +18,7 @@ import SlideToggle from "react-slide-toggle"
 import BootPay from "bootpay-js"
 import axios from "axios"
 import sentlove from '../../img/runlove.gif'
+import adpic from '../../img/ad/decamp.jpg'
 import querystring from 'querystring'
 import Modal from '../Modal/responseModal'
 import { Container } from "semantic-ui-react"
@@ -325,7 +326,9 @@ export default function FirstComponent(props) {
             </div>
 
             <div className={'ad'}>
-                
+                <a href={'https://dcamp.kr/event/20404'} target={'blank'}>
+                    <img src={adpic} alt={'advertise'} className={'adpic'}/>
+                </a>
             </div>
 
             <footer>
