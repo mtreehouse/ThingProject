@@ -37,7 +37,7 @@ export default function Admin() {
                             <ul>
                                 <li><a href="/#/admin">Members</a></li>
                                 <li><a href=""></a></li>
-                                <li><a href=""></a></li>
+                                <li><a href="/">Home</a></li>
                             </ul>
                         </menu>
                         <article>

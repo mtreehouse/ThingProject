@@ -39,12 +39,15 @@ export default class Home extends React.Component {
                     onResize={(windowSize) => {
                         document.getElementsByClassName('rps_div').item(0).children[0].classList.add('full_size')
                         document.getElementsByClassName('full_size').item(0).style.height=windowSize.windowHeight+"px"
+
+                        // const $videoIframe = document.getElementById('video');
+                        // let responsiveHeight = $videoIframe.offsetWidth * 0.5625;
+                        // $videoIframe.setAttribute('height', responsiveHeight);
                     }}
                 />
                 <div className={'rps_div'}>
                     <LoadingOverlay
-                        active={this.state.isLoading}
-                        spinner
+                        active={this.state.isLoading} spinner
                     >
                         <ReactPageScroller
                             renderAllPagesOnFirstRender={false}
