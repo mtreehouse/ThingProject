@@ -13,7 +13,6 @@ import FirstComponent from "./HomeComps/FirstComponent";
 import SecondComponent from "./HomeComps/SecondComponent";
 import LoadingOverlay from 'react-loading-overlay';
 import ReactFullpage from '@fullpage/react-fullpage';
-import {setState} from "expect";
 
 export default class Home extends React.Component {
 
@@ -36,7 +35,7 @@ export default class Home extends React.Component {
             <React.Fragment>
                 <div className={'rps_div'}>
                         <ReactFullpage
-                            licenseKey = {'YOUR_KEY_HERE'}
+
                             scrollingSpeed = {800}
                             render={({ state, fullpageApi }) => {
                                 return (
