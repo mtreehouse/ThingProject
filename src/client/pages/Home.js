@@ -13,13 +13,13 @@ import FirstComponent from "./HomeComps/FirstComponent";
 import SecondComponent from "./HomeComps/SecondComponent";
 import LoadingOverlay from 'react-loading-overlay';
 import ReactFullpage from '@fullpage/react-fullpage';
+import {setState} from "expect";
 
 export default class Home extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            currentPage: null,
             isLoading: false
         };
     }
@@ -40,17 +40,19 @@ export default class Home extends React.Component {
                             scrollingSpeed = {800}
                             render={({ state, fullpageApi }) => {
                                 return (
-                                    <ReactFullpage.Wrapper>
                                         <LoadingOverlay
-                                            className="section"
                                             active={this.state.isLoading} spinner
                                         >
-                                                <FirstComponent load={this.setLoading.bind(this)} fullApi={fullpageApi}/>
-                                        </LoadingOverlay>
+                                    <ReactFullpage.Wrapper>
+                                        <div className="section">
+                                            <FirstComponent loadApi={this.setLoading.bind(this)} fullApi={fullpageApi}/>
+                                        </div>
                                         <div className="section">
                                             <SecondComponent/>
                                         </div>
+
                                     </ReactFullpage.Wrapper>
+                                        </LoadingOverlay>
                                 );
                             }}
                         />

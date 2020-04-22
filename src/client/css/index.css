@@ -78,3 +78,8 @@ code {
   color: #717171 !important;
 }
 
+._loading_overlay_wrapper
+{
+  height:100vh;
+}
+

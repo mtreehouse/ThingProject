@@ -175,7 +175,7 @@ export default function FirstComponent(props) {
                                     Sentry.captureException(e)
                                 });
                         }).then(r => {
-                            props.load()
+                            props.loadApi() //Loading overlay
                             setTimeout(()=>{
                                 setIsSent(true)
                                 alert(myName+'님의 마음이 출발했습니다!')
@@ -208,8 +208,8 @@ export default function FirstComponent(props) {
         });
     }
 
-    // 테스트 버튼
-    function btn_test() {
+    // 스크롤 아래 이동 버튼
+    function btn_moveBottom() {
         props.fullApi.moveTo(2,1)
     }
 
@@ -333,7 +333,7 @@ export default function FirstComponent(props) {
             </div>
 
             <footer>
-                <button className={'scroll-link'} onClick={btn_test}>
+                <button className={'scroll-link'} onClick={btn_moveBottom}>
                     <svg className="mouse" xmlns="..." viewBox="0 0 76 130">
                         <g fill="none">
                             <rect width="70" height="118" x="1.5" y="1.5" stroke="#FFF" strokeWidth={3} rx="36"/>
