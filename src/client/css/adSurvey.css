@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap');
+
+#adSurvey {
+    padding: 5px;
+    background-image: url("../img/ad/adsurveybg.jpg");
+    background-size: cover;
+}
+
+#adSurvey *{
+    font-family: 'Yeon Sung', cursive !important;
+}

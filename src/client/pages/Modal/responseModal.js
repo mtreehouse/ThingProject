@@ -117,7 +117,7 @@ export default function ModalExampleShorthand(props) {
     }
 
     return(
-        <Modal trigger={<Button className={'modalBtn'}
+        <Modal className={'resModal'} trigger={<Button className={'modalBtn'}
                                 onClick={e=>{
                                     e.preventDefault();
                                     setModalOpen(true) }}>문자를 받으셨다면 여기로!</Button>}

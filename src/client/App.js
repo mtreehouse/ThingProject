@@ -11,7 +11,7 @@
 import React, {} from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom'
 import {Home, Admin} from './pages'
-import adServey from './pages/HomeComps/adServey'
+import adSurvey from './pages/HomeComps/adSurvey'
 
 export default class App extends React.Component {
     render() {
@@ -20,7 +20,7 @@ export default class App extends React.Component {
                 <>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/admin" component={Admin}/>
-                    <Route exact path="/adsurvey" component={adServey}/>
+                    <Route exact path="/adsurvey" component={adSurvey}/>
                 </>
             </Switch>
         );

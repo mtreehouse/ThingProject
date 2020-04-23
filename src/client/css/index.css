@@ -82,4 +82,18 @@ code {
 {
   height:100vh;
 }
+@font-face {
+  font-family: 'Youth';
+  font-style: normal;
+  font-weight: 100;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kywa/Youth/Youth.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kywa/Youth/Youth.woff') format('woff');
+}
 
+.first-component * :not(h2){
+  font-family: 'Youth', sans-serif;
+  font-size: .95em;
+}
+.resModal input, .resModal .header{
+  font-family: 'Youth', sans-serif !important;
+  font-size: 1em;
+}

@@ -211,7 +211,7 @@ export default function FirstComponent(props) {
     // 스크롤 아래 이동 버튼
     function btn_moveBottom() {
         //props.fullApi.moveTo(2,1)
-        window.open('/#/adsurvey','','width=505,height=600,left=400,top=200')
+        window.open('/#/adsurvey','','width=505,height=540,left=400,top=200')
     }
 
     const ModalApp = ({ children }) => (
