@@ -12,11 +12,22 @@ import * as Survey from "survey-react";
 import "survey-react/modern.css";
 import '../../css/adSurvey.css'
 import axios from "axios"
+import querystring from "querystring";
 
 export default function adSurvey() {
+    let adMsg = '';
+
+    function getStrByte(str) {
+        let byte = 0;
+        for (let i=0; i<str.length; ++i) {
+            (str.charCodeAt(i) > 127) ? byte += 3 : byte++ ;
+        }
+        return byte;
+    }
 
     const options = {
-        showCompletedPage : false,
+        completedHtml: "<br/>문의가 정상 접수되었습니다.<br/>확인 후 연락드리겠습니다.</br>감사합니다!",
+        completeText: '문의하기',
         questions: [
             {
                 name: "name",
@@ -61,24 +72,39 @@ export default function adSurvey() {
         ]
     };
 
+    function onValChanged(survey, options){
+        adMsg ="------광고 문의------" +
+            "담당자 : " + survey.data.name +
+            "\n회사명 : " + survey.data.company +
+            "\n메일 : " + survey.data.email +
+            "\n번호 : " + survey.data.phone +
+            "\n주소 : " + survey.data.url +
+            "\n내용 : " + survey.data.content ;
+        const adMsgByte = getStrByte(adMsg)
+        if(adMsgByte>980) {
+            alert("글자 수가 초과되었습니다.\n다시 시도해주세요.\n["+adMsgByte+"/1000(max)]")
+            window.location.reload();
+        }
+
+    }
+
     function onComplete(survey, options) {
-        const adMsg = "담당자 : " + survey.data.name +
-                    "\n회사명 : " + survey.data.company +
-                    "\n메일 : " + survey.data.email +
-                    "\n번호 : " + survey.data.phone +
-                    "\n주소 : " + survey.data.url +
-                    "\n내용 : " + survey.data.content ;
-       alert(adMsg);
-       /* axios.post('/api/aligo/sms', {})
+        alert('complete')
+        axios.post('/api/aligo/send', querystring.stringify({
+            title: '[광고 문의 - THING LOVE]',
+            sender: '01037004972',
+            receiver: '01037004972',
+            msg: adMsg
+        }))
             .then(()=>{
-                alert('확인 후 연락드리겠습니다.\n감사합니다!')
+                setTimeout(()=>{
+                    window.close();
+                },3000)
             })
             .catch(e=>{
                 console.log(e);
                 alert('오류로 인해 전송에 실패하였습니다. 잠시 후 다시 시도해주세요.')
-            })*/
-
-        window.close();
+            })
     }
 
     Survey
@@ -89,8 +115,8 @@ export default function adSurvey() {
 
     return (
         <div id={"adSurvey"}>
-            <h2>광고 문의</h2><br/>
-            <Survey.Survey model={model} onComplete={onComplete}/>
+            <h1>광고 문의</h1><br/>
+            <Survey.Survey model={model} onComplete={onComplete} onValueChanged={onValChanged}/>
         </div>
     )
 }

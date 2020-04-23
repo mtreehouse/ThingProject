@@ -58,6 +58,11 @@
     color: blue;
 }
 
+#address .adText{
+    font-weight: bold;
+    color: mediumblue;
+}
+
 .modalBtn:hover {
     font-size: 13px;
 }

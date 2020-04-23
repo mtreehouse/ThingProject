@@ -6,6 +6,18 @@
     background-size: cover;
 }
 
-#adSurvey *{
-    font-family: 'Yeon Sung', cursive !important;
+#adSurvey h1{
+    font-size: 1.8em ;
 }
+
+#adSurvey *{
+    font-family: 'Yeon Sung', cursive ;
+    font-size: 1.04em;
+}
+
+.sv-completedpage {
+    margin:0px;
+    height: 100vh;
+}
+
+

@@ -14,9 +14,10 @@ import adpic from "../../img/ad/decamp.gif";
 export default () => {
     function adClick(e){
         e.preventDefault()
-        alert('담당자      : 김윤우\n' +
-            '전화번호   : 010-3700-4972\n' +
-            '메일주소   : ywpartner@naver.com')
+        window.open('/#/adsurvey','','width=505,height=540,left=400,top=200')
+        // alert('담당자      : 김윤우\n' +
+        //     '전화번호   : 010-3700-4972\n' +
+        //     '메일주소   : ywpartner@naver.com')
     }
     return (
         <div className="component second-component">
@@ -34,7 +35,7 @@ export default () => {
                 </div>
                 <div id="address">
                     <p>
-                        <span>Copyright</span> 2020 CA. All rights reserved. / <a onClick={adClick}>광고문의</a>
+                        <span>Copyright</span> 2020 CA. All rights reserved. / <a className={'adText'} onClick={adClick}>광고문의</a>
                     </p>
                 </div>
         </div>
