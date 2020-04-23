@@ -73,23 +73,21 @@ export default function adSurvey() {
     };
 
     function onValChanged(survey, options){
-        adMsg ="------광고 문의------" +
-            "담당자 : " + survey.data.name +
+        adMsg ="♠♤♠광고 문의♠♤♠" +
+            "\n담당자 : " + survey.data.name +
             "\n회사명 : " + survey.data.company +
             "\n메일 : " + survey.data.email +
             "\n번호 : " + survey.data.phone +
             "\n주소 : " + survey.data.url +
             "\n내용 : " + survey.data.content ;
-        const adMsgByte = getStrByte(adMsg)
+        /*const adMsgByte = getStrByte(adMsg)
         if(adMsgByte>980) {
             alert("글자 수가 초과되었습니다.\n다시 시도해주세요.\n["+adMsgByte+"/1000(max)]")
             window.location.reload();
-        }
-
+        }*/
     }
 
     function onComplete(survey, options) {
-        alert('complete')
         axios.post('/api/aligo/send', querystring.stringify({
             title: '[광고 문의 - THING LOVE]',
             sender: '01037004972',
