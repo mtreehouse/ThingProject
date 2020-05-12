@@ -88,6 +88,7 @@ export default function adSurvey() {
     }
 
     function onComplete(survey, options) {
+        window.gtag('event', 'click_adSurvey_Sent')
         axios.post('/api/aligo/send', querystring.stringify({
             title: '[광고 문의 - THING LOVE]',
             sender: '01037004972',
@@ -97,7 +98,7 @@ export default function adSurvey() {
             .then(()=>{
                 setTimeout(()=>{
                     window.close();
-                },3000)
+                },2000)
             })
             .catch(e=>{
                 console.log(e);

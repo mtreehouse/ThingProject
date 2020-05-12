@@ -18,7 +18,7 @@ import SlideToggle from "react-slide-toggle"
 import BootPay from "bootpay-js"
 import axios from "axios"
 import sentlove from '../../img/runlove.gif'
-import adpic from '../../img/ad/decamp.jpg'
+import adpic from '../../img/ad/adsize.png'
 import querystring from 'querystring'
 import Modal from '../Modal/responseModal'
 import { Container } from "semantic-ui-react"
@@ -83,6 +83,7 @@ export default function FirstComponent(props) {
 
     // 전화번호 인증
     function btn_verify() {
+        window.gtag('event', 'click_step1_인증')
         if(myName != '' && phoneNumber.length===11){
             setIsTyped(true);
             onToggle();
@@ -94,6 +95,7 @@ export default function FirstComponent(props) {
 
     // 결제 > DB저장 > 문자전송
     function btn_sendLove() {
+        window.gtag('event', 'click_step2_전송')
         if(loveName == '' || loveNumber.length!=11){
             alert('정확한 상대방 정보를 입력해주세요!')
             return;
@@ -178,6 +180,7 @@ export default function FirstComponent(props) {
                             props.loadApi() //Loading overlay
                             setTimeout(()=>{
                                 setIsSent(true)
+                                window.gtag('event', 'count_finalUser')
                                 alert(myName+'님의 마음이 출발했습니다!')
                                 setTimeout(()=>{
                                     window.location.reload();
@@ -327,7 +330,7 @@ export default function FirstComponent(props) {
             </div>
 
             <div className={'ad'}>
-                <a href={'https://dcamp.kr/event/20404'} target={'blank'}>
+                <a href={'#'} target={'blank'} onClick={()=>{window.gtag('event', 'click_ad_1')}}>
                     <img src={adpic} alt={'advertise'} className={'adpic'}/>
                 </a>
             </div>

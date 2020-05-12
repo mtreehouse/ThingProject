@@ -41,6 +41,7 @@ export default function ModalExampleShorthand(props) {
     }
 
     function responseCheck() {
+        window.gtag('event', 'count_Modal_finalResponse')
         Sentry.init({dsn: "https://0554b0406469483d96b7f43e9298ccb9@o375237.ingest.sentry.io/5194338"});
 
         let notConnected = true
