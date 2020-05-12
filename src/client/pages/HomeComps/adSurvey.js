@@ -88,7 +88,7 @@ export default function adSurvey() {
     }
 
     function onComplete(survey, options) {
-        window.gtag('event', 'click_adSurvey_Sent')
+        window.gtag('event', 'count_adSurvey_Sent')
         axios.post('/api/aligo/send', querystring.stringify({
             title: '[광고 문의 - THING LOVE]',
             sender: '01037004972',
