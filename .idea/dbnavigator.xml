@@ -23,15 +23,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="038c9e3f-9952-42ff-974c-a49f07d5bf5b">
-        <schema name="mydb" object-types="procedure, view, index, column, table, function, constraint, dataset trigger" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="038c9e3f-9952-42ff-974c-a49f07d5bf5b">
-      <console name="Connection" type="STANDARD" schema="mydb" session="Main">delete from thing_members where id &lt;97
+      <console name="Connection" type="STANDARD" schema="mydb" session="Main"><![CDATA[delete from thing_members where id <97
 
 
 
@@ -39,7 +35,7 @@
 
 
 INSERT INTO thing_members (my_name, his_name, my_phone, his_phone, receipt_id) values ('김윤우','test','01037004972','test','test')
-commit</console>
+commit]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

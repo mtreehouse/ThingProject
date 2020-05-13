@@ -58,7 +58,8 @@
     "react-scripts": "3.4.0",
     "react-slide-toggle": "^0.3.3",
     "semantic-ui-react": "^0.88.2",
-    "survey-react": "^1.7.3"
+    "survey-react": "^1.7.3",
+    "video-react": "^0.14.1"
   },
   "scripts": {
     "start": "node server",

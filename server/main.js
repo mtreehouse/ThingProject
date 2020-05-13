@@ -56,7 +56,7 @@ schedule.scheduleJob('* 8 * * *', function(){
                         .then(()=>{
                             const msg = "3일이 지나 "+member.my_name+"님의 매칭이 실패하였습니다.\n" +
                                 "Thing Love가 응원합니다♥\n" +
-                                "http://mtree.shop"
+                                "http://secretpropose.com"
                             const context = createContext({
                                 status: 201,
                                 body: {"sender":"01037004972","receiver":phoneSec.dec(member.my_phone),"msg":msg,"msg_type":"SMS"}

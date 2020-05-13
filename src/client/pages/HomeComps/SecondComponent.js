@@ -9,7 +9,11 @@
  */
 import React from "react";
 import "../../css/secondComponent.css"
-import adpic from "../../img/ad/adsize.png";
+import adpic from "../../img/ad/adsize.png"
+import { Player } from 'video-react';
+import 'video-react/dist/video-react.css';
+import scvid from "../../video/instruction.mp4"
+import scpost from "../../../client/img/secretpropose.png"
 
 export default () => {
     function adClick(e){
@@ -22,12 +26,22 @@ export default () => {
     return (
         <div className="component second-component">
                 <h2>How To Know Minds</h2>
-                <div className="youtube">
+                {/*<div className="youtube">
                     <iframe title={'youtubeiframe'}
                             src="https://www.youtube.com/embed/N2DRya_M6as?controls=0&showinfo=0&rel=0&autoplay=0&loop=1"
                             frameBorder="0" allow="accelerometer; fullscreen; encrypted-media; gyroscope; picture-in-picture;" allowFullScreen width="100%"
                             height="100%"></iframe>
-                </div><br/>
+                </div>*/}
+                <div className={'intro_vid'}>
+                    <Player
+                        fluid={true}
+                        //playsInline={true}
+                        //height={300}
+                        poster={scpost}
+                        src={scvid}
+                    />
+                </div>
+                    <br/>
                 <div className={'ad2'}>
                     <a href={'#'} target={'blank'} onClick={()=>{window.gtag('event', 'click_ad_2')}}>
                         <img src={adpic} alt={'advertise'} className={'adpic'}/>

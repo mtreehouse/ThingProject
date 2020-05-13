@@ -162,12 +162,12 @@ export default function FirstComponent(props) {
                             // 상대에게 메세지 전송
                             const sms_message = loveName+'님, 주변의 누군가가 당신에게 호감을 가지고있습니다!\n'
                                         + loveName+'님이 마음에 두고있는 분이 있다면 지금 확인해보세요!\n'
-                                        + 'http://mtree.shop \n\n'
-                                        + loveName+'님의 사랑,\n청년세대 창업지원의 리더\nD.CAMP가 함께 응원합니다♥\n\n'
-                                        + '- Thing Love -'
+                                        + 'http://secretpropose.com \n\n'
+                                        + loveName+'님의 사랑,\n 비밀고백이 함께 응원합니다♥\n\n'
+                                        + '- Secret Propose -'
                             axios.post('/api/aligo/send', querystring.stringify(
                                 {
-                                    title: '[THING LOVE]',
+                                    title: '[SECRET PROPOSE]',
                                     sender: '01037004972',
                                     receiver: loveNumber,
                                     msg: sms_message,

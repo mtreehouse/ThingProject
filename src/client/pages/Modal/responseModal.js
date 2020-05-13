@@ -59,7 +59,7 @@ export default function ModalExampleShorthand(props) {
                         notConnected = false
                         console.log("______________매칭성공: "+myPhone+"__"+member.his_phone);
                         const match_Message = member.my_name+'님과 '+member.his_name+'님의 사랑이 이루어졌습니다!\n\n'
-                            + member.my_name+'님의 사랑, Thing Love가 응원합니다♥\n'
+                            + member.my_name+'님의 사랑, 비밀고백이 응원합니다♥\n'
                         axios.post('/api/aligo/send', querystring.stringify(
                             {
                                 sender: '01037004972',
@@ -73,7 +73,7 @@ export default function ModalExampleShorthand(props) {
                                         console.log("______"+e);
                                         Sentry.captureException(e)
                                     })
-                                alert(myName+"님의 "+loveName+"님에 대한 사랑이 이루어졌습니다!\n\n"+myName+"님의 사랑,\nThing Love가 응원합니다♥")
+                                alert(myName+"님의 "+loveName+"님에 대한 사랑이 이루어졌습니다!\n\n"+myName+"님의 사랑,\n비밀고백이 응원합니다♥")
                             })
                             .catch(e => {
                                 initState()
@@ -85,7 +85,7 @@ export default function ModalExampleShorthand(props) {
                         console.log("______________매칭실패: "+myPhone+"__"+member.his_phone);
                         const fail_Message = member.my_name+'님의 '+member.his_name+'님에 대한 마음이 빗나갔습니다.\n'
                             + '\n'
-                            + member.my_name+'님의 사랑, Thing Love가 응원합니다♥\n'
+                            + member.my_name+'님의 사랑, 비밀고백이 응원합니다♥\n'
                         axios.post('/api/aligo/send', querystring.stringify(
                             {
                                 sender: '01037004972',
@@ -110,7 +110,7 @@ export default function ModalExampleShorthand(props) {
             }
         }).then(()=>{
             if(notConnected){
-                alert("고객님의 마음이 빗나갔습니다..\n\n"+myName+"님의 사랑,\nThing Love가 응원합니다!")
+                alert("고객님의 마음이 빗나갔습니다..\n\n"+myName+"님의 사랑,\n비밀고백이 응원합니다!")
             }
         }).then(r=>{
             initState()

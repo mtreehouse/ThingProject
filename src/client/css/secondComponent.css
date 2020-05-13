@@ -1,3 +1,7 @@
+.second-component h2 {
+    margin-top: 20px;
+}
+
 .youtube {
     margin-top: 40px;
     display: inline-block;
@@ -11,17 +15,22 @@
     height: 100%;
     max-height: 395px;*/
 }
-
+.intro_vid {
+    display: inline-block;
+    margin-top: 4vh;
+    width: 80vw;
+    max-width: 660px;
+}
 /* 광고 영역 */
 .ad2 {
     display: inline-block;
     margin-top: 3vh;
-    width: 30vw;
-    height: 30vw;
+    width: 18vw;
+    height: 18vw;
     min-width: 200px;
     min-height: 200px;
-    max-width: 320px;
-    max-height: 320px;
+    max-width: 300px;
+    max-height: 300px;
 }
 
 .ad2 .adpic {
@@ -69,4 +78,5 @@
 .modalBtn:active {
     color:grey;
 }
+
 
