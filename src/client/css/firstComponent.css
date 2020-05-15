@@ -66,9 +66,10 @@
 }
 
 .input_div input {
-    height: 3vh;
-    width: 20vw;
-    min-width: 200px;
+    height: 3.3vh;
+    width: 26vw;
+    min-width: 250px;
+    max-width: 380px;
     min-height: 23px;
     max-height: 33px;
     margin: 4px;

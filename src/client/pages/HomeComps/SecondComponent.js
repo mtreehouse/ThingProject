@@ -43,9 +43,10 @@ export default () => {
                 </div>
                     <br/>
                 <div className={'ad2'}>
-                    <a href={'#'} target={'blank'} onClick={()=>{window.gtag('event', 'click_ad_2')}}>
+                    <script data-ad-client="ca-pub-4872298844105618" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    {/*<a href={'#'} target={'blank'} onClick={()=>{window.gtag('event', 'click_ad_2')}}>
                         <img src={adpic} alt={'advertise'} className={'adpic'}/>
-                    </a>
+                    </a>*/}
                 </div>
                 <div id="address">
                     <p>

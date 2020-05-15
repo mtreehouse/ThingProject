@@ -24,6 +24,7 @@ import Modal from '../Modal/responseModal'
 import { Container } from "semantic-ui-react"
 import * as common from '../../js/common'
 import * as Sentry from "@sentry/browser";
+import AdSense from 'react-adsense';
 
 export default function FirstComponent(props) {
     const [isTyped, setIsTyped] = useState(false);
@@ -330,9 +331,16 @@ export default function FirstComponent(props) {
             </div>
 
             <div className={'ad'}>
-                <a href={'#'} target={'blank'} onClick={()=>{window.gtag('event', 'click_ad_1')}}>
+                <AdSense.Google
+                    style={{ display: 'block' }}
+                    client='ca-pub-4872298844105618'
+                    slot='2081498277'
+                    format='auto'
+                    responsive='true'
+                />
+                {/*<a href={'#'} target={'blank'} onClick={()=>{window.gtag('event', 'click_ad_1')}}>
                     <img src={adpic} alt={'advertise'} className={'adpic'}/>
-                </a>
+                </a>*/}
             </div>
 
             <footer>
