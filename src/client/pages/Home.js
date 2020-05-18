@@ -11,6 +11,8 @@
 import React, {} from 'react';
 import FirstComponent from "./HomeComps/FirstComponent";
 import SecondComponent from "./HomeComps/SecondComponent";
+import ThirdComponent from "./HomeComps/ThirdComponent";
+import FourthComponent from "./HomeComps/FourthComponent";
 import LoadingOverlay from 'react-loading-overlay';
 import ReactFullpage from '@fullpage/react-fullpage';
 
@@ -48,6 +50,12 @@ export default class Home extends React.Component {
                                         </div>
                                         <div className="section">
                                             <SecondComponent/>
+                                        </div>
+                                        <div className="section">
+                                            <ThirdComponent/>
+                                        </div>
+                                        <div className="section">
+                                            <FourthComponent/>
                                         </div>
 
                                     </ReactFullpage.Wrapper>

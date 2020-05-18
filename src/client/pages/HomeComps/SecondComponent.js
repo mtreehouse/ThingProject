@@ -43,16 +43,15 @@ export default () => {
                 </div>
                     <br/>
                 <div className={'ad2'}>
-                    <script data-ad-client="ca-pub-4872298844105618" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    {/*<a href={'#'} target={'blank'} onClick={()=>{window.gtag('event', 'click_ad_2')}}>
+                    <a href={'#'} target={'blank'} onClick={()=>{window.gtag('event', 'click_ad_2')}}>
                         <img src={adpic} alt={'advertise'} className={'adpic'}/>
-                    </a>*/}
+                    </a>
                 </div>
-                <div id="address">
+                {/*<div id="address">
                     <p>
                         <span>Copyright</span> 2020 CA. All rights reserved. / <a className={'adText'} onClick={adClick}>광고문의</a>
                     </p>
-                </div>
+                </div>*/}
         </div>
     );
 };

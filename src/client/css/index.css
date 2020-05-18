@@ -69,6 +69,20 @@ code {
   position: relative;
 }
 
+.component.third-component {
+  background-image: url("../img/thirdcomp_back.jpg");
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.component.fourth-component {
+  background-image: url("../img/fourthcomp_back.jpg");
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
 .hide{
   display: none !important;
 }

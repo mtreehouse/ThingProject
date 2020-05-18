@@ -214,7 +214,7 @@ export default function FirstComponent(props) {
 
     // 스크롤 아래 이동 버튼
     function btn_moveBottom() {
-        props.fullApi.moveTo(2,1)
+        props.fullApi.moveTo(4,1)
     }
 
     const ModalApp = ({ children }) => (
@@ -327,17 +327,16 @@ export default function FirstComponent(props) {
                         <Modal />
                     </ModalApp>
                 </div>
-
             </div>
 
             <div className={'ad'}>
                 <AdSense.Google
-                    style={{ display: 'block' }}
                     client='ca-pub-4872298844105618'
                     slot='2081498277'
-                    format='auto'
-                    responsive='true'
+                    style={{  display: 'block' }}
+                    format=''
                 />
+                {/*<script data-ad-client="ca-pub-4872298844105618" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>*/}
                 {/*<a href={'#'} target={'blank'} onClick={()=>{window.gtag('event', 'click_ad_1')}}>
                     <img src={adpic} alt={'advertise'} className={'adpic'}/>
                 </a>*/}

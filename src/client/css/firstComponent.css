@@ -28,17 +28,17 @@
 /*--------- keyframes end ---------*/
 
 
-.first_main_h2 {
+.first-component .first_main_h2 {
     margin: 40px 0 6vw 0;
     animation: first_main_h2 5s infinite 3s linear;
 }
 
-.sentloveimg {
+.first-component .sentloveimg {
     height: 30vh;
 }
 
 /* 광고 영역 */
-.ad {
+.first-component .ad {
     display: inline-block;
     margin-top: 3vh;
     width: 18vw;
@@ -49,7 +49,7 @@
     max-height: 300px;
 }
 
-.ad .adpic {
+.first-component .ad .adpic {
     top:0; left: 0;
     width :100%;
     height: 100%;
@@ -57,7 +57,7 @@
 /*---광고 영역 끝---*/
 
 /*--------- input start ---------*/
-.input_div {
+.first-component .input_div {
     display: inline-block;
     background-image: url("../img/input_div.gif");
     background-position: center;
