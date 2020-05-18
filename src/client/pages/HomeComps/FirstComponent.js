@@ -214,7 +214,7 @@ export default function FirstComponent(props) {
 
     // 스크롤 아래 이동 버튼
     function btn_moveBottom() {
-        props.fullApi.moveTo(4,1)
+        props.fullApi.moveTo(2,1)
     }
 
     const ModalApp = ({ children }) => (

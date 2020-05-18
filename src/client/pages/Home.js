@@ -37,29 +37,29 @@ export default class Home extends React.Component {
             <React.Fragment>
                 <div className={'rps_div'}>
                         <ReactFullpage
-
+                            navigation
+                            navigationTooltips = {['메인', '설명', '소개', '제휴']}
                             scrollingSpeed = {800}
                             render={({ state, fullpageApi }) => {
                                 return (
-                                        <LoadingOverlay
-                                            active={this.state.isLoading} spinner
-                                        >
-                                    <ReactFullpage.Wrapper>
-                                        <div className="section">
-                                            <FirstComponent loadApi={this.setLoading.bind(this)} fullApi={fullpageApi}/>
-                                        </div>
-                                        <div className="section">
-                                            <SecondComponent/>
-                                        </div>
-                                        <div className="section">
-                                            <ThirdComponent/>
-                                        </div>
-                                        <div className="section">
-                                            <FourthComponent/>
-                                        </div>
-
-                                    </ReactFullpage.Wrapper>
-                                        </LoadingOverlay>
+                                    <LoadingOverlay
+                                        active={this.state.isLoading} spinner
+                                    >
+                                        <ReactFullpage.Wrapper>
+                                            <div className="section">
+                                                <FirstComponent loadApi={this.setLoading.bind(this)} fullApi={fullpageApi}/>
+                                            </div>
+                                            <div className="section">
+                                                <SecondComponent/>
+                                            </div>
+                                            <div className="section">
+                                                <ThirdComponent/>
+                                            </div>
+                                            <div className="section">
+                                                <FourthComponent/>
+                                            </div>
+                                        </ReactFullpage.Wrapper>
+                                    </LoadingOverlay>
                                 );
                             }}
                         />

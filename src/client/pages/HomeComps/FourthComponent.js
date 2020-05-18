@@ -39,6 +39,7 @@ export default () => {
                     <Image src={sp2} responsive onClick={()=>{
                         window.open('https://react-bootstrap.github.io/','_blank')
                     }}/>
+
                 </Col>
                 <Col xs={'auto'} md={6} lg={6} className={'mb-2 mb-md-5'}>
                     <Image src={sp3} responsive onClick={()=>{
