@@ -13,7 +13,7 @@ import adpic from "../../img/ad/adsize.png"
 import { Player } from 'video-react';
 import 'video-react/dist/video-react.css';
 import scvid from "../../video/instruction.mp4"
-import scpost from "../../../client/img/secretpropose.png"
+import scpost from "../../../client/img/secretproposevid.jpg"
 
 export default () => {
     function adClick(e){
