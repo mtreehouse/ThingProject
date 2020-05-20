@@ -56,28 +56,28 @@ code {
 
 .component.first-component {
   background-color: #ffddd8;
-  background-image: url("../img/firstcomp_back.jpg");
+  background-image: url("../img/firstcomp_back.webp");
   background-position: center;
   background-size: cover;
   position: relative;
 }
 
 .component.second-component {
-  background-image: url("../img/secondcomp_back.jpg");
+  background-image: url("../img/secondcomp_back.webp");
   background-position: center;
   background-size: cover;
   position: relative;
 }
 
 .component.third-component {
-  background-image: url("../img/thirdcomp_back.jpg");
+  background-image: url("../img/thirdcomp_back.webp");
   background-position: center;
   background-size: cover;
   position: relative;
 }
 
 .component.fourth-component {
-  background-image: url("../img/fourthcomp_back.jpg");
+  background-image: url("../img/fourthcomp_back.webp");
   background-position: center;
   background-size: cover;
   position: relative;

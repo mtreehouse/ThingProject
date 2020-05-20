@@ -15,7 +15,7 @@ import 'video-react/dist/video-react.css';
 import scvid from "../../video/instruction.mp4"
 import scpost from "../../../client/img/secretproposevid.jpg"
 
-export default () => {
+function SecondComponent () {
     function adClick(e){
         e.preventDefault()
         window.open('/#/adsurvey','','width=505,height=540,left=400,top=200')
@@ -55,3 +55,5 @@ export default () => {
         </div>
     );
 };
+
+export default React.memo(SecondComponent)

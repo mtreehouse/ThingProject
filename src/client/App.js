@@ -9,7 +9,7 @@
  */
 
 import React, {} from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import {Home, Admin} from './pages'
 import adSurvey from './pages/HomeComps/adSurvey'
 

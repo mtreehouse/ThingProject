@@ -24,9 +24,8 @@ import Modal from '../Modal/responseModal'
 import { Container } from "semantic-ui-react"
 import * as common from '../../js/common'
 import * as Sentry from "@sentry/browser";
-import AdSense from 'react-adsense';
 
-export default function FirstComponent(props) {
+function FirstComponent(props) {
     const [isTyped, setIsTyped] = useState(false);
     const [isVerified, setIsVerified] = useState(false);
     const [isSent, setIsSent] = useState(false);
@@ -330,12 +329,6 @@ export default function FirstComponent(props) {
             </div>
 
             <div className={'ad'}>
-                <AdSense.Google
-                    client='ca-pub-4872298844105618'
-                    slot='2081498277'
-                    style={{  display: 'block' }}
-                    format=''
-                />
                 {/*<script data-ad-client="ca-pub-4872298844105618" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>*/}
                 {/*<a href={'#'} target={'blank'} onClick={()=>{window.gtag('event', 'click_ad_1')}}>
                     <img src={adpic} alt={'advertise'} className={'adpic'}/>
@@ -356,3 +349,5 @@ export default function FirstComponent(props) {
         </div>
     )
 }
+
+export default React.memo(FirstComponent)

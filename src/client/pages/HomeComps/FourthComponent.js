@@ -16,7 +16,7 @@ import sp3 from "../../img/sponsors/sp3.jpg"
 import sp4 from "../../img/sponsors/sp4.jpg"
 import { Row, Col, Image } from 'react-bootstrap';
 
-export default () => {
+function FourthComponent() {
     function adClick(e){
         e.preventDefault()
         window.open('/#/adsurvey','','width=505,height=540,left=400,top=200')
@@ -30,25 +30,25 @@ export default () => {
                 <br/>
 
             <Row className={'fourth_rows mt-md-5'}>
-                <Col xs={'auto'} md={6} lg={6} className={'mb-2 mb-md-5'}>
+                <Col xs={6} md={6} lg={6} className={'mb-2 mb-md-5'}>
                     <Image src={sp1} responsive rounded onClick={()=>{
                         window.open('https://ko.reactjs.org/','_blank')
                     }}/>
                 </Col>
-                <Col xs={'auto'} md={6} lg={6} className={'mb-2 mb-md-5'}>
+                <Col xs={6} md={6} lg={6} className={'mb-2 mb-md-5'}>
                     <Image src={sp2} responsive onClick={()=>{
                         window.open('https://react-bootstrap.github.io/','_blank')
                     }}/>
 
                 </Col>
-                <Col xs={'auto'} md={6} lg={6} className={'mb-2 mb-md-5'}>
+                <Col xs={6} md={6} lg={6} className={'mb-2 mb-md-5'}>
                     <Image src={sp3} responsive onClick={()=>{
                         window.open('https://material-ui.com/','_blank')
                     }} />
                 </Col>
-                <Col xs={'auto'} md={6} lg={6} className={'mb-2 mb-md-5'}>
+                <Col xs={6} md={6} lg={6} className={'mb-2 mb-md-5'}>
                     <Image src={sp4} responsive onClick={()=>{
-                        window.open('https://analytics.google.com/analytics/web/','_blank')
+                        window.open('https://marketingplatform.google.com/about/analytics/','_blank')
                     }}/>
                 </Col>
             </Row>
@@ -61,3 +61,5 @@ export default () => {
         </div>
     );
 };
+
+export default React.memo(FourthComponent)

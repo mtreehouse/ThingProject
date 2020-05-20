@@ -15,7 +15,7 @@ import axios from 'axios'
 import querystring from "querystring";
 import * as Sentry from "@sentry/browser";
 
-export default function ModalExampleShorthand(props) {
+function ModalExampleShorthand() {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [myName, setMyName] = useState('');
     const [loveName, setLoveName] = useState('');
@@ -226,3 +226,5 @@ export default function ModalExampleShorthand(props) {
         </Modal>
     )
 }
+
+export default React.memo(ModalExampleShorthand)

@@ -40,7 +40,7 @@ export default class Home extends React.Component {
                             navigation
                             navigationTooltips = {['메인', '설명', '소개', '제휴']}
                             scrollingSpeed = {800}
-                            render={({ state, fullpageApi }) => {
+                            render={({ fullpageApi }) => {
                                 return (
                                     <LoadingOverlay
                                         active={this.state.isLoading} spinner
