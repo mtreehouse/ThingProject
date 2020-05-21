@@ -57,6 +57,25 @@ export const del = ctx => {
         })
 };
 
+/* 멤버 삭제
+* POST /api/member/delBackup
+* {id}
+* */
+export const delBackup = ctx => {
+    ctx.body=200;
+    const { id } = ctx.params;
+    const db = require('../../mysql-db');
+    db.promise().execute("DELETE FROM thing_backup WHERE id=?"
+        , [id])
+        .then(e => {
+            console.log("_________________db삭제성공");
+        })
+        .catch(e => {
+            console.log(e);
+            Sentry.captureException(e)
+        })
+};
+
 /* 멤버 매칭 확인
 * POST /api/member/matchCheck
 * {my_phone}

@@ -47,7 +47,7 @@ export default function Admin() {
                 </div>
                 :
                 <div>
-                    <header><p>관리자 페이지</p></header>
+                <header><p>관리자 페이지</p></header>
                     <div id={'body'}>
                         <menu>
                             <ul>

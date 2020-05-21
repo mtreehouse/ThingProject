@@ -25,7 +25,7 @@ const delButton = (cell, row) => {
         <Button
             onClick={()=>{
                 if(window.confirm('삭제하시겠습니까?')){
-                    axios.head('/api/member/del/'+cell)
+                    axios.head('/api/member/delBackup/'+cell)
                         .then(()=>{
                             window.location.reload();
                         })
@@ -33,23 +33,6 @@ const delButton = (cell, row) => {
                 }
             }}
         >{cell}</Button>
-    )
-}
-
-const cancelButton = (cell) => {
-    return (
-            <Button
-                    className={'cancle-btn'}
-                    onClick={()=>{
-                        axios.post('/api/bp/cancel', {
-                            data: cell
-                        })
-                            .then(res => {
-                                    alert(JSON.stringify(res.data))
-                            })
-                            .catch(e => {alert(e);})
-                    }}
-            >취소</Button>
     )
 }
 
@@ -97,13 +80,6 @@ export default class Member extends React.Component {
             }, {
                 dataField: 'created_date',
                 text: 'DATE'
-            },  {
-                dataField: 'receipt_id',
-                text: '결제',
-                formatter: cancelButton,
-                headerStyle: () => {
-                    return { width: '70px', textAlign: 'center' };
-                }
             }
         ]
     }
