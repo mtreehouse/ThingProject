@@ -7,11 +7,5 @@
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mariadb://seed-springboot-webservice.cac6eisuepcp.us-east-1.rds.amazonaws.com:3306/mydb</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="thinglove" uuid="a43e9d05-882b-4b23-b933-b8097ec87388">
-      <driver-ref>mariadb</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mariadb://thinglove.cg8vmfewbbuv.ap-northeast-2.rds.amazonaws.com:3306/mydb</jdbc-url>
-    </data-source>
   </component>
 </project>

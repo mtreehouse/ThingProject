@@ -15,6 +15,22 @@ export const list = async ctx => {
         .catch(e=>{console.log(e);})
 };
 //
+// /* 멤버 백업 리스트
+// * GET /api/admin/backuplist
+// *
+// * */
+export const backuplist = async ctx => {
+    const db = require('../../mysql-db');
+    await db.promise().query("SELECT id, my_name, his_name, my_phone, his_phone, receipt_id, date_format(created_date,'%Y-%m-%d')created_date FROM thing_backup ORDER BY id DESC")
+        .then(([rows, fields]) => {
+            ctx.body = {
+                members: rows,
+                columns: fields
+            };
+        })
+        .catch(e=>{console.log(e);})
+};
+//
 // /* 전화번호 암호화
 import { enc, dec } from "../security/SecurityUtils"
 // * GET /api/admin/enc
