@@ -68,7 +68,7 @@ function ThirdComponent() {
                         </Feed>
                     </Card.Content>
                 </Card>
-                <br/><br/>
+                <br/>
                 <Container fluid>
                     <Header color={'pink'} as='h3'>익명성을 보장한 마음 확인</Header>
                     <p>
@@ -81,7 +81,8 @@ function ThirdComponent() {
                         라는 생각에서 출발한 저희 서비스는 <br/>
                         상대방이 좋아하는 사람이 내가 아니라면 <br/>
                         조금 더 기다리거나 더 어필할 수 있도록,<br/>
-                        그 사람이 나라면 망설이지 않고 고백할 수 있게 도와드립니다.
+                        그 사람이 나라면 망설이지 않고 <br/>
+                        고백할 수 있게 도와드립니다!
                     </p>
                 </Container>
             </div>

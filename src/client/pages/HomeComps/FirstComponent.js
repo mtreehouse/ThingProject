@@ -64,7 +64,9 @@ function FirstComponent(props) {
             appId: fbConf.appId
         };
 
-        firebase.initializeApp(firebaseConfig);
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
 
         window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
             "recaptcha-container",

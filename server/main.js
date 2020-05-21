@@ -44,7 +44,7 @@ app.listen(port, () => {
     console.log("Listening to port " + port);
 })
 
-/* 등록 후 7일 지난 멤버 매일 11시 삭제 */
+/* 등록 후 3일 지난 멤버 매일 11시 삭제 */
 schedule.scheduleJob('* 8 * * *', function(){
     console.log('__Check expired members : '+new Date().toLocaleString('ko-KR', { timeZone: 'GMT' }));
     const db = require('./mysql-db');
@@ -55,8 +55,8 @@ schedule.scheduleJob('* 8 * * *', function(){
                     db.promise().execute("DELETE FROM thing_members WHERE id=?",[member.id])
                         .then(()=>{
                             const msg = "3일이 지나 "+member.my_name+"님의 매칭이 실패하였습니다.\n" +
-                                "Thing Love가 응원합니다♥\n" +
-                                "http://secretpropose.com"
+                                "비밀고백이 응원합니다♥\n" +
+                                "www.secretpropose.com"
                             const context = createContext({
                                 status: 201,
                                 body: {"sender":"01037004972","receiver":phoneSec.dec(member.my_phone),"msg":msg,"msg_type":"SMS"}
