@@ -11910,6 +11910,11 @@ react-router@5.1.2, react-router@latest:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
+react-script-hook@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-script-hook/-/react-script-hook-1.1.1.tgz#63e06ee04188f04ae411e6dd70b9b1434152d4f1"
+  integrity sha512-numo44ztaQXKBWdJFiSeBsn0tnpZh7BND3PENwlzk0ya5atMQofjSmNvbfIy4pLmS488PFM5mH6kW3Ruj3aWDg==
+
 react-scripts@3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-3.4.0.tgz#f413680f0b5b937c8879ba1ffdae9b8c5b364bf5"

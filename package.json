@@ -55,6 +55,7 @@
     "react-loading-overlay": "^1.0.1",
     "react-router": "latest",
     "react-router-dom": "^5.1.2",
+    "react-script-hook": "^1.1.1",
     "react-scripts": "3.4.0",
     "react-slide-toggle": "^0.3.3",
     "semantic-ui-react": "^0.88.2",
