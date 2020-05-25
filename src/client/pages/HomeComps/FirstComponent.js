@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 /**
  *=========================[  ]=========================
  * @파일명:FirstComponent.js
@@ -23,7 +24,6 @@ import querystring from 'querystring'
 import Modal from '../Modal/responseModal'
 import { Container } from "semantic-ui-react"
 import * as common from '../../js/common'
-import * as Sentry from "@sentry/browser";
 
 function FirstComponent(props) {
     const [isTyped, setIsTyped] = useState(false);
@@ -36,13 +36,11 @@ function FirstComponent(props) {
     const [loveName, setLoveName] = useState('');
     const [loveNumber, setLoveNumber] = useState('');
     const [codeNumber, setCodeNumber] = useState('');
-
     let rcptId = "";
 
     const onToggle = () => {
         setToggleEvent(Date.now());
     };
-
     useEffect(() => {
         /*
          *==========================================================
@@ -79,8 +77,6 @@ function FirstComponent(props) {
         /**
          *===================[ Firebase sms End ]===================
          */
-
-        Sentry.init({dsn: "https://0554b0406469483d96b7f43e9298ccb9@o375237.ingest.sentry.io/5194338"});
     }, [])
 
     // 전화번호 인증
@@ -130,7 +126,6 @@ function FirstComponent(props) {
                     //     params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
                     // }).error(function (data) {
                     //     //결제 진행시 에러가 발생하면 수행됩니다.
-                    //     Sentry.captureException(data)
                     //     console.log(data);
                     // }).cancel(function (data) {
                     //     //결제가 취소되면 수행됩니다.
@@ -176,7 +171,6 @@ function FirstComponent(props) {
                                     msg_type: 'LMS'
                                 })).catch(e => {
                                     console.log("_________________" + e)
-                                    Sentry.captureException(e)
                                 });
                         }).then(r => {
                             props.loadApi() //Loading overlay
@@ -190,7 +184,6 @@ function FirstComponent(props) {
                             },4500)
                         }).catch(e => {
                                 console.log(e);
-                                Sentry.captureException(e)
                                 console.log('문자전송에 실패하였습니다.');
                                 alert("문자전송에 실패하였습니다.")
                                 // axios.post('/api/bp/cancel', {
@@ -208,7 +201,6 @@ function FirstComponent(props) {
                 }
             }).catch(e => {
             console.log("_________________" + e);
-            Sentry.captureException(e)
             alert('서버가 원활하지 않습니다.\n잠시 후 재시도 해주세요.')
         });
     }
@@ -330,11 +322,14 @@ function FirstComponent(props) {
                 </div>
             </div>
 
-            <div className={'ad'}>
+            <div className={''}>
+                <a href="https://coupa.ng/bC2XuX" target="_blank"><img className={'cp1'} src="https://ads-partners.coupang.com/banners/43762?subId=&traceId=V0-301-879dd1202e5c73b2-I43762&w=728&h=90" alt="쿠팡광고"/></a>
+                <br/>
+                <a href="https://coupa.ng/bC2YxP" target="_blank"><img className={'cp2'} src="https://ads-partners.coupang.com/banners/43774?subId=&traceId=V0-301-969b06e95b87326d-I43774&w=728&h=90" alt="쿠팡광고"/></a>
                 <script data-ad-client="ca-pub-4872298844105618" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <a href={'#'} target={'blank'} onClick={()=>{window.gtag('event', 'click_ad_1')}}>
+                {/*<a href={'#'} target={'blank'} onClick={()=>{window.gtag('event', 'click_ad_1')}}>
                     <img src={adpic} alt={'advertise'} className={'adpic'}/>
-                </a>
+                </a>*/}
             </div>
 
             <footer>

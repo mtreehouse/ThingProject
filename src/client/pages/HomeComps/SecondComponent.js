@@ -42,10 +42,11 @@ function SecondComponent () {
                     />
                 </div>
                     <br/>
-                <div className={'ad2'}>
-                    <a href={'#'} target={'blank'} onClick={()=>{window.gtag('event', 'click_ad_2')}}>
+                <div className={''}>
+                    <a href="https://coupa.ng/bC2Y0P" target="_blank"><img className={'cp1'} src="https://ads-partners.coupang.com/banners/217894?subId=&traceId=V0-301-371ae01f4226dec2-I217894&w=728&h=90" alt="쿠팡광고"/></a>
+                    {/*<a href={'#'} target={'blank'} onClick={()=>{window.gtag('event', 'click_ad_2')}}>
                         <img src={adpic} alt={'advertise'} className={'adpic'}/>
-                    </a>
+                    </a>*/}
                 </div>
                 {/*<div id="address">
                     <p>

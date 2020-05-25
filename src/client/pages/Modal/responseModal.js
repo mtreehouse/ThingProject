@@ -13,7 +13,6 @@ import firebase from "firebase/app"
 import * as common from '../../js/common'
 import axios from 'axios'
 import querystring from "querystring";
-import * as Sentry from "@sentry/browser";
 
 function ModalExampleShorthand() {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -42,7 +41,7 @@ function ModalExampleShorthand() {
 
     function responseCheck() {
         window.gtag('event', 'count_Modal_finalResponse')
-        Sentry.init({dsn: "https://0554b0406469483d96b7f43e9298ccb9@o375237.ingest.sentry.io/5194338"});
+        .init({dsn: "https://0554b0406469483d96b7f43e9298ccb9@o375237.ingest..io/5194338"});
 
         let notConnected = true
         axios.post('/api/member/matchCheck', {
@@ -71,14 +70,13 @@ function ModalExampleShorthand() {
                                 axios.head('/api/member/del/'+member.id)
                                     .catch(e=>{
                                         console.log("______"+e);
-                                        Sentry.captureException(e)
                                     })
                                 alert(myName+"님의 "+loveName+"님에 대한 사랑이 이루어졌습니다!\n\n"+myName+"님의 사랑,\n비밀고백이 응원합니다♥")
                             })
                             .catch(e => {
                                 initState()
                                 console.log("_________________" + e)
-                                Sentry.captureException(e)
+                                .captureException(e)
                             });
                     }else{
                         // 매칭 실패 문자 전송 후 DB에서 삭제
@@ -97,13 +95,12 @@ function ModalExampleShorthand() {
                                 axios.head('/api/member/del/'+member.id)
                                     .catch(e=>{
                                         console.log("______"+e);
-                                        Sentry.captureException(e)
                                     })
                             })
                             .catch(e => {
                                 initState()
                                 console.log("_________________" + e)
-                                Sentry.captureException(e)
+                                .captureException(e)
                             });
                     }
                 })

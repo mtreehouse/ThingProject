@@ -111,3 +111,14 @@ code {
   font-family: 'Youth', sans-serif !important;
   font-size: 1em;
 }
+/* 광고 */
+.cp1 {
+  margin-top: 9vh;
+  width: 87vw;
+  max-width: 600px;
+}
+.cp2 {
+  margin-top: 3vh;
+  width: 87vw;
+  max-width: 600px;
+}
