@@ -38,7 +38,7 @@ export default class Home extends React.Component {
                 <div className={'rps_div'}>
                         <ReactFullpage
                             navigation
-                            navigationTooltips = {['메인', '설명', '소개', '제휴']}
+                            navigationTooltips = {['메인', '소개', '설명', '제휴']}
                             scrollingSpeed = {800}
                             render={({ fullpageApi }) => {
                                 return (
@@ -50,10 +50,10 @@ export default class Home extends React.Component {
                                                 <FirstComponent loadApi={this.setLoading.bind(this)} fullApi={fullpageApi}/>
                                             </div>
                                             <div className="section">
-                                                <SecondComponent/>
+                                                <ThirdComponent/>
                                             </div>
                                             <div className="section">
-                                                <ThirdComponent/>
+                                                <SecondComponent/>
                                             </div>
                                             <div className="section">
                                                 <FourthComponent/>

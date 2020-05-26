@@ -25,6 +25,7 @@ import Modal from '../Modal/responseModal'
 import { Container } from "semantic-ui-react"
 import * as common from '../../js/common'
 
+
 function FirstComponent(props) {
     const [isTyped, setIsTyped] = useState(false);
     const [isVerified, setIsVerified] = useState(false);
@@ -77,11 +78,11 @@ function FirstComponent(props) {
         /**
          *===================[ Firebase sms End ]===================
          */
-    }, [])
+    }, []);
 
     // 전화번호 인증
     function btn_verify() {
-        window.gtag('event', 'click_step1_인증')
+        window.gtag('event', 'click_step1_인증');
         if(myName != '' && phoneNumber.length===11){
             setIsTyped(true);
             onToggle();
@@ -93,9 +94,9 @@ function FirstComponent(props) {
 
     // 결제 > DB저장 > 문자전송
     function btn_sendLove() {
-        window.gtag('event', 'click_step2_전송')
-        if(loveName == '' || loveNumber.length!=11){
-            alert('정확한 상대방 정보를 입력해주세요!')
+        window.gtag('event', 'click_step2_전송');
+        if(loveName === '' || loveNumber.length!=11){
+            alert('정확한 상대방 정보를 입력해주세요!');
             return;
         }
 
@@ -161,7 +162,7 @@ function FirstComponent(props) {
                                         + loveName+'님이 마음에 두고있는 분이 있다면 지금 확인해보세요!\n'
                                         + 'http://secretpropose.com \n\n'
                                         + loveName+'님의 사랑,\n 비밀고백이 함께 응원합니다♥\n\n'
-                                        + '- Secret Propose -'
+                                        + '- Secret Propose -';
                             axios.post('/api/aligo/send', querystring.stringify(
                                 {
                                     title: '[SECRET PROPOSE]',
@@ -173,11 +174,11 @@ function FirstComponent(props) {
                                     console.log("_________________" + e)
                                 });
                         }).then(r => {
-                            props.loadApi() //Loading overlay
+                            props.loadApi(); //Loading overlay
                             setTimeout(()=>{
-                                setIsSent(true)
-                                window.gtag('event', 'count_finalUser')
-                                alert(myName+'님의 마음이 출발했습니다!')
+                                setIsSent(true);
+                                window.gtag('event', 'count_finalUser');
+                                alert(myName+'님의 마음이 출발했습니다!');
                                 setTimeout(()=>{
                                     window.location.reload();
                                 },4000)
@@ -272,10 +273,9 @@ function FirstComponent(props) {
                             <SlideToggle collapsed toggleEvent={toggleEvent}>
                                 {({setCollapsibleElement}) => (
                                     <div className="my-collapsible" ref={setCollapsibleElement}>
-                                        <input type={'text'} placeholder={'인증 번호'} onChange={e => {
+                                        <input type={'number'} placeholder={'인증 번호'} onChange={e => {
                                             setCodeNumber(e.target.value)
                                         }}
-                                        type={'number'}
                                         />
                                     </div>
                                 )}
@@ -334,7 +334,7 @@ function FirstComponent(props) {
 
             <footer>
                 <button className={'scroll-link'} onClick={btn_moveBottom}>
-                    <svg className="mouse" xmlns="..." viewBox="0 0 76 130">
+                    <svg className="mouse" viewBox="0 0 76 130">
                         <g fill="none">
                             <rect width="70" height="118" x="1.5" y="1.5" stroke="#FFF" strokeWidth={3} rx="36"/>
                             <circle className={'scroll'} cx="36.5" cy="31.5" r="4.5" fill="#FFF"/>

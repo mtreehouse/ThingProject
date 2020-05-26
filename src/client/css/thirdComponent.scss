@@ -1,0 +1,24 @@
+.third-component h2 {
+    margin-top: 15px !important;
+}
+
+.third-component p {
+    font-size: 3.5vw;
+
+}
+
+@media  (min-width: 540px) {
+    .third-component p {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 541px) {
+    .ui.centered.card{
+        width: 247px !important;
+        height: 208px !important;
+    }
+    .ui.centered.card .header{
+        font-size: 16px !important;
+    }
+}

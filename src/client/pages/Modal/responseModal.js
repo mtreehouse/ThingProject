@@ -41,7 +41,6 @@ function ModalExampleShorthand() {
 
     function responseCheck() {
         window.gtag('event', 'count_Modal_finalResponse')
-        .init({dsn: "https://0554b0406469483d96b7f43e9298ccb9@o375237.ingest..io/5194338"});
 
         let notConnected = true
         axios.post('/api/member/matchCheck', {
@@ -76,7 +75,6 @@ function ModalExampleShorthand() {
                             .catch(e => {
                                 initState()
                                 console.log("_________________" + e)
-                                .captureException(e)
                             });
                     }else{
                         // 매칭 실패 문자 전송 후 DB에서 삭제
@@ -100,7 +98,6 @@ function ModalExampleShorthand() {
                             .catch(e => {
                                 initState()
                                 console.log("_________________" + e)
-                                .captureException(e)
                             });
                     }
                 })
@@ -145,6 +142,7 @@ function ModalExampleShorthand() {
                                    maxLength={13}
                                    onFocus={e=>{e.target.setAttribute("autocomplete","nope")}}
                             />
+                            <p className={(isTyped ? ' modaldelay' : 'hide')} > 30초 이상 소요될 수 있습니다. </p>
                             <Input placeholder={'인증번호 입력'}
                                    type={'number'}
                                    onChange={e => {
@@ -197,7 +195,7 @@ function ModalExampleShorthand() {
                     :
                     <Button color="green" inverted onClick={e=>{
                         e.preventDefault()
-                        if(myName === '' || phoneNumber.length!=11){
+                        if(myName === '' || phoneNumber.length!==11){
                             alert('정확한 내 정보를 입력해주세요!')
                             return;
                         }
@@ -209,7 +207,7 @@ function ModalExampleShorthand() {
                 }
                 <Button basic color="blue" inverted onClick={e=>{
                     e.preventDefault();
-                        if(loveName === '' || loveNumber.length!=11){
+                        if(loveName === '' || loveNumber.length!==11){
                             alert('정확한 상대방 정보를 입력해주세요!')
                             return;
                         }

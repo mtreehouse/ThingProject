@@ -25,6 +25,18 @@
         transform: rotate(0deg);
     }
 }
+
+@keyframes modaldelayred {
+    0%{
+        color: white;
+    }
+    50%{
+        color: red;
+    }
+    100%{
+        color: white;
+    }
+}
 /*--------- keyframes end ---------*/
 
 
@@ -118,6 +130,11 @@
     color: #000000;
     font-weight: bold;
     cursor: pointer;
+}
+.modaldelay {
+    animation-duration: 2s;
+    animation-name: modaldelayred;
+    animation-iteration-count: infinite;
 }
 /*--------- button end ---------*/
 

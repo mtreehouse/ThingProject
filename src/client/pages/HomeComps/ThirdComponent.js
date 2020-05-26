@@ -8,7 +8,7 @@
  *===================[ Thing-Project ]===================
  */
 import React from "react";
-import "../../css/thirdComponent.css"
+import "../../css/thirdComponent.scss"
 import "../../css/semantic-ui.scss"
 import adpic from "../../img/ad/adsize.png"
 import jenny from "../../img/semantic/jenny.jpg"
@@ -56,7 +56,7 @@ function ThirdComponent() {
                                 </Feed.Content>
                             </Feed.Event>
 
-                            <Feed.Event>
+                            <Feed.Event className={'phoneHide'}>
                                 <Feed.Label image={elliot} />
                                 <Feed.Content>
                                     <Feed.Date content='4 days ago' />

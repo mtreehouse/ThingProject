@@ -30,12 +30,13 @@ function FourthComponent() {
                 <br/>
 
             <Row className={'fourth_rows mt-md-5'}>
-                <Col xs={6} md={6} lg={6} className={'mb-2 mb-md-5'}>
+                <Col  xs={6} md={6} lg={6} className={'mb-2 mb-md-5'}>
                     <Image src={sp1} responsive rounded onClick={()=>{
                         window.open('https://ko.reactjs.org/','_blank')
                     }}/>
                 </Col>
-                <Col xs={6} md={6} lg={6} className={'mb-2 mb-md-5'}>
+
+                <Col xs={6} md={6} lg={6} className={'mb-2 mb-md-5 phoneHide'}>
                     <Image src={sp2} responsive onClick={()=>{
                         window.open('https://react-bootstrap.github.io/','_blank')
                     }}/>
