@@ -73,7 +73,7 @@
     "react-bootstrap-table2-editor": "^1.4.0",
     "react-bootstrap-table2-paginator": "^2.1.0",
     "react-bootstrap-table2-toolkit": "^2.1.1",
-    "react-dev-utils": "^10.2.0",
+    "react-dev-utils": "^11.0.4",
     "react-device-detect": "^1.11.14",
     "react-dom": "^16.12.0",
     "react-firebaseui": "^4.1.0",
